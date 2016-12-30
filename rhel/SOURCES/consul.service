@@ -7,6 +7,7 @@ User=nobody
 Environment=GOMAXPROCS=2
 EnvironmentFile=-/etc/sysconfig/consul
 Restart=on-failure
+RestartSec=10s
 ExecStart=/usr/sbin/consul agent $OPTIONS -config-dir=/etc/consul.d -data-dir=/var/lib/consul/
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT

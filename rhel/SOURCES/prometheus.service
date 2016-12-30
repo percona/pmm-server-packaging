@@ -10,6 +10,7 @@ Environment=STORAGE_LOCAL_PATH="/var/lib/prometheus"
 EnvironmentFile=-/etc/sysconfig/prometheus
 ExecStart=/usr/sbin/prometheus -web.listen-address $WEB_LISTEN_ADDRESS -config.file=/etc/prometheus.yml -storage.local.path $STORAGE_LOCAL_PATH -web.console.templates=/usr/share/prometheus/consoles -web.console.libraries=/usr/share/prometheus/console_libraries $OPTIONS
 Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=multi-user.target

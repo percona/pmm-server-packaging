@@ -10,6 +10,7 @@ Environment=COLLECTORS_ENABLED="conntrack,diskstats,entropy,filefd,filesystem,hw
 EnvironmentFile=-/etc/sysconfig/node_exporter
 ExecStart=/usr/sbin/node_exporter -web.listen-address $WEB_LISTEN_ADDRESS -collectors.enabled $COLLECTORS_ENABLED
 Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=multi-user.target

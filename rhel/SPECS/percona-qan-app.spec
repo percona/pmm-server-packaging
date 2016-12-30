@@ -9,7 +9,7 @@
 
 Name:		%{project}-%{repo}
 Version:	1.0.7
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -27,6 +27,7 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -D -a 1 -n %{repo}-%{commit}
+sed -i "s/':9001',/':' + window.location.port + '\/qan-api',/" client/app/app.js
 
 
 %build
@@ -47,5 +48,8 @@ cp -pav ./bower_components %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Wed Dec 28 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-2
+- fix client/app/app.js
+
 * Mon Dec 19 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-1
 - init version

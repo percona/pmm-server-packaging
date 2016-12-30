@@ -8,6 +8,7 @@ User=nobody
 Type=simple
 ExecStart=/usr/sbin/orchestrator --verbose http
 Restart=on-failure
+RestartSec=10s
 WorkingDirectory=/usr/share/orchestrator
 
 [Install]

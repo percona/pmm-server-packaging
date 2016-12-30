@@ -1,6 +1,7 @@
 [Unit]
 Description=Percona Query Analytics API
-After=network.target
+After=network.target mysqld.service
+Requires=mysqld.service
 
 [Service]
 User=nobody
@@ -11,6 +12,7 @@ Environment=BASE_PATH=/qan-api
 EnvironmentFile=-/etc/sysconfig/percona-qan-api
 ExecStart=/usr/sbin/percona-qan-api -srcPath /usr/share/percona-qan-api/src -importPath github.com/percona/qan-api -runMode prod
 Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=multi-user.target
