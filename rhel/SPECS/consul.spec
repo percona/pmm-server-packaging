@@ -34,7 +34,7 @@
 
 Name:           consul
 Version:        0.7.1
-Release:        0.6.git%{shortcommit}%{?dist}
+Release:        1%{?dist}
 Summary:        Tool for service discovery, monitoring and configuration http://www.consul.io
 License:        MPLv2.0
 URL:            https://%{provider_prefix}
@@ -306,6 +306,9 @@ fi
 %endif
 
 %changelog
+* Tue Jan 17 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.7.1-1.gita9455cd
+- update to 0.7.1
+
 * Thu Jul 21 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.6.0-0.6.git46499d6
 - https://fedoraproject.org/wiki/Changes/golang1.7
 

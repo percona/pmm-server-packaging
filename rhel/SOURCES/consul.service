@@ -5,10 +5,11 @@ After=network.target
 [Service]
 User=nobody
 Environment=GOMAXPROCS=2
+Environment=DATA_DIR=/var/lib/consul
 EnvironmentFile=-/etc/sysconfig/consul
 Restart=on-failure
 RestartSec=10s
-ExecStart=/usr/sbin/consul agent $OPTIONS -config-dir=/etc/consul.d -data-dir=/var/lib/consul/
+ExecStart=/usr/sbin/consul agent $OPTIONS -config-dir /etc/consul.d -data-dir $DATA_DIR
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 
