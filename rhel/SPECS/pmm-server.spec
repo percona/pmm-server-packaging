@@ -9,7 +9,7 @@
 
 Name:		%{repo}
 Version:	1.0.7
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -43,6 +43,8 @@ install -d %{buildroot}%{_sysconfdir}/cron.daily
 mv purge-qan-data %{buildroot}%{_sysconfdir}/cron.daily/purge-qan-data
 install -d %{buildroot}%{_datadir}/percona-dashboards
 mv import-dashboards.py %{buildroot}%{_datadir}/percona-dashboards/import-dashboards.py
+install -d %{buildroot}%{_sysconfdir}/tmpfiles.d
+mv tmpfiles.d-pmm.conf %{buildroot}%{_sysconfdir}/tmpfiles.d/pmm.conf
 
 mv sysconfig %{buildroot}%{_sysconfdir}/sysconfig
 mv orchestrator.conf.json %{buildroot}%{_sysconfdir}/orchestrator.conf.json
@@ -58,6 +60,7 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 %{_sysconfdir}/prometheus.yml
 %{_sysconfdir}/nginx/.htpasswd
 %{_sysconfdir}/nginx/conf.d/pmm.conf
+%{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_sysconfdir}/orchestrator.conf.json
 %{_sysconfdir}/cron.daily/purge-qan-data
 %{_datadir}/percona-dashboards/import-dashboards.py*
