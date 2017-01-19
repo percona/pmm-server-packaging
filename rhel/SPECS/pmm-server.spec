@@ -9,7 +9,7 @@
 
 Name:		%{repo}
 Version:	1.0.7
-Release:	6%{?dist}
+Release:	7%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -19,6 +19,7 @@ Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar
 BuildArch:	noarch
 Requires:	nginx
 BuildRequires:	openssl
+
 
 %description
 Percona Monitoring and Management (PMM) Server.
@@ -53,6 +54,10 @@ install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 
+%post
+/usr/bin/systemd-tmpfiles --create
+
+
 %files
 %license LICENSE
 %doc README.md CHANGELOG.md
@@ -68,6 +73,10 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Wed Dec 28 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-7
+- add /etc/tmpfiles.d/pmm.conf file
+- run systemd-tmpfiles tool during post install
+
 * Wed Dec 28 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-2
 - add sysconfig
 
