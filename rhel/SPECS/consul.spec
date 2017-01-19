@@ -177,11 +177,11 @@ export GOPATH=$(pwd):%{gopath}
 export GOPATH=$(pwd):$(pwd)/Godeps/_workspace:%{gopath}
 %endif
 
-%gobuild -o bin/%{name} %{import_path}
+%gobuild -o bin/%{repo} %{import_path}
 
 %install
 # consul subpackage
-install -D -p -m 0755 bin/%{name} %{buildroot}%{_sbindir}/%{name}
+install -D -p -m 0755 bin/%{repo} %{buildroot}%{_sbindir}/%{repo}
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{repo}.service
 #install -d %{buildroot}%{_initddir}/ 
@@ -276,7 +276,7 @@ fi
 %files
 %license LICENSE
 %doc CHANGELOG.md README.md
-%{_sbindir}/%{name}
+%{_sbindir}/%{repo}
 #{_initddir}/%{repo}
 /usr/lib/systemd/system/%{repo}.service
 %dir %{_sysconfdir}/%{repo}.d

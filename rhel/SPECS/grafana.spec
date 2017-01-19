@@ -67,21 +67,21 @@ export GOPATH=$(pwd)/_build:%{gopath}
 # install -d -p %{buildroot}/%{gopath}/src/%{import_path}/
 # cp -pav *.go %{buildroot}/%{gopath}/src/%{import_path}/
 # cp -rpav pkg public conf tests %{buildroot}/%{gopath}/src/%{import_path}/
-install -d -p %{buildroot}%{_datadir}/%{name}
-cp -pav *.md %{buildroot}%{_datadir}/%{name}
+install -d -p %{buildroot}%{_datadir}/%{repo}
+cp -pav *.md %{buildroot}%{_datadir}/%{repo}
 # cp -rpav benchmarks %{buildroot}/%{gopath}/src/%{import_path}/
-cp -rpav docs %{buildroot}%{_datadir}/%{name}
-cp -rpav public_gen %{buildroot}%{_datadir}/%{name}/public
-cp -rpav scripts %{buildroot}%{_datadir}/%{name}
-cp -rpav vendor %{buildroot}%{_datadir}/%{name}
+cp -rpav docs %{buildroot}%{_datadir}/%{repo}
+cp -rpav public_gen %{buildroot}%{_datadir}/%{repo}/public
+cp -rpav scripts %{buildroot}%{_datadir}/%{repo}
+cp -rpav vendor %{buildroot}%{_datadir}/%{repo}
 install -d -p %{buildroot}%{_sbindir}
-cp bin/%{name}-server %{buildroot}%{_sbindir}/
+cp bin/%{repo}-server %{buildroot}%{_sbindir}/
 install -d -p %{buildroot}%{_bindir}
-cp bin/%{name}-cli %{buildroot}%{_bindir}/
-install -d -p %{buildroot}%{_sysconfdir}/%{name}
-cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{name}/grafana.ini
-mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{name}/
-cp -rpav conf %{buildroot}%{_datadir}/%{name}
+cp bin/%{repo}-cli %{buildroot}%{_bindir}/
+install -d -p %{buildroot}%{_sysconfdir}/%{repo}
+cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
+mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
+cp -rpav conf %{buildroot}%{_datadir}/%{repo}
 %if 0%{?fedora} || 0%{?rhel} == 7
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 %{SOURCE3} %{buildroot}/usr/lib/systemd/system/
@@ -91,8 +91,8 @@ install -p -m 0644 packaging/rpm/init.d/grafana-server %{buildroot}%{_initddir}/
 %endif
 #mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
 #install -p -m 0644 packaging/rpm/sysconfig/grafana-server %{buildroot}%{_sysconfdir}/sysconfig
-install -d -p %{buildroot}%{_sharedstatedir}/%{name}
-install -d -p %{buildroot}/var/log/%{name}
+install -d -p %{buildroot}%{_sharedstatedir}/%{repo}
+install -d -p %{buildroot}/var/log/%{repo}
 
 %check
 export GOPATH=$(pwd)/_build:%{gopath}
@@ -110,26 +110,26 @@ go test ./pkg/util
 
 %files
 %defattr(-, grafana, grafana, -)
-%{_datadir}/%{name}
-%exclude %{_datadir}/%{name}/*.md
-%exclude %{_datadir}/%{name}/docs
-%doc %{_datadir}/%{name}/CHANGELOG.md
-%doc %{_datadir}/%{name}/LICENSE.md
-%doc %{_datadir}/%{name}/NOTICE.md
-%doc %{_datadir}/%{name}/README.md
-%doc %{_datadir}/%{name}/docs
-%attr(0755, root, root) %{_sbindir}/%{name}-server
-%attr(0755, root, root) %{_bindir}/%{name}-cli
-%{_sysconfdir}/%{name}/grafana.ini
-%{_sysconfdir}/%{name}/ldap.toml
+%{_datadir}/%{repo}
+%exclude %{_datadir}/%{repo}/*.md
+%exclude %{_datadir}/%{repo}/docs
+%doc %{_datadir}/%{repo}/CHANGELOG.md
+%doc %{_datadir}/%{repo}/LICENSE.md
+%doc %{_datadir}/%{repo}/NOTICE.md
+%doc %{_datadir}/%{repo}/README.md
+%doc %{_datadir}/%{repo}/docs
+%attr(0755, root, root) %{_sbindir}/%{repo}-server
+%attr(0755, root, root) %{_bindir}/%{repo}-cli
+%{_sysconfdir}/%{repo}/grafana.ini
+%{_sysconfdir}/%{repo}/ldap.toml
 %if 0%{?fedora} || 0%{?rhel} == 7
 %attr(-, root, root) /usr/lib/systemd/system/grafana-server.service
 %else
 %attr(-, root, root) %{_initddir}/grafana-server
 %endif
 #attr(-, root, root) %{_sysconfdir}/sysconfig/grafana-server
-%dir %{_sharedstatedir}/%{name}
-%dir /var/log/%{name}
+%dir %{_sharedstatedir}/%{repo}
+%dir /var/log/%{repo}
 
 %pre
 getent group grafana >/dev/null || groupadd -r grafana
