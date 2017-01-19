@@ -49,7 +49,7 @@ Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	%{repo}.service
+Source1:        %{repo}.service
 
 %if 0%{?fedora} || 0%{?rhel} == 7
 BuildRequires: systemd
@@ -74,8 +74,6 @@ BuildRequires:   golang >= 1.7.3
 %description
 %{summary}
 
-%package -n %{repo}
-Summary:        %{summary}
 
 %if ! 0%{?with_bundled}
 BuildRequires: golang(bitbucket.org/ww/goautoneg)
@@ -95,7 +93,7 @@ BuildRequires: golang(gopkg.in/yaml.v2)
 %endif
 
 
-%description -n %{repo}
+%description
 %{summary}
 
 %if 0%{?with_devel}
@@ -309,14 +307,14 @@ gotest %{import_path}/notification
 gotest %{import_path}/config
 %endif
 
-%post -n %{repo}
+%post
 %if 0%{?fedora} || 0%{?rhel} == 7
 %systemd_post %{repo}.service
 %else
 #/sbin/chkconfig --add %{repo}
 %endif
 
-%preun -n %{repo}
+%preun
 %if 0%{?fedora} || 0%{?rhel} == 7
 %systemd_preun %{repo}.service
 %else
@@ -326,7 +324,7 @@ if [ $1 = 0 ]; then
 fi
 %endif
 
-%postun -n %{repo}
+%postun
 %if 0%{?fedora} || 0%{?rhel} == 7
 %systemd_postun %{repo}.service
 %else
@@ -336,7 +334,7 @@ fi
 %endif
 
 
-%files -n %{repo}
+%files
 %copying LICENSE
 %doc AUTHORS.md CHANGELOG.md CONTRIBUTING.md README.md NOTICE
 #doc Godeps/Godeps.json
