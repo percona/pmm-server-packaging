@@ -34,7 +34,7 @@
 %global commit          f73a6053faec7fb22de9a40da936d1a2dcf4e4df
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           golang-%{provider}-%{project}-%{repo}
+Name:           percona-%{repo}
 Version:        2.0.1
 Release:        0.git%{shortcommit}%{?dist}
 Summary:        MySQL replication topology management and HA
@@ -63,8 +63,6 @@ BuildRequires:   gcc-go >= %{gccgo_min_vers}
 BuildRequires:   golang >= 1.7.3
 %endif
 
-
-Provides: %{repo} = %{version}-%{release}
 
 %description
 %{summary}

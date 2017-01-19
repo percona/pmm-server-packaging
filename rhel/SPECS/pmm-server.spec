@@ -17,7 +17,7 @@ URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 BuildArch:	noarch
-Requires:	nginx
+Requires:	nginx ansible git bats
 BuildRequires:	openssl
 
 

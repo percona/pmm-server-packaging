@@ -12,7 +12,7 @@
 %define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**}; 
 %endif
 
-Name:           grafana
+Name:           percona-%{repo}
 Version:        4.0.2
 Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor

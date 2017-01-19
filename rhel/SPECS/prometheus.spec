@@ -42,7 +42,7 @@
 %global commit          2a89e8733f240d3cd57a6520b52c36ac4744ce12
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           golang-%{provider}-%{project}-%{repo}
+Name:           percona-%{repo}
 Version:        1.4.1
 Release:        3%{?dist}.0.1
 Summary:        The Prometheus monitoring system and time series database
@@ -94,7 +94,6 @@ BuildRequires: golang(gopkg.in/fsnotify.v1)
 BuildRequires: golang(gopkg.in/yaml.v2)
 %endif
 
-Provides: prometheus = %{version}-%{release}
 
 %description -n %{repo}
 %{summary}
@@ -136,33 +135,6 @@ Requires: golang(golang.org/x/net/context)
 Requires: golang(gopkg.in/fsnotify.v1)
 Requires: golang(gopkg.in/yaml.v2)
 
-Provides: golang(%{import_path}/config) = %{version}-%{release}
-Provides: golang(%{import_path}/notification) = %{version}-%{release}
-Provides: golang(%{import_path}/promql) = %{version}-%{release}
-Provides: golang(%{import_path}/retrieval) = %{version}-%{release}
-Provides: golang(%{import_path}/retrieval/discovery) = %{version}-%{release}
-Provides: golang(%{import_path}/rules) = %{version}-%{release}
-Provides: golang(%{import_path}/storage) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/local) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/local/codable) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/local/index) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/metric) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/remote) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/remote/influxdb) = %{version}-%{release}
-Provides: golang(%{import_path}/storage/remote/opentsdb) = %{version}-%{release}
-Provides: golang(%{import_path}/template) = %{version}-%{release}
-Provides: golang(%{import_path}/util/cli) = %{version}-%{release}
-Provides: golang(%{import_path}/util/flock) = %{version}-%{release}
-Provides: golang(%{import_path}/util/httputil) = %{version}-%{release}
-Provides: golang(%{import_path}/util/route) = %{version}-%{release}
-Provides: golang(%{import_path}/util/stats) = %{version}-%{release}
-Provides: golang(%{import_path}/util/strutil) = %{version}-%{release}
-Provides: golang(%{import_path}/util/testutil) = %{version}-%{release}
-Provides: golang(%{import_path}/version) = %{version}-%{release}
-Provides: golang(%{import_path}/web) = %{version}-%{release}
-Provides: golang(%{import_path}/web/api/legacy) = %{version}-%{release}
-Provides: golang(%{import_path}/web/api/v1) = %{version}-%{release}
-Provides: golang(%{import_path}/web/blob) = %{version}-%{release}
 
 %description devel
 %{summary}

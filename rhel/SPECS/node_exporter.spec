@@ -34,7 +34,7 @@
 %global commit          006d1c7922b765f458fe9b92ce646641bded0f52
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           golang-%{provider}-%{project}-%{repo}
+Name:           percona-%{repo}
 Version:        0.13.0
 Release:        0.git%{shortcommit}%{?dist}
 Summary:        Prometheus exporter for machine metrics, written in Go with pluggable metric collectors
@@ -73,8 +73,6 @@ BuildRequires:   golang >= 1.7.3
 #BuildRequires: golang-github-mitchellh-cli-devel-temporary
 %endif
 
-Provides: %{repo} = %{version}-%{release}
-Provides: node-exporter = %{version}-%{release}
 
 %description
 %{summary}

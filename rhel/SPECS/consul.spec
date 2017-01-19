@@ -32,7 +32,7 @@
 %global commit          a9455cd4fc2809570ff1855c37d6ffc2449bd42f
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           consul
+Name:           percona-%{repo}
 Version:        0.7.1
 Release:        1%{?dist}
 Summary:        Tool for service discovery, monitoring and configuration http://www.consul.io
@@ -135,16 +135,6 @@ Requires:      golang(github.com/ryanuber/columnize)
 Requires:      golang(github.com/docker/go-units)
 Requires:      golang(github.com/opencontainers/runc/libcontainer/user)
 
-Provides:      golang(%{import_path}/acl) = %{version}-%{release}
-Provides:      golang(%{import_path}/api) = %{version}-%{release}
-Provides:      golang(%{import_path}/command) = %{version}-%{release}
-Provides:      golang(%{import_path}/command/agent) = %{version}-%{release}
-Provides:      golang(%{import_path}/consul) = %{version}-%{release}
-Provides:      golang(%{import_path}/consul/state) = %{version}-%{release}
-Provides:      golang(%{import_path}/consul/structs) = %{version}-%{release}
-Provides:      golang(%{import_path}/testutil) = %{version}-%{release}
-Provides:      golang(%{import_path}/tlsutil) = %{version}-%{release}
-Provides:      golang(%{import_path}/watch) = %{version}-%{release}
 
 %description -n golang-%{provider}-%{project}-%{repo}-devel
 %{summary}
