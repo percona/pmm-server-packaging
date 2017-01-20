@@ -17,7 +17,7 @@ URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 BuildArch:	noarch
-Requires:	grafana python python-requests
+Requires:	percona-grafana python python-requests
 Provides:	percona-grafana-dashboards = %{version}-%{release}
 
 %description
