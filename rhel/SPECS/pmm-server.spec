@@ -4,12 +4,12 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		50d842f6723c0a60addff2bc6d0e748add68c77c
+%global commit		7a4a5fd1efebccfc556b7866e4c2923d1ad06ad7
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 
 Name:		%{repo}
 Version:	1.0.7
-Release:	7%{?dist}
+Release:	8%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
