@@ -9,7 +9,7 @@
 
 Name:		%{repo}
 Version:	1.0.7
-Release:	8%{?dist}
+Release:	9%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -40,6 +40,7 @@ echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .ht
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
 mv .htpasswd  %{buildroot}%{_sysconfdir}/nginx/.htpasswd
 mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
+mv nginx-ssl.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 install -d %{buildroot}%{_sysconfdir}/cron.daily
 mv purge-qan-data %{buildroot}%{_sysconfdir}/cron.daily/purge-qan-data
 install -d %{buildroot}%{_datadir}/percona-dashboards
