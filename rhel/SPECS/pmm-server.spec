@@ -66,6 +66,7 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 %{_sysconfdir}/prometheus.yml
 %{_sysconfdir}/nginx/.htpasswd
 %{_sysconfdir}/nginx/conf.d/pmm.conf
+%{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 %{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_sysconfdir}/orchestrator.conf.json
 %{_sysconfdir}/cron.daily/purge-qan-data
