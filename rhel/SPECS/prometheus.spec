@@ -39,12 +39,12 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          2a89e8733f240d3cd57a6520b52c36ac4744ce12
+%global commit          d840f2c400629a846b210cf58d65b9fbae0f1d5c
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        1.4.1
-Release:        3%{?dist}.0.1
+Version:        1.5.0
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -360,6 +360,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.0-1
+- update to 1.5.0
+
 * Mon Feb 22 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.15.0-3
 - https://fedoraproject.org/wiki/Changes/golang1.6
 

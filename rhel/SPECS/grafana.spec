@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v4.0.2
+%global commit          v4.1.1
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,13 +13,12 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        4.0.2
+Version:        4.1.1
 Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:        grafana-node_modules-%{shortcommit}.el6.tar.gz
 Source2:        grafana-node_modules-%{shortcommit}.el7.tar.gz
 Source3:        grafana-server.service
 ExclusiveArch:  %{ix86} x86_64 %{arm}
@@ -41,11 +40,7 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%if 0%{?rhel} == 6
-%setup -q -b 1 -n %{repo}-%{version}
-%else
 %setup -q -b 2 -n %{repo}-%{version}
-%endif
 rm -rf Godeps
 
 %build
@@ -148,6 +143,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Thu Jan 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.1.1-1
+- up to 4.1.1
+
 * Thu Dec 29 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 4.0.2-2
 - use fixed grafana-server.service
 

@@ -29,11 +29,11 @@
 # https://github.com/hashicorp/consul
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          a9455cd4fc2809570ff1855c37d6ffc2449bd42f
+%global commit          a90bb8f02183e12c312ddb4dfb2c7602fdbf4e12
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        0.7.1
+Version:        0.7.3
 Release:        1%{?dist}
 Summary:        Tool for service discovery, monitoring and configuration http://www.consul.io
 License:        MPLv2.0
@@ -296,6 +296,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.7.3-1
+- update to 0.7.3
+
 * Tue Jan 17 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.7.1-1.gita9455cd
 - update to 0.7.1
 
