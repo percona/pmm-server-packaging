@@ -4,11 +4,11 @@
 %global repo		grafana-dashboards
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		ea62aaf4a67a1cbe77608b14b2f9a132cd104510
+%global commit		99180110d8230541bf9e1b8dedf0b29c00ee4f59
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 
 Name:		%{project}-dashboards
-Version:	1.0.7
+Version:	1.1.0
 Release:	1%{?dist}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
