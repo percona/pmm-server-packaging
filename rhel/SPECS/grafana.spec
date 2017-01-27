@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        4.1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -42,6 +42,7 @@ Graphite, InfluxDB & OpenTSDB.
 %prep
 %setup -q -b 2 -n %{repo}-%{version}
 rm -rf Godeps
+sed -i -e 's/var version = "[0-9].[0-9].[0-9]"/var version = "%{version}"/' ./pkg/cmd/grafana-server/main.go
 
 %build
 mkdir -p _build/src
