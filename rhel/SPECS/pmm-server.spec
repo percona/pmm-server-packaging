@@ -8,8 +8,8 @@
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 
 Name:		%{repo}
-Version:	1.0.7
-Release:	11%{?dist}
+Version:	1.1.0
+Release:	1%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
