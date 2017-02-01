@@ -8,8 +8,8 @@
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 
 Name:		%{project}-%{repo}
-Version:	1.0.7
-Release:	3%{?dist}
+Version:	1.1.0
+Release:	1%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
