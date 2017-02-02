@@ -7,19 +7,19 @@
 %global repo		qan-api
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		e8b74e672370f7301986737831aa472173252d7e
+%global commit		01a21b3e6ddf7881bf3de14f9bd2c550aa0434ec
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
+%define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
-Version:	1.0.7
-Release:	1%{?dist}
+Version:	1.1.0
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	%{repo}-vendor-%{version}.tar.gz
-Source2:	%{name}.service
+Source1:	%{name}.service
 
 BuildRequires:	golang
 Requires:	perl
@@ -39,18 +39,17 @@ See the PMM docs for more information.
 %prep
 %setup -T -c -n %{repo}-%{version}
 %setup -q -c -a 0 -n %{repo}-%{version}
-%setup -q -c -a 1 -n %{repo}-%{version}
-mv vendor src
 mkdir -p src/%{provider}.%{provider_tld}/%{project}
 mv %{repo}-%{commit} src/%{provider_prefix}
+ln -s $(pwd)/src/%{provider_prefix}/vendor/github.com/revel src/github.com/revel
 
 
 %build
 mkdir -p bin release
 export GOPATH=$(pwd)
-export APP_VERSION="%{version}-$(TZ="UTC" date "+%Y%m%d").%{shortcommit}"
-go build -o bin/revel ./src/github.com/revel/cmd/revel
-./bin/revel build github.com/percona/qan-api release prod
+export APP_VERSION="%{version}-%{build_timestamp}.%{shortcommit}"
+go build -o ./revel ./src/%{provider_prefix}/vendor/github.com/revel/cmd/revel
+./revel build %{provider_prefix} release prod
 rm -rf release/src/github.com/percona/qan-api
 
 
@@ -70,7 +69,7 @@ install -d -p %{buildroot}%{_sysconfdir}
 cp -rpa ./src/%{provider_prefix}/conf/prod.conf %{buildroot}%{_sysconfdir}/percona-qan-api.conf
 
 install -d %{buildroot}/usr/lib/systemd/system
-install -p -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/%{name}.service
+install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.service
 
 
 %post
@@ -110,5 +109,9 @@ fi
 
 
 %changelog
+* Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
+- add build_timestamp to Release value
+- use deps from vendor dir
+
 * Fri Dec 16 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-1
 - init version
