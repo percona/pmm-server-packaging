@@ -6,10 +6,11 @@
 %global import_path	%{provider_prefix}
 %global commit		99180110d8230541bf9e1b8dedf0b29c00ee4f59
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
+%define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-dashboards
 Version:	1.1.0
-Release:	1%{?dist}
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
 License:	AGPLv3
@@ -47,5 +48,8 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
+* Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
+- add build_timestamp to Release value
+
 * Thu Dec 15 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-1
 - init version
