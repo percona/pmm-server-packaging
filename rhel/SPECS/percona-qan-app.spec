@@ -4,18 +4,18 @@
 %global repo		qan-app
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		d99d49522a03ef601389dd9053a79560afee485d
+%global commit		ad8b6ce171946876dca222506ce4848522d4a7e0
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
+%define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
 Version:	1.1.0
-Release:	1%{?dist}
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	%{repo}-bower-%{version}.tar.gz
 
 BuildArch:	noarch
 Requires:	nginx
@@ -26,7 +26,7 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -D -a 1 -n %{repo}-%{commit}
+%setup -q -n %{repo}-%{commit}
 sed -i "s/':9001',/':' + window.location.port + '\/qan-api',/" client/app/app.js
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" index.html
 
@@ -43,12 +43,16 @@ cp -pav ./bower_components %{buildroot}%{_datadir}/%{name}
 
 
 %files
-#license LICENSE
+%license LICENSE
 %doc README.md
 %{_datadir}/%{name}
 
 
 %changelog
+* Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
+- add build_timestamp to Release value
+- use bower deps from main archive
+
 * Mon Jan 23 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-3
 - fix version inside index.html
 
