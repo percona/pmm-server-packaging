@@ -4,12 +4,13 @@
 %global repo		pmm-manage
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		53e62fda9ff89273ac1325148147049cef1a962e
+%global commit		f222a3e865af9dc4f20f04699811defd436bccf9
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
+%define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
 Version:	1.1.0
-Release:	1%{?dist}
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	PMM configuration managament tool
 
 License:	AGPLv3
@@ -67,5 +68,8 @@ install -p -m 0644 packaging/pmm-manage.service %{buildroot}/usr/lib/systemd/sys
 
 
 %changelog
+* Fri Feb  3 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
+- add build_timestamp to Release value
+
 * Wed Feb  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
 - init version
