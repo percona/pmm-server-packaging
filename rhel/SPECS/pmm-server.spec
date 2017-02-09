@@ -1,15 +1,16 @@
 %global provider	github
 %global provider_tld	com
-%global project		delgod
+%global project		percona
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		50bb86f629e0549d4d0aac54f973dc64dc79cab7
+%global commit		858cd24419e6fe05b6695f21f29daddaf0137fce
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
+%define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
 Version:	1.1.0
-Release:	1%{?dist}
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -75,6 +76,9 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Thu Feb  9 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
+- add build_timestamp to Release value
+
 * Wed Dec 28 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 1.0.7-7
 - add /etc/tmpfiles.d/pmm.conf file
 - run systemd-tmpfiles tool during post install
