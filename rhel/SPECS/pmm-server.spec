@@ -4,13 +4,13 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		858cd24419e6fe05b6695f21f29daddaf0137fce
+%global commit		1807b6cdb4213edb59d4548a8ebc40899adc3c69
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
 Version:	1.1.0
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -31,10 +31,8 @@ See the PMM docs for more information.
 %setup -q -n %{repo}-%{commit}
 sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml
 sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml
-
-
-%build
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
+sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
 
 %install
@@ -76,6 +74,9 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Mon Feb 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
+- add version to landing page
+
 * Thu Feb  9 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
 - add build_timestamp to Release value
 
