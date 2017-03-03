@@ -1,16 +1,18 @@
+%global _dwz_low_mem_die_limit 0
+
 %global provider	github
 %global provider_tld	com
 %global project		Percona-Lab
 %global repo		pmm-manage
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		f222a3e865af9dc4f20f04699811defd436bccf9
+%global commit		ac538fc3d548690af344295d523f1ec2080b2916
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.1.0
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.1.1
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	PMM configuration managament tool
 
 License:	AGPLv3
@@ -39,11 +41,14 @@ ln -s $(pwd) src/%{provider_prefix}
 
 %build
 export GOPATH=$(pwd)
+go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n')" -a -v -x %{provider_prefix}/cmd/pmm-configure
 go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n')" -a -v -x %{provider_prefix}/cmd/pmm-configurator
 
 
 %install
+install -d -p %{buildroot}%{_bindir}
 install -d -p %{buildroot}%{_sbindir}
+install -p -m 0755 pmm-configure    %{buildroot}%{_bindir}/pmm-configure
 install -p -m 0755 pmm-configurator %{buildroot}%{_sbindir}/pmm-configurator
 
 install -d %{buildroot}/usr/lib/systemd/system
@@ -63,11 +68,15 @@ install -p -m 0644 packaging/pmm-manage.service %{buildroot}/usr/lib/systemd/sys
 %files
 %license src/%{provider_prefix}/LICENSE
 %doc src/%{provider_prefix}/README.md
+%{_bindir}/pmm-configure
 %{_sbindir}/pmm-configurator
 /usr/lib/systemd/system/%{name}.service
 
 
 %changelog
+* Fri Mar  3 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.1-1
+- add pmm-configure
+
 * Fri Feb  3 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
 - add build_timestamp to Release value
 
