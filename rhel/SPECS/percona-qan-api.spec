@@ -12,8 +12,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
-Version:	1.1.0
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.1.1
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -105,10 +105,13 @@ fi
 %attr(0755, root, root) %{_sbindir}/%{name}
 %{_datadir}/%{name}
 /usr/lib/systemd/system/%{name}.service
-%{_sysconfdir}/percona-qan-api.conf
+%config %{_sysconfdir}/percona-qan-api.conf
 
 
 %changelog
+* Mon Mar  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.1-2
+- mark percona-qan-api.conf as %config
+
 * Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
 - add build_timestamp to Release value
 - use deps from vendor dir
