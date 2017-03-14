@@ -31,11 +31,11 @@
 %global repo            orchestrator
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          f73a6053faec7fb22de9a40da936d1a2dcf4e4df
+%global commit          e6a806779d41be219af06116d8bdbf1e71802c71
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        2.0.1
+Version:        2.0.3
 Release:        0.git%{shortcommit}%{?dist}
 Summary:        MySQL replication topology management and HA
 License:        ASL 2.0
@@ -142,8 +142,7 @@ eval ${GOCOMPILER} -a -v -x "$@";
 function gobuild { eval ${GOCOMPILER} -a -v -x "$@"; }
 %endif
 
-mkdir -p src/github.com
-cp -r vendor/github.com/outbrain src/github.com/outbrain/
+mv vendor src
 
 # set working directory
 mkdir -p src/%{provider}.%{provider_tld}/%{project}
@@ -282,6 +281,9 @@ fi
 %endif
 
 %changelog
+* Tue Mar 14 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 2.0.3-1
+- update to 2.0.3
+
 * Tue Dec 13 2016 Mykola Marzhan <mykola.marzhan@percona.com> - 0.13.0-0.git006d1c7
 - First package
 
