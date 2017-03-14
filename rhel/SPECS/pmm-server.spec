@@ -4,13 +4,13 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		1807b6cdb4213edb59d4548a8ebc40899adc3c69
+%global commit		994a33cafb4d1fdc57f2d2b02e96c89b0d74b41a
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.1.0
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.1.2
+Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -53,6 +53,9 @@ mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
+install -d %{buildroot}%{_sysconfdir}/my.cnf.d
+mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
+
 
 %post
 /usr/bin/systemd-tmpfiles --create
@@ -61,6 +64,7 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 %files
 %license LICENSE
 %doc README.md CHANGELOG.md
+%{_sysconfdir}/my.cnf.d
 %{_sysconfdir}/sysconfig
 %{_sysconfdir}/prometheus.yml
 %{_sysconfdir}/nginx/.htpasswd
@@ -74,6 +78,9 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Tue Mar 14 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.2-3
+- add my.cnf
+
 * Mon Feb 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
 - add version to landing page
 
