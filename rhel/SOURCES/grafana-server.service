@@ -17,12 +17,11 @@ Restart=on-failure
 RestartSec=10s
 WorkingDirectory=/usr/share/grafana
 ExecStart=/usr/sbin/grafana-server                                \
-                         --config=${CONF_FILE}                    \
-                         --homepath=/usr/share/grafana            \
-                         cfg:default.paths.logs=${LOG_DIR}        \
-                         cfg:default.paths.data=${DATA_DIR}       \
-                         cfg:default.paths.plugins=${PLUGINS_DIR} \
-                         ${OPTIONS}
+                            --config=${CONF_FILE}                 \
+                            cfg:default.paths.logs=${LOG_DIR}     \
+                            cfg:default.paths.data=${DATA_DIR}    \
+                            cfg:default.paths.plugins=${PLUGINS_DIR} \
+                            ${OPTIONS}
 LimitNOFILE=10000
 TimeoutStopSec=20
 

@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v4.1.2
+%global commit          v4.2.0
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,7 +13,7 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        4.1.2
+Version:        4.2.0
 Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
@@ -40,7 +40,7 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%setup -q -b 2 -n %{repo}-%{version}
+%setup -q -a 2 -n %{repo}-%{version}
 rm -rf Godeps
 sed -i -e 's/var version = "[0-9].[0-9].[0-9]"/var version = "%{version}"/' ./pkg/cmd/grafana-server/main.go
 
