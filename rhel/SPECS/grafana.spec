@@ -14,13 +14,14 @@
 
 Name:           percona-%{repo}
 Version:        4.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-%{shortcommit}.el7.tar.gz
 Source3:        grafana-server.service
+Patch0:         grafana-v4.2.0-fix-tooltip.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -41,6 +42,7 @@ Graphite, InfluxDB & OpenTSDB.
 
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
+%patch0
 rm -rf Godeps
 sed -i -e 's/var version = "[0-9].[0-9].[0-9]"/var version = "%{version}"/' ./pkg/cmd/grafana-server/main.go
 
@@ -144,6 +146,10 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Wed Mar 29 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.2.0-2
+- up to 4.2.0
+- PMM-708 rollback tooltip position
+
 * Tue Mar 14 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.1.2-1
 - up to 4.1.2
 
