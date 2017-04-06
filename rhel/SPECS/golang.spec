@@ -99,7 +99,7 @@
 
 Name:           golang
 Version:        1.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Go Programming Language
 # source tree includes several copies of Mark.Twain-Tom.Sawyer.txt under Public Domain
 License:        BSD and Public Domain
@@ -347,7 +347,7 @@ rm -f $src_list $pkg_list $docs_list $misc_list $tests_list $shared_list $race_l
 touch $src_list $pkg_list $docs_list $misc_list $tests_list $shared_list $race_list
 pushd $RPM_BUILD_ROOT%{goroot}
     find src/ -type d -a \( ! -name testdata -a ! -ipath '*/testdata/*' \) -printf '%%%dir %{goroot}/%p\n' >> $src_list
-    find src/ ! -type d -a \( ! -ipath '*/testdata/*' -a ! -name '*_test*.go' \) -printf '%{goroot}/%p\n' >> $src_list
+    find src/ ! -type d -a \( ! -ipath '*/testdata/*' -a ! -name '*_test.go' \) -printf '%{goroot}/%p\n' >> $src_list
 
     find bin/ pkg/ -type d -a ! -path '*_dynlink/*' -a ! -path '*_race/*' -printf '%%%dir %{goroot}/%p\n' >> $pkg_list
     find bin/ pkg/ ! -type d -a ! -path '*_dynlink/*' -a ! -path '*_race/*' -printf '%{goroot}/%p\n' >> $pkg_list
@@ -385,7 +385,7 @@ pushd $RPM_BUILD_ROOT%{goroot}
     find test/ -type d -printf '%%%dir %{goroot}/%p\n' >> $tests_list
     find test/ ! -type d -printf '%{goroot}/%p\n' >> $tests_list
     find src/ -type d -a \( -name testdata -o -ipath '*/testdata/*' \) -printf '%%%dir %{goroot}/%p\n' >> $tests_list
-    find src/ ! -type d -a \( -ipath '*/testdata/*' -o -name '*_test*.go' \) -printf '%{goroot}/%p\n' >> $tests_list
+    find src/ ! -type d -a \( -ipath '*/testdata/*' -o -name '*_test.go' \) -printf '%{goroot}/%p\n' >> $tests_list
     # this is only the zoneinfo.zip
     find lib/ -type d -printf '%%%dir %{goroot}/%p\n' >> $tests_list
     find lib/ ! -type d -printf '%{goroot}/%p\n' >> $tests_list
@@ -504,6 +504,9 @@ fi
 %endif
 
 %changelog
+* Thu Apr  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8-2
+- fix golang/go/issues/19155
+
 * Fri Feb 17 2017 Jakub Čajka <jcajka@redhat.com> - 1.8-1
 - bump to released version
 - Resolves: BZ#1423637
