@@ -39,11 +39,11 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          bd1182d29f462c39544f94cc822830e1c64cf55b
+%global commit          10f645382988add09c8e3420d0d7ff2dc4d36a29
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        1.5.2
+Version:        1.6.0
 Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
@@ -336,7 +336,7 @@ fi
 
 %files
 %copying LICENSE
-%doc AUTHORS.md CHANGELOG.md CONTRIBUTING.md README.md NOTICE
+%doc CHANGELOG.md CONTRIBUTING.md README.md NOTICE
 #doc Godeps/Godeps.json
 %{_sbindir}/%{repo}
 %{_bindir}/promtool
@@ -347,7 +347,7 @@ fi
 %if 0%{?with_devel}
 %files devel -f devel.file-list
 %copying LICENSE
-%doc AUTHORS.md CHANGELOG.md CONTRIBUTING.md README.md
+%doc CHANGELOG.md CONTRIBUTING.md README.md
 #doc Godeps/Godeps.json
 %dir %{gopath}/src/%{provider}.%{provider_tld}/%{project}
 %dir %{gopath}/src/%{import_path}
@@ -360,6 +360,9 @@ fi
 %endif
 
 %changelog
+* Mon Apr 17 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.6.0-1
+- update to 1.6.0
+
 * Tue Mar 14 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.2-1
 - update to 1.5.2
 
