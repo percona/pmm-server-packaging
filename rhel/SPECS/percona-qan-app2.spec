@@ -10,7 +10,7 @@
 
 Name:		%{project}-%{repo}2
 Version:	1.1.4
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -32,7 +32,7 @@ npm install
 
 
 %build
-./node_modules/.bin/ng build --base-href '/qan2/' --aot --output-path dist/qan-app2 --target production
+node --max-old-space-size=4096 ./node_modules/.bin/ng build --base-href '/qan2/' --aot --output-path dist/qan-app2 --target production
 
 
 %install
