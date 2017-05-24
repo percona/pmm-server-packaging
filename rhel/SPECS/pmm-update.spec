@@ -9,7 +9,7 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.1.0
+Version:	1.1.4
 Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Tool for updating packages and OS configuration for PMM Server
 
@@ -33,7 +33,7 @@ BuildArch:	noarch
 
 %install
 install -d %{buildroot}%{_bindir}
-cp -pav ./pmm-update* %{buildroot}%{_bindir}
+cp -pav ./bin/* %{buildroot}%{_bindir}
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./ansible %{buildroot}%{_datadir}/%{name}
 
