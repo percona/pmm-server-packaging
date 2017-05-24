@@ -4,7 +4,7 @@
 %global repo		pmm-update
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		d75711eb0b4a972143006295e5bba164518cbc3c
+%global commit		9fd890b36fb21fbe3d475312b0838d67759ae8ae
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
@@ -18,6 +18,7 @@ URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 BuildArch:	noarch
+Requires:	PyYAML
 
 
 %description
@@ -36,6 +37,7 @@ install -d %{buildroot}%{_bindir}
 cp -pav ./bin/* %{buildroot}%{_bindir}
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./ansible %{buildroot}%{_datadir}/%{name}
+cp -pav ./helpers %{buildroot}%{_datadir}/%{name}
 
 
 %files
