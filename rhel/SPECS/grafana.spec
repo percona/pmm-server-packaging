@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v4.2.0
+%global commit          v4.3.2
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,15 +13,14 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        4.2.0
-Release:        2%{?dist}
+Version:        4.3.2
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-%{shortcommit}.el7.tar.gz
 Source3:        grafana-server.service
-Patch0:         grafana-v4.2.0-fix-tooltip.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -42,9 +41,7 @@ Graphite, InfluxDB & OpenTSDB.
 
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
-%patch0
 rm -rf Godeps
-sed -i -e 's/var version = "[0-9].[0-9].[0-9]"/var version = "%{version}"/' ./pkg/cmd/grafana-server/main.go
 
 %build
 mkdir -p _build/src
@@ -56,10 +53,10 @@ mkdir -p ./_build/src/github.com/grafana
 ln -s $(pwd) ./_build/src/github.com/grafana/grafana
 export GOPATH=$(pwd)/_build:%{gopath}
 
+export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 %gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
 %gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
 /usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose release
-#/usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose jshint:source jshint:tests jscs tslint clean:release copy:node_modules copy:public_to_gen phantomjs css htmlmin:build ngtemplates cssmin:build ngAnnotate:build concat:js filerev remapFilerev usemin uglify:genDir build-post-process compress:release
 
 %install
 # install -d -p %{buildroot}/%{gopath}/src/%{import_path}/
@@ -146,6 +143,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.3.2-1
+- update to 4.3.2
+
 * Wed Mar 29 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.2.0-2
 - up to 4.2.0
 - PMM-708 rollback tooltip position
