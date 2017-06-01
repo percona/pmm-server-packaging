@@ -31,11 +31,11 @@
 %global repo            orchestrator
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          05241ab2608de7ed5dd66a363690a33db36e9954
+%global commit          c61104ea3b9a853affe6c4a6d4f7d37f420ae27d
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        2.1.0
+Version:        2.1.2
 Release:        1.git%{shortcommit}%{?dist}
 Summary:        MySQL replication topology management and HA
 License:        ASL 2.0
@@ -123,7 +123,7 @@ export GOCOMPILER='go build -ldflags "$LDFLAGS"'
 %endif
 %endif
 
-export LDFLAGS=""
+export LDFLAGS=" -X main.AppVersion=%{version} -X main.GitCommit=%{commit} "
 %if 0%{?with_debug}
 %if %{isgccgoarch}
 export OLD_RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
@@ -281,6 +281,9 @@ fi
 %endif
 
 %changelog
+* Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.2-1
+- update to 2.1.2
+
 * Mon Apr 17 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.0-1
 - update to 2.1.0
 

@@ -39,11 +39,11 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          4666df502c0e239ed4aa1d80abbbfb54f61b23c3
+%global commit          c580b60c67f2c5f6b638c3322161bcdf6d68d7fc
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        1.6.1
+Version:        1.6.3
 Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
@@ -230,7 +230,9 @@ export GO_VERSION=$(go version | cut -d' ' -f3 | sed 's/go//')
 export BUILDDATE=$(date +%Y%m%d-%H:%M:%S)
 
 # build prometheus
-export OLD_LDFLAGS="$OLD_LDFLAGS -X main.buildVersion=%{version} -X main.buildRevision=%{shortcommit} -X main.buildBranch=master -X main.buildUser=fedora -X main.buildDate=${BUILDDATE} -X main.goVersion=${GO_VERSION}"
+export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.Version=%{version} "
+export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.Revision=%{commit} "
+export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.BuildDate=${BUILDDATE} "
 
 gobuild -o bin/prometheus %{import_path}/cmd/prometheus
 gobuild -o bin/promtool   %{import_path}/cmd/promtool
@@ -360,6 +362,9 @@ fi
 %endif
 
 %changelog
+* Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.6.3-1
+- update to 1.6.3
+
 * Thu Apr 20 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.6.1-1
 - update to 1.6.0
 

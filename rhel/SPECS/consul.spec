@@ -29,11 +29,11 @@
 # https://github.com/hashicorp/consul
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          e9ca44d0a1757ac9aecc6785904a701936c10e4a
+%global commit          ea2a82b221c3e0a466a4f38ab4e8718ad8c60621
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        0.8.1
+Version:        0.8.3
 Release:        1%{?dist}
 Summary:        Tool for service discovery, monitoring and configuration http://www.consul.io
 License:        MPLv2.0
@@ -177,6 +177,9 @@ export GOPATH=$(pwd):%{gopath}
 export GOPATH=$(pwd):$(pwd)/Godeps/_workspace:%{gopath}
 %endif
 
+export LDFLAGS=" -X github.com/hashicorp/consul/version.GitCommit=%{shortcommit} "
+LDFLAGS+="-X github.com/hashicorp/consul/version.GitDescribe=%{version} "
+LDFLAGS+=" -X github.com/hashicorp/consul/version.VersionPrerelease='' "
 %gobuild -o bin/%{repo} %{import_path}
 
 %install
@@ -296,6 +299,9 @@ fi
 %endif
 
 %changelog
+* Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.8.3-1
+- update to 0.8.3
+
 * Tue Apr 18 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.8.1-1
 - update to 0.8.1
 
