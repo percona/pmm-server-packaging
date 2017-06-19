@@ -44,7 +44,7 @@
 
 Name:           percona-%{repo}
 Version:        1.7.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -230,8 +230,10 @@ export GO_VERSION=$(go version | cut -d' ' -f3 | sed 's/go//')
 export BUILDDATE=$(date +%Y%m%d-%H:%M:%S)
 
 # build prometheus
+export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.Branch=v%{version} "
 export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.Version=%{version} "
 export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.Revision=%{commit} "
+export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.BuildUser=Jenkins "
 export OLD_LDFLAGS="$OLD_LDFLAGS -X github.com/prometheus/prometheus/vendor/github.com/prometheus/common/version.BuildDate=${BUILDDATE} "
 
 gobuild -o bin/prometheus %{import_path}/cmd/prometheus
@@ -362,6 +364,10 @@ fi
 %endif
 
 %changelog
+* Mon Jun 19 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.7.1-2
+- add BuildUser and Branch tags.
+  resolves: PMM-968
+
 * Tue Jun 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.7.1-1
 - update to 1.7.1
 
