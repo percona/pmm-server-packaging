@@ -4,13 +4,13 @@
 %global repo		qan-app
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		47a55faf5e34ae9b816dbaf6c0023b3bdd707752
+%global commit		d90bad6f079c0c5109fc3e243d916b80bafef2da
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}2
-Version:	1.1.4
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.1.6
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -28,11 +28,12 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -n %{repo}-%{commit}
+sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.json
 npm install
 
 
 %build
-node --max-old-space-size=4096 ./node_modules/.bin/ng build --base-href '/qan2/' --aot --output-path dist/qan-app2 --target production
+npm run build:prod
 
 
 %install
@@ -47,6 +48,9 @@ cp -pav ./dist/qan-app2/*    %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Mon Jun 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.6-1
+- PMM-1087 fix QAN2 package building issue
+
 * Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.4-1
 - add angular2 support
 
