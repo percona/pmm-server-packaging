@@ -31,11 +31,11 @@
 %global repo            orchestrator
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          c61104ea3b9a853affe6c4a6d4f7d37f420ae27d
+%global commit          fae7c1e6403594a4ff13a84169368bbeb3426003
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        2.1.2
+Version:        2.1.5
 Release:        1.git%{shortcommit}%{?dist}
 Summary:        MySQL replication topology management and HA
 License:        ASL 2.0
@@ -281,6 +281,9 @@ fi
 %endif
 
 %changelog
+* Thu Jun 29 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.5-1
+- PMM-849 update to 2.1.5
+
 * Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.2-1
 - update to 2.1.2
 
