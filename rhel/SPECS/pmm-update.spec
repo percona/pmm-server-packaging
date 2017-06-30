@@ -1,16 +1,16 @@
 %global provider	github
 %global provider_tld	com
-%global project		Percona-Lab
+%global project		percona
 %global repo		pmm-update
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		9fd890b36fb21fbe3d475312b0838d67759ae8ae
+%global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.1.4
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.1.6
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Tool for updating packages and OS configuration for PMM Server
 
 License:	AGPLv3
@@ -48,6 +48,9 @@ cp -pav ./helpers %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Fri Jun 30 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.6-1
+- move repository from Percona-Lab to percona organization
+
 * Mon Feb 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
 - add ansible dir to %{_datadir}/%{name}
 

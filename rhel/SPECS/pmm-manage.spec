@@ -2,16 +2,16 @@
 
 %global provider	github
 %global provider_tld	com
-%global project		Percona-Lab
+%global project		percona
 %global repo		pmm-manage
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		ac538fc3d548690af344295d523f1ec2080b2916
+%global commit		56f6671dc4ac56cd835bc893469f092f2f8bea3c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.1.1
+Version:	1.1.6
 Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	PMM configuration managament tool
 
@@ -74,6 +74,9 @@ install -p -m 0644 packaging/pmm-manage.service %{buildroot}/usr/lib/systemd/sys
 
 
 %changelog
+* Fri Jun 30 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.6-1
+- move repository from Percona-Lab to percona organization
+
 * Fri Mar  3 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.1-1
 - add pmm-configure
 
