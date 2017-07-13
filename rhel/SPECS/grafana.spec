@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        4.3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -33,7 +33,7 @@ Requires(preun): systemd
 Requires(postun): systemd
 %endif
 
-#Requires:       golang >= 1.7.3
+Requires:       fontconfig freetype urw-fonts
 
 %description
 Grafana is an open source, feature rich metrics dashboard and graph editor for
@@ -143,6 +143,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Thu Jul 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.3.2-2
+- PMM-1208 install fontconfig freetype urw-fonts
+
 * Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.3.2-1
 - update to 4.3.2
 
