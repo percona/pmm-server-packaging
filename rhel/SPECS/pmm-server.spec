@@ -10,7 +10,7 @@
 
 Name:		%{repo}
 Version:	1.1.2
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	4.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -82,8 +82,8 @@ mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
 
 
 %changelog
-* Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.2.2-1
-- add my.cnf
+* Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.2.2-3
+- add clickhouse.xml
 
 * Tue Mar 14 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.2-3
 - add my.cnf
