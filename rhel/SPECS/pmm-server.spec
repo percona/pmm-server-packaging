@@ -4,13 +4,13 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		994a33cafb4d1fdc57f2d2b02e96c89b0d74b41a
+%global commit		6915afe29c69d9f1661d1bb0cb76927cc9961787
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
 Version:	1.1.2
-Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -53,6 +53,9 @@ mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
+install -d %{buildroot}%{_sysconfdir}/clickhouse-server
+mv clickhouse.xml %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
+
 install -d %{buildroot}%{_sysconfdir}/my.cnf.d
 mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
 
@@ -73,11 +76,15 @@ mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
 %{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_sysconfdir}/orchestrator.conf.json
 %{_sysconfdir}/cron.daily/purge-qan-data
+%{_sysconfdir}/clickhouse-server/config.xml
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 
 
 %changelog
+* Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.2.2-1
+- add my.cnf
+
 * Tue Mar 14 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.2-3
 - add my.cnf
 
