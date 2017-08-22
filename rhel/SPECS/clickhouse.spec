@@ -6,7 +6,7 @@
 
 Name:           percona-clickhouse
 Version:        1.1.54236
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
 License:        Apache-2.0
@@ -89,6 +89,8 @@ cd build
 # NOTE: We don't need this file since poco library are static linked to clickhouse,
 # so we delete it to avoid file collision with other rpm packages.
 %{__rm} -rf %{buildroot}/usr/lib/cmake/Poco/PocoConfig.cmake
+# avoid colision with pmm-server rpm
+%{__rm} -rf %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
 
 %if 0%{?rhel}  == 7
 %{__mkdir} -p %{buildroot}%{_localstatedir}/log/clickhouse-server
@@ -146,7 +148,7 @@ exit 0
 %{_bindir}/clickhouse-zookeeper-cli
 %{_bindir}/corrector_utf8
 %if 0%{?rhel}  == 7
-%config(noreplace) %{_sysconfdir}/clickhouse-server/config.xml
+#config(noreplace) %{_sysconfdir}/clickhouse-server/config.xml
 %config(noreplace) %{_sysconfdir}/clickhouse-server/users.xml
 %{_unitdir}/clickhouse.service
 %{_sysconfdir}/tmpfiles.d/clickhouse.conf
@@ -165,6 +167,9 @@ exit 0
 
 
 %changelog
+* Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-4
+- avoid colision with pmm-server rpm
+
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-3
 - fix %{_sysconfdir}/clickhouse-server owner
 - fix %{_localstatedir}/lib/clickhouse location
