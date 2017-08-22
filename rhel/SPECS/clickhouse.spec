@@ -6,7 +6,7 @@
 
 Name:           percona-clickhouse
 Version:        1.1.54236
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
 License:        Apache-2.0
@@ -92,13 +92,14 @@ cd build
 
 %if 0%{?rhel}  == 7
 %{__mkdir} -p %{buildroot}%{_localstatedir}/log/clickhouse-server
-%{__mkdir} -p %{buildroot}%{_localstatedir}/lib/clickhouse-server/tmp
+%{__mkdir} -p %{buildroot}%{_localstatedir}/lib/clickhouse/tmp
 %{__mkdir} -p %{buildroot}%{_localstatedir}/run/clickhouse-server
 %{__install} -D -m 0644 -p %{SOURCE1} \
    %{buildroot}%{_unitdir}/clickhouse.service
 %{__install} -D -m 0644 -p %{SOURCE2} \
    %{buildroot}%{_sysconfdir}/tmpfiles.d/clickhouse.conf
 %{__mkdir} -p %{buildroot}%{_sysconfdir}/logrotate.d
+%{__mkdir} -p %{buildroot}%{_sysconfdir}/clickhouse
 %{__install} -m 644 -p %{SOURCE3} \
     %{buildroot}%{_sysconfdir}/logrotate.d/clickhouse-server
 %endif
@@ -149,8 +150,9 @@ exit 0
 %config(noreplace) %{_sysconfdir}/clickhouse-server/users.xml
 %{_unitdir}/clickhouse.service
 %{_sysconfdir}/tmpfiles.d/clickhouse.conf
-%attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_localstatedir}/lib/clickhouse-server
-%attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_localstatedir}/lib/clickhouse-server/tmp
+%attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_sysconfdir}/clickhouse
+%attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_localstatedir}/lib/clickhouse
+%attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_localstatedir}/lib/clickhouse/tmp
 %attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_localstatedir}/log/clickhouse-server
 %attr(0755, %{clickhouse_user}, %{clickhouse_group}) %dir %{_localstatedir}/run/clickhouse-server
 %config(noreplace) %{_sysconfdir}/logrotate.d/clickhouse-server
@@ -163,6 +165,10 @@ exit 0
 
 
 %changelog
+* Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-3
+- fix %{_sysconfdir}/clickhouse-server owner
+- fix %{_localstatedir}/lib/clickhouse location
+
 * Mon Aug 21 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-2
 - fix Requires
 - fix fix package name for %pre/%post actions
