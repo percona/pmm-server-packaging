@@ -1,0 +1,14 @@
+[Unit]
+Description=Configuration API of PMM server components
+After=network.target
+
+[Service]
+Type=simple
+Environment=CONFIG="/etc/prometheus.yml"
+EnvironmentFile=-/etc/sysconfig/pmm-managed
+ExecStart=/usr/sbin/pmm-managed --prometheus-config $CONFIG $OPTIONS
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
