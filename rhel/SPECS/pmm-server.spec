@@ -4,13 +4,13 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		6915afe29c69d9f1661d1bb0cb76927cc9961787
+%global commit		0c85a55994e2841790d4f07a0c6299d50d035f42
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.1.2
-Release:	4.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.3.0
+Release:	5.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -50,14 +50,18 @@ mv tmpfiles.d-pmm.conf %{buildroot}%{_sysconfdir}/tmpfiles.d/pmm.conf
 mv sysconfig %{buildroot}%{_sysconfdir}/sysconfig
 mv orchestrator.conf.json %{buildroot}%{_sysconfdir}/orchestrator.conf.json
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
-install -d %{buildroot}%{_datadir}/%{name}
-cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
 mv clickhouse.xml %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
 
 install -d %{buildroot}%{_sysconfdir}/my.cnf.d
 mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
+
+install -d %{buildroot}%{_sysconfdir}/supervisord.d
+mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
+
+install -d %{buildroot}%{_datadir}/%{name}
+cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
 
 %post
@@ -69,6 +73,7 @@ mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
 %doc README.md CHANGELOG.md
 %{_sysconfdir}/my.cnf.d
 %{_sysconfdir}/sysconfig
+%{_sysconfdir}/supervisord.d
 %{_sysconfdir}/prometheus.yml
 %{_sysconfdir}/nginx/.htpasswd
 %{_sysconfdir}/nginx/conf.d/pmm.conf
@@ -82,6 +87,9 @@ mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
 
 
 %changelog
+* Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-5
+- add supervisord.d config
+
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.2.2-3
 - add clickhouse.xml
 
