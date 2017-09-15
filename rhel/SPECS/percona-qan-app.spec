@@ -16,7 +16,7 @@ Summary:	Query Analytics API for PMM
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app2-node_modules-1.2.1.tar.gz
+Source1:	qan-app-node_modules-1.3.0.tar.gz
 
 BuildRequires:	nodejs
 BuildArch:	noarch
