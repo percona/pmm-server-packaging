@@ -4,19 +4,21 @@
 %global repo		qan-app
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		ad8b6ce171946876dca222506ce4848522d4a7e0
+%global commit		c0a510e0587952704bb05c48497466ce0ef9c04f
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
-Version:	1.1.0
+Version:	1.3.0
 Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+Source1:	qan-app2-node_modules-1.2.1.tar.gz
 
+BuildRequires:	nodejs
 BuildArch:	noarch
 Requires:	nginx
 
@@ -26,20 +28,18 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -n %{repo}-%{commit}
-sed -i "s/':9001',/':' + window.location.port + '\/qan-api',/" client/app/app.js
-sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" index.html
+%setup -q -a 1 -n %{repo}-%{commit}
+sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.json node_modules/package.json
+diff package.json node_modules/package.json
 
 
 %build
+npm run build:prod
 
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}
-cp -pav ./client           %{buildroot}%{_datadir}/%{name}
-cp -pav ./scripts          %{buildroot}%{_datadir}/%{name}
-cp -pav ./index.html       %{buildroot}%{_datadir}/%{name}
-cp -pav ./bower_components %{buildroot}%{_datadir}/%{name}
+cp -pav ./dist/qan-app2/*    %{buildroot}%{_datadir}/%{name}
 
 
 %files
@@ -49,6 +49,19 @@ cp -pav ./bower_components %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Mon Jun 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-1
+- up to 1.3.0
+
+* Mon Jun 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.2.1-1
+- up to 1.2.1
+- use prefetched node_modules
+
+* Mon Jun 26 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.6-1
+- PMM-1087 fix QAN2 package building issue
+
+* Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.4-1
+- add angular2 support
+
 * Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
 - add build_timestamp to Release value
 - use bower deps from main archive
