@@ -5,6 +5,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
+Environment=HOME=/usr/share/grafana
 Environment=CONF_FILE=/etc/grafana/grafana.ini
 Environment=LOG_DIR=/var/log/grafana
 Environment=DATA_DIR=/var/lib/grafana
