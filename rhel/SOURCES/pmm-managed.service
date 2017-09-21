@@ -1,6 +1,6 @@
 [Unit]
 Description=Configuration API of PMM server components
-After=network.target
+After=network.target consul.service
 
 [Service]
 Type=simple
