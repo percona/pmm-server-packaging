@@ -12,7 +12,7 @@
 
 Name:		%{repo}
 Version:	1.3.0
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management management daemon
 
 License:	AGPLv3
@@ -73,5 +73,8 @@ install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.servic
 
 
 %changelog
+* Thu Sep 21 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-2
+- add consul dependency for pmm-managed
+
 * Tue Sep 12 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-1
 - init version
