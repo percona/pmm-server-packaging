@@ -39,12 +39,12 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          3afb3fffa3a29c3de865e1172fb740442e9d0133
+%global commit          22eadbe635528fa17b99a7635fed6b6018103042
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        1.7.1
-Release:        2%{?dist}
+Version:        1.7.2
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -364,6 +364,10 @@ fi
 %endif
 
 %changelog
+* Thu Oct  5 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.7.2-1
+- update to 1.7.1
+- PMM-1519 add prometheus stop timeout to systemd unit
+
 * Mon Jun 19 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.7.1-2
 - add BuildUser and Branch tags.
   resolves: PMM-968
