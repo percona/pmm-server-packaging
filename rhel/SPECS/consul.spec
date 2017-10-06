@@ -29,11 +29,11 @@
 # https://github.com/hashicorp/consul
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          2c7715154d8d4568524b76d2d4deb7ca6fd1b285
+%global commit          112c0603d3d6fb23ab5f15e8fdb1a761da8eaf9a
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        0.8.5
+Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Tool for service discovery, monitoring and configuration http://www.consul.io
 License:        MPLv2.0
@@ -299,6 +299,9 @@ fi
 %endif
 
 %changelog
+* Fri Oct  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.9.3-1
+- PMM-1553 update to 0.9.3
+
 * Thu Jun 29 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 0.8.4-1
 - PMM-934 update to 0.8.5
 
