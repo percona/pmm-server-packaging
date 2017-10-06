@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v4.4.3
+%global commit          v4.5.2
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,7 +13,7 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        4.4.3
+Version:        4.5.2
 Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
@@ -143,6 +143,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Fri Oct  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.5.2-1
+- PMM-1521 update to 4.5.2
+
 * Tue Sep 19 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.4.3-2
 - fix HOME variable in unit file
 
