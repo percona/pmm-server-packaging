@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v4.5.2
+%global commit          v4.6.0
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,8 +13,8 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        4.5.2
-Release:        2%{?dist}
+Version:        4.6.0
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -45,6 +45,7 @@ rm -rf Godeps
 
 %build
 mkdir -p _build/src
+mv vendor/cloud.google.com _build/src/
 mv vendor/github.com _build/src/
 mv vendor/golang.org _build/src/
 mv vendor/gopkg.in   _build/src/
@@ -59,24 +60,21 @@ export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit
 /usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose release
 
 %install
-# install -d -p %{buildroot}/%{gopath}/src/%{import_path}/
-# cp -pav *.go %{buildroot}/%{gopath}/src/%{import_path}/
-# cp -rpav pkg public conf tests %{buildroot}/%{gopath}/src/%{import_path}/
 install -d -p %{buildroot}%{_datadir}/%{repo}
-cp -pav *.md %{buildroot}%{_datadir}/%{repo}
-# cp -rpav benchmarks %{buildroot}/%{gopath}/src/%{import_path}/
-cp -rpav docs %{buildroot}%{_datadir}/%{repo}
-cp -rpav public_gen %{buildroot}%{_datadir}/%{repo}/public
-cp -rpav scripts %{buildroot}%{_datadir}/%{repo}
-cp -rpav vendor %{buildroot}%{_datadir}/%{repo}
+cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
+cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
+cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
+cp -rpav tmp/vendor %{buildroot}%{_datadir}/%{repo}
+
 install -d -p %{buildroot}%{_sbindir}
-cp bin/%{repo}-server %{buildroot}%{_sbindir}/
+cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
 install -d -p %{buildroot}%{_bindir}
-cp bin/%{repo}-cli %{buildroot}%{_bindir}/
+cp tmp/bin/%{repo}-cli %{buildroot}%{_bindir}/
+
 install -d -p %{buildroot}%{_sysconfdir}/%{repo}
-cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
-mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
-cp -rpav conf %{buildroot}%{_datadir}/%{repo}
+cp tmp/conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
+mv tmp/conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
+
 %if 0%{?fedora} || 0%{?rhel} == 7
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 %{SOURCE3} %{buildroot}/usr/lib/systemd/system/
@@ -84,8 +82,7 @@ install -p -m 0644 %{SOURCE3} %{buildroot}/usr/lib/systemd/system/
 mkdir -p %{buildroot}%{_initddir}/
 install -p -m 0644 packaging/rpm/init.d/grafana-server %{buildroot}%{_initddir}/
 %endif
-#mkdir -p %{buildroot}%{_sysconfdir}/sysconfig
-#install -p -m 0644 packaging/rpm/sysconfig/grafana-server %{buildroot}%{_sysconfdir}/sysconfig
+
 install -d -p %{buildroot}%{_sharedstatedir}/%{repo}
 install -d -p %{buildroot}/var/log/%{repo}
 
@@ -106,13 +103,8 @@ go test ./pkg/util
 %files
 %defattr(-, grafana, grafana, -)
 %{_datadir}/%{repo}
-%exclude %{_datadir}/%{repo}/*.md
-%exclude %{_datadir}/%{repo}/docs
-%doc %{_datadir}/%{repo}/CHANGELOG.md
-%doc %{_datadir}/%{repo}/LICENSE.md
-%doc %{_datadir}/%{repo}/NOTICE.md
-%doc %{_datadir}/%{repo}/README.md
-%doc %{_datadir}/%{repo}/docs
+%doc *.md
+%doc docs
 %attr(0755, root, root) %{_sbindir}/%{repo}-server
 %attr(0755, root, root) %{_bindir}/%{repo}-cli
 %{_sysconfdir}/%{repo}/grafana.ini
@@ -143,6 +135,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Tue Oct 31 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.6.0-1
+- PMM-1652 update to 4.6.0
+
 * Fri Oct  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 4.5.2-1
 - PMM-1521 update to 4.5.2
 
