@@ -1,36 +1,37 @@
 diff -up go/src/cmd/dist/buildtool.go.bootstrap go/src/cmd/dist/buildtool.go
---- go/src/cmd/dist/buildtool.go.bootstrap	2016-10-24 12:54:57.620563325 +0200
-+++ go/src/cmd/dist/buildtool.go	2016-10-24 13:12:25.036466602 +0200
-@@ -131,17 +131,25 @@ func bootstrapBuildTools() {
+--- go/src/cmd/dist/buildtool.go.bootstrap	2017-07-11 12:05:00.041373419 +0200
++++ go/src/cmd/dist/buildtool.go	2017-07-11 12:07:27.141775914 +0200
+@@ -153,18 +153,26 @@ func bootstrapBuildTools() {
  	defer os.Setenv("GOBIN", os.Getenv("GOBIN"))
  	os.Setenv("GOBIN", "")
  
-+	hostos := os.Getenv("GOHOSTOS")
-+	hostarch := os.Getenv("GOHOSTARCH")
++    hostos := os.Getenv("GOHOSTOS")
++    hostarch := os.Getenv("GOHOSTARCH")
 +
  	os.Setenv("GOOS", "")
  	os.Setenv("GOHOSTOS", "")
  	os.Setenv("GOARCH", "")
  	os.Setenv("GOHOSTARCH", "")
  
-+	bingopath := pathf("%s/bin/%s_%s/go", goroot_bootstrap, hostos, hostarch)
-+	if _, err := os.Stat(bingopath); os.IsNotExist(err) {
-+		bingopath = pathf("%s/bin/go", goroot_bootstrap)
-+	}
++    bingopath := pathf("%s/bin/%s_%s/go", goroot_bootstrap, hostos, hostarch)
++    if _, err := os.Stat(bingopath); os.IsNotExist(err) {
++       bingopath = pathf("%s/bin/go", goroot_bootstrap)
++    }
 +
  	// Run Go 1.4 to build binaries. Use -gcflags=-l to disable inlining to
  	// workaround bugs in Go 1.4's compiler. See discussion thread:
  	// https://groups.google.com/d/msg/golang-dev/Ss7mCKsvk8w/Gsq7VYI0AwAJ
  	// Use the math_big_pure_go build tag to disable the assembly in math/big
  	// which may contain unsupported instructions.
--	run(workspace, ShowOutput|CheckExit, pathf("%s/bin/go", goroot_bootstrap), "install", "-gcflags=-l", "-tags=math_big_pure_go", "-v", "bootstrap/cmd/...")
-+	run(workspace, ShowOutput|CheckExit, bingopath, "install", "-gcflags=-l", "-v", "-tags=math_big_pure_go", "bootstrap/...")
- 
- 	// Copy binaries into tool binary directory.
- 	for _, name := range bootstrapDirs {
+ 	cmd := []string{
+-		pathf("%s/bin/go", goroot_bootstrap),
++		bingopath,
+ 		"install",
+ 		"-gcflags=-l",
+ 		"-tags=math_big_pure_go",
 diff -up go/src/make.bash.bootstrap go/src/make.bash
---- go/src/make.bash.bootstrap	2016-10-24 12:54:57.606563267 +0200
-+++ go/src/make.bash	2016-10-24 12:54:57.620563325 +0200
+--- go/src/make.bash.bootstrap	2017-07-11 12:05:00.036373439 +0200
++++ go/src/make.bash	2017-07-11 12:05:00.041373419 +0200
 @@ -120,8 +120,15 @@ echo '##### Building Go bootstrap tool.'
  echo cmd/dist
  export GOROOT="$(cd .. && pwd)"
@@ -49,7 +50,7 @@ diff -up go/src/make.bash.bootstrap go/src/make.bash
  	echo "Set \$GOROOT_BOOTSTRAP to a working Go tree >= Go 1.4." >&2
  	exit 1
  fi
-@@ -130,8 +137,6 @@ if [ "$GOROOT_BOOTSTRAP" == "$GOROOT" ];
+@@ -130,8 +137,6 @@ if [ "$GOROOT_BOOTSTRAP" = "$GOROOT" ];
  	echo "Set \$GOROOT_BOOTSTRAP to a working Go tree >= Go 1.4." >&2
  	exit 1
  fi

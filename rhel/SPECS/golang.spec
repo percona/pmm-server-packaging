@@ -94,11 +94,11 @@
 %global gohostarch  s390x
 %endif
 
-%global go_api 1.8
-%global go_version 1.8.3
+%global go_api 1.9
+%global go_version 1.9.2
 
 Name:           golang
-Version:        1.8.3
+Version:        1.9.2
 Release:        1%{?dist}
 Summary:        The Go Programming Language
 # source tree includes several copies of Mark.Twain-Tom.Sawyer.txt under Public Domain
@@ -120,7 +120,7 @@ BuildRequires:  hostname
 BuildRequires:  net-tools
 %endif
 # for tests
-BuildRequires:  pcre-devel, glibc-static, perl
+BuildRequires:  pcre-devel, glibc-static, perl, procps-ng
 
 Provides:       go = %{version}-%{release}
 Requires:       %{name}-bin = %{version}-%{release}
@@ -138,6 +138,8 @@ Patch215:       ./go1.5-zoneinfo_testing_only.patch
 
 # Proposed patch by mmunday https://golang.org/cl/35262
 Patch219: s390x-expose-IfInfomsg-X__ifi_pad.patch 
+
+Patch220: s390x-ignore-L0syms.patch
 
 # Having documentation separate was broken
 Obsoletes:      %{name}-docs < 1.1-4
@@ -270,10 +272,9 @@ Requires:       %{name} = %{version}-%{release}
 
 %patch219 -p1
 
-cp %{SOURCE1} ./src/runtime/
+%patch220 -p1
 
-# don't include chacha test vectors in buildID
-mv ./src/vendor/golang_org/x/crypto/chacha20poly1305/chacha20poly1305_test_vectors.go ./src/vendor/golang_org/x/crypto/chacha20poly1305/chacha20poly1305_vectors_test.go
+cp %{SOURCE1} ./src/runtime/
 
 %build
 # print out system information
@@ -507,8 +508,30 @@ fi
 %endif
 
 %changelog
-* Thu Jun  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.3-1
-- update to 1.8.3
+* Wed Nov  8 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.2-1
+- update to 1.9.2
+
+* Fri Sep 15 2017 Jakub Čajka <jcajka@redhat.com> - 1.9-1
+- bump to the relased version
+
+* Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.9-0.beta2.1.2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.9-0.beta2.1.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Tue Jul 11 2017 Jakub Čajka <jcajka@redhat.com> - 1.9-0.beta2.1
+- bump to beta2
+
+* Thu May 25 2017 Jakub Čajka <jcajka@redhat.com> - 1.8.3-1
+- bump to 1.8.3
+- fix for CVE-2017-8932
+- make possible to use 31bit OID in ASN1
+- Resolves: BZ#1454978, BZ#1455191
+
+* Fri Apr 21 2017 Jakub Čajka <jcajka@redhat.com> - 1.8.1-2
+- fix uint64 constant codegen on s390x
+- Resolves: BZ#1441078
 
 * Tue Apr 11 2017 Jakub Čajka <jcajka@redhat.com> - 1.8.1-1
 - bump to Go 1.8.1
