@@ -39,11 +39,11 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          3a7c51ab70fc7615cd318204d3aa7c078b7c5b20
+%global commit          5211b96d4d1291c3dd1a569f711d3b301b635ecb
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        1.8.1
+Version:        1.8.2
 Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
@@ -364,6 +364,9 @@ fi
 %endif
 
 %changelog
+* Mon Nov 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-1
+- PMM-1577 update to 1.8.2
+
 * Tue Oct 24 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.1-1
 - PMM-1577 update to 1.8.1
 
