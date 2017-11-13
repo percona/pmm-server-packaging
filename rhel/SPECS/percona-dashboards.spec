@@ -4,12 +4,12 @@
 %global repo		grafana-dashboards
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		99180110d8230541bf9e1b8dedf0b29c00ee4f59
+%global commit		bd5716f9642f59173825a43e63c50aec889701f7
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-dashboards
-Version:	1.1.0
+Version:	1.5.0
 Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
@@ -36,6 +36,8 @@ Dashboards are also a part of Percona Monitoring and Management project.
 
 
 %install
+install -d %{buildroot}/var/lib/grafana/plugins
+mv *-app %{buildroot}/var/lib/grafana/plugins/
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./* %{buildroot}%{_datadir}/%{name}/
 echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
@@ -45,9 +47,13 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 %license LICENSE
 %doc README.md LICENSE
 %{_datadir}/%{name}
+/var/lib/grafana/plugins
 
 
 %changelog
+* Mon Nov 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.0-1
+- PMM-1680 Include QAN Plugin into PMM
+
 * Thu Feb  2 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
 - add build_timestamp to Release value
 
