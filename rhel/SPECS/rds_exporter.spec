@@ -13,9 +13,9 @@
 Name:		%{repo}
 Version:	1.5.0
 Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
-Summary:        Prometheus exporter for RDS metrics, written in Go with pluggable metric collectors
+Summary:	Prometheus exporter for RDS metrics, written in Go with pluggable metric collectors
 
-License:	AGPLv3
+License:	ASL 2.0
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
