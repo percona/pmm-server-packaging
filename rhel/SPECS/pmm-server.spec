@@ -4,13 +4,13 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		0c85a55994e2841790d4f07a0c6299d50d035f42
+%global commit		ce7d9f7113f1a8cde94ef2a98ff691968b4811b4
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.3.0
-Release:	5.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.5.0
+Release:	6.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -63,9 +63,19 @@ mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./* %{buildroot}%{_datadir}/%{name}
 
+install -d %{buildroot}/usr/lib/systemd/system
+install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
+
 
 %post
 /usr/bin/systemd-tmpfiles --create
+%systemd_post %{repo}.service
+
+%preun
+%systemd_preun %{repo}.service
+
+%postun
+%systemd_postun %{repo}.service
 
 
 %files
@@ -84,9 +94,13 @@ cp -pav ./* %{buildroot}%{_datadir}/%{name}
 %{_sysconfdir}/clickhouse-server/config.xml
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
+/usr/lib/systemd/system/node_exporter.service
 
 
 %changelog
+* Thu Nov 16 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.0-6
+- PMM-1708 use node_exporter from pmm-client
+
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-5
 - add supervisord.d config
 
