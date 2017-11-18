@@ -4,19 +4,19 @@
 %global repo		qan-app
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		c0a510e0587952704bb05c48497466ce0ef9c04f
+%global commit		e69353d1ba68d3bf9cdc91fa7765fc38497fab76
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
-Version:	1.3.0
+Version:	1.5.0
 Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app-node_modules-1.3.0.tar.gz
+Source1:	qan-app-node_modules-1.5.0.tar.gz
 
 BuildRequires:	nodejs
 BuildArch:	noarch
