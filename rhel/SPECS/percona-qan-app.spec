@@ -31,6 +31,7 @@ See the PMM docs for more information.
 %setup -q -a 1 -n %{repo}-%{commit}
 sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.json node_modules/package.json
 diff package.json node_modules/package.json
+diff package-lock.json node_modules/package-lock.json
 
 
 %build
