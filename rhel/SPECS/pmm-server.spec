@@ -10,7 +10,7 @@
 
 Name:		%{repo}
 Version:	1.5.0
-Release:	6.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	7.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -21,6 +21,12 @@ BuildArch:	noarch
 Requires:	nginx ansible git bats
 BuildRequires:	openssl
 
+%if 0%{?fedora} || 0%{?rhel} == 7
+BuildRequires: systemd
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
+%endif
 
 %description
 Percona Monitoring and Management (PMM) Server.
@@ -69,13 +75,13 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 %post
 /usr/bin/systemd-tmpfiles --create
-%systemd_post %{repo}.service
+%systemd_post node_exporter.service
 
 %preun
-%systemd_preun %{repo}.service
+%systemd_preun node_exporter.service
 
 %postun
-%systemd_postun %{repo}.service
+%systemd_postun node_exporter.service
 
 
 %files
