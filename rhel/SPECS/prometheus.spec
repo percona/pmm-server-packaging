@@ -39,12 +39,12 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          5211b96d4d1291c3dd1a569f711d3b301b635ecb
+%global commit          85f23d82a045d103ea7f3c89a91fba4a93e6367a
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        1.8.2
-Release:        3%{?dist}
+Version:        2.1.0
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -364,6 +364,9 @@ fi
 %endif
 
 %changelog
+* Thu May 17 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.0-1
+- PMM-2182 update to 2.1.0
+
 * Tue Apr 17 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-3
 - PMM-2358 add sleep to unit file, maybe system time will be synced
 
