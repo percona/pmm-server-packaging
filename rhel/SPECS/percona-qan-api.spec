@@ -12,8 +12,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
-Version:	1.1.1
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.7.0
+Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -60,7 +60,6 @@ install -d -p %{buildroot}%{_datadir}
 cp -rpa ./release %{buildroot}%{_datadir}/%{name}
 install -d -p %{buildroot}%{_datadir}/%{name}/src/%{provider_prefix}/app/views
 install -d -p %{buildroot}%{_datadir}/%{name}/src/%{provider_prefix}/service/query
-cp -pa  ./src/%{provider_prefix}/scripts/* %{buildroot}%{_datadir}/%{name}/
 cp -rpa ./src/%{provider_prefix}/schema    %{buildroot}%{_datadir}/%{name}/schema
 cp -rpa ./src/%{provider_prefix}/conf      %{buildroot}%{_datadir}/%{name}/src/%{provider_prefix}/conf
 cp -rpa ./src/%{provider_prefix}/service/query/mini.pl %{buildroot}%{_datadir}/%{name}/src/%{provider_prefix}/service/query/mini.pl
@@ -109,6 +108,9 @@ fi
 
 
 %changelog
+* Mon Mar  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.7.0-3
+- don't install obsolete scripts
+
 * Mon Mar  6 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.1-2
 - mark percona-qan-api.conf as %config
 
