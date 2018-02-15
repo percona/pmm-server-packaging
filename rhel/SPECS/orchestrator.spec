@@ -31,11 +31,11 @@
 %global repo            orchestrator
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          fae7c1e6403594a4ff13a84169368bbeb3426003
+%global commit          a77ee001dc95b8dc0476b929164f37b1141f54c1
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        2.1.5
+Version:        3.0.6
 Release:        1.git%{shortcommit}%{?dist}
 Summary:        MySQL replication topology management and HA
 License:        ASL 2.0
@@ -142,8 +142,6 @@ eval ${GOCOMPILER} -a -v -x "$@";
 function gobuild { eval ${GOCOMPILER} -a -v -x "$@"; }
 %endif
 
-mv vendor src
-
 # set working directory
 mkdir -p src/%{provider}.%{provider_tld}/%{project}
 ln -s ../../../ src/%{provider}.%{provider_tld}/%{project}/%{repo}
@@ -155,7 +153,7 @@ export GOPATH=$(pwd):%{gopath}
 export GOPATH=$(pwd):$(pwd)/Godeps/_workspace:%{gopath}
 %endif
 
-gobuild -o bin/%{repo} go/cmd/orchestrator/main.go
+gobuild -o bin/%{repo} src/%{provider}.%{provider_tld}/%{project}/%{repo}/go/cmd/orchestrator/main.go
 
 %install
 # consul subpackage
@@ -281,6 +279,9 @@ fi
 %endif
 
 %changelog
+* Thu Feb 15 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 3.0.6-1
+- PMM-2005 update to 3.0.6
+
 * Thu Jun 29 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.5-1
 - PMM-849 update to 2.1.5
 
