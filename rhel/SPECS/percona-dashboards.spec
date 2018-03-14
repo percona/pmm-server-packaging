@@ -4,19 +4,19 @@
 %global repo		grafana-dashboards
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		2b2c949b3e11bd106459b233709b3fc51cb4f1be
+%global commit		d4e98afbedf4af696ab68c2b8265a9c6652e5c76
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-dashboards
-Version:	1.7.0
-Release:	4.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.9.0
+Release:	5.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app-node_modules-1.5.0.tar.gz
+Source1:	qan-app-node_modules-1.8.0.tar.gz
 
 BuildRequires:	nodejs
 BuildArch:	noarch
@@ -55,6 +55,9 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
+* Wed Mar 14 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.0-5
+- use more new node_modules
+
 * Tue Feb 13 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.7.0-4
 - PMM-2034 compile grafana app
 
