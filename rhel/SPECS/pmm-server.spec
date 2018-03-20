@@ -10,7 +10,7 @@
 
 Name:		%{repo}
 Version:	1.9.0
-Release:	8.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	9.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -74,6 +74,7 @@ install -d %{buildroot}%{_sysconfdir}/supervisord.d
 mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
 
 install -d %{buildroot}%{_datadir}/%{name}
+cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./password-page/dist %{buildroot}%{_datadir}/%{name}/password-page
 
 install -d %{buildroot}/usr/lib/systemd/system
@@ -111,7 +112,7 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
-* Tue Mar 20 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.0-8
+* Tue Mar 20 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.0-9
 - PMM-1823 add password page compilation
 
 * Thu Nov 16 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.0-6
