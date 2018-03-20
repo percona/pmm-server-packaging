@@ -4,18 +4,19 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		ce7d9f7113f1a8cde94ef2a98ff691968b4811b4
+%global commit		313549577c9517dd16f381001d1642e6fc73ed8b
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.5.0
-Release:	7.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.9.0
+Release:	8.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+Source1:	pmm-server-node_modules-1.9.0.tar.gz
 
 BuildArch:	noarch
 Requires:	nginx ansible git bats
@@ -34,12 +35,18 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -n %{repo}-%{commit}
+%setup -q -a 1 -n %{repo}-%{commit}
 sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml
 sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
+ln -s ../node_modules password-page/node_modules
+diff password-page/package.json node_modules/package.json
 
+%build
+pushd password-page
+    npm run build
+popd
 
 %install
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
@@ -67,7 +74,7 @@ install -d %{buildroot}%{_sysconfdir}/supervisord.d
 mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
 
 install -d %{buildroot}%{_datadir}/%{name}
-cp -pav ./* %{buildroot}%{_datadir}/%{name}
+cp -pav ./password-page/dist %{buildroot}%{_datadir}/%{name}/password-page
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
@@ -104,6 +111,9 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
+* Tue Mar 20 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.0-8
+- PMM-1823 add password page compilation
+
 * Thu Nov 16 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.0-6
 - PMM-1708 use node_exporter from pmm-client
 
