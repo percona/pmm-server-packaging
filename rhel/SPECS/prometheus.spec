@@ -44,7 +44,7 @@
 
 Name:           percona-%{repo}
 Version:        1.8.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -364,6 +364,9 @@ fi
 %endif
 
 %changelog
+* Mon Mar 26 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-2
+- PMM-2282 start prometheus.service after chronyd.service
+
 * Mon Nov 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-1
 - PMM-1577 update to 1.8.2
 

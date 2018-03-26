@@ -1,6 +1,6 @@
 [Unit]
 Description=Prometheus
-After=network.target
+After=network.target chronyd.service
 
 [Service]
 User=nobody
