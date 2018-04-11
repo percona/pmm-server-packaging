@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v4.6.3
+%global commit          v5.0.4
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,13 +13,13 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        4.6.3
+Version:        5.0.4
 Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v4.6.0.el7.tar.gz
+Source2:        grafana-node_modules-v5.0.4.el7.tar.gz
 Source3:        grafana-server.service
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
@@ -45,6 +45,7 @@ rm -rf Godeps
 
 %build
 mkdir -p _build/src
+mv vendor/google.golang.org _build/src/
 mv vendor/cloud.google.com _build/src/
 mv vendor/github.com _build/src/
 mv vendor/golang.org _build/src/
@@ -57,14 +58,13 @@ export GOPATH=$(pwd)/_build:%{gopath}
 export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 %gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
 %gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
-/usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose release
+/usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose --pkgVer=%{version} release
 
 %install
 install -d -p %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/vendor %{buildroot}%{_datadir}/%{repo}
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
@@ -135,6 +135,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Thu Mar 29 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.0.4-1
+- PMM-2319 update to 5.0.4
+
 * Mon Jan  8 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 4.6.3-1
 - PMM-1895 update to 4.6.3
 
