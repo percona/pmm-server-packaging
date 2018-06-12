@@ -9,14 +9,14 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{project}-%{repo}
-Version:	1.8.0
-Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.12.0
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app-node_modules-1.8.0.tar.gz
+Source1:	qan-app-node_modules-1.12.0.tar.gz
 
 BuildRequires:	nodejs
 BuildArch:	noarch
@@ -50,6 +50,9 @@ cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Tue Jun 12 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-1
+- PMM-2617 update node_modules
+
 * Wed Feb 21 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.0-3
 - PMM-2002 update node_modules
 

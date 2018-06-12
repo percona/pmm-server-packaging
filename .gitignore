@@ -2,5 +2,6 @@
 rhel/BUILD
 rhel/BUILDROOT
 rhel/RPMS
-rhel/SOURCES
+rhel/SOURCES/*
+!rhel/SOURCES/*-node_modules-*
 rhel/SRPMS
