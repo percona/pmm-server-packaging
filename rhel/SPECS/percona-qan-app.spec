@@ -10,7 +10,7 @@
 
 Name:		%{project}-%{repo}
 Version:	1.12.0
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -30,12 +30,6 @@ See the PMM docs for more information.
 %prep
 %setup -q -a 1 -n %{repo}-%{commit}
 sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.json node_modules/package.json
-diff package.json node_modules/package.json
-diff package-lock.json node_modules/package-lock.json
-
-
-%build
-npm run build:prod
 
 
 %install
@@ -50,6 +44,9 @@ cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Tue Jun 12 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-2
+- PMM-2580 use pre-built dir
+
 * Tue Jun 12 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-1
 - PMM-2617 update node_modules
 
