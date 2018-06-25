@@ -10,7 +10,7 @@
 
 Name:		%{project}-%{repo}
 Version:	1.12.0
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Query Analytics API for PMM
 
 License:	AGPLv3
@@ -44,6 +44,9 @@ cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Mon Jun 25 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-3
+- PMM-2660 bump version
+
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-2
 - PMM-2580 use pre-built dir
 
