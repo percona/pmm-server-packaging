@@ -5,7 +5,7 @@ After=network.target chronyd.service
 [Service]
 User=nobody
 Type=simple
-Environment=WEB_LISTEN_ADDRESS=:9090
+Environment=WEB_LISTEN_ADDRESS=:9094
 Environment=STORAGE_LOCAL_PATH=/var/lib/prometheus1
 EnvironmentFile=-/etc/sysconfig/prometheus1
 ExecStartPre=/usr/bin/sleep 10
