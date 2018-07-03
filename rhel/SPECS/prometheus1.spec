@@ -39,17 +39,17 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          188ca45bd85ce843071e768d855722a9d9dabe03
+%global commit          5211b96d4d1291c3dd1a569f711d3b301b635ecb
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           percona-%{repo}
-Version:        2.3.1
-Release:        1%{?dist}
+Name:           percona-%{repo}1
+Version:        1.8.2
+Release:        3%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:        %{repo}.service
+Source1:        %{repo}1.service
 
 %if 0%{?fedora} || 0%{?rhel} == 7
 BuildRequires: systemd
@@ -240,14 +240,14 @@ gobuild -o bin/prometheus %{import_path}/cmd/prometheus
 gobuild -o bin/promtool   %{import_path}/cmd/promtool
 
 %install
-install -D -p -m 0755 bin/%{repo}  %{buildroot}%{_sbindir}/%{repo}
-install -D -p -m 0755 bin/promtool %{buildroot}%{_bindir}/promtool
-install -d %{buildroot}%{_datadir}/%{repo}
-cp -rpa ./consoles %{buildroot}%{_datadir}/%{repo}/consoles
-cp -rpa ./console_libraries %{buildroot}%{_datadir}/%{repo}/console_libraries
+install -D -p -m 0755 bin/%{repo}  %{buildroot}%{_sbindir}/%{repo}1
+install -D -p -m 0755 bin/promtool %{buildroot}%{_bindir}/promtool1
+install -d %{buildroot}%{_datadir}/%{repo}1
+cp -rpa ./consoles %{buildroot}%{_datadir}/%{repo}1/consoles
+cp -rpa ./console_libraries %{buildroot}%{_datadir}/%{repo}1/console_libraries
 install -d %{buildroot}/usr/lib/systemd/system
-install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{repo}.service
-install -d %{buildroot}%{_sharedstatedir}/%{repo}
+install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{repo}1.service
+install -d %{buildroot}%{_sharedstatedir}/%{repo}1
 
 # source codes for building projects
 %if 0%{?with_devel}
@@ -313,14 +313,14 @@ gotest %{import_path}/config
 
 %post
 %if 0%{?fedora} || 0%{?rhel} == 7
-%systemd_post %{repo}.service
+%systemd_post %{repo}1.service
 %else
 #/sbin/chkconfig --add %{repo}
 %endif
 
 %preun
 %if 0%{?fedora} || 0%{?rhel} == 7
-%systemd_preun %{repo}.service
+%systemd_preun %{repo}1.service
 %else
 if [ $1 = 0 ]; then
     #service %{repo} stop >/dev/null 2>&1 ||:
@@ -330,7 +330,7 @@ fi
 
 %postun
 %if 0%{?fedora} || 0%{?rhel} == 7
-%systemd_postun %{repo}.service
+%systemd_postun %{repo}1.service
 %else
 if [ "$1" -ge "1" ]; then
     #service %{repo} condrestart > /dev/null 2>&1 ||:
@@ -342,11 +342,11 @@ fi
 %copying LICENSE
 %doc CHANGELOG.md CONTRIBUTING.md README.md NOTICE
 #doc Godeps/Godeps.json
-%{_sbindir}/%{repo}
-%{_bindir}/promtool
-%{_datadir}/%{repo}
-/usr/lib/systemd/system/%{repo}.service
-%dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
+%{_sbindir}/%{repo}1
+%{_bindir}/promtool1
+%{_datadir}/%{repo}1
+/usr/lib/systemd/system/%{repo}1.service
+%dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}1
 
 %if 0%{?with_devel}
 %files devel -f devel.file-list
@@ -364,18 +364,6 @@ fi
 %endif
 
 %changelog
-* Thu Jun 28 2018 Kamil Dziedzic <kamil.dziedzic@percona.com> - 2.3.1-1
-- PMM-2182 update to 2.3.1
-
-* Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 2.3.0-1
-- PMM-2182 update to 2.3.0
-
-* Mon May 28 2018 Kamil Dziedzic <kamil.dziedzic@percona.com> - 2.2.1-1
-- PMM-2182 update to 2.2.1
-
-* Thu May 17 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 2.1.0-1
-- PMM-2182 update to 2.1.0
-
 * Tue Apr 17 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-3
 - PMM-2358 add sleep to unit file, maybe system time will be synced
 

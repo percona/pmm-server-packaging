@@ -9,8 +9,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.9.0
-Release:	10.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.12.0
+Release:	11.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -36,8 +36,8 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -a 1 -n %{repo}-%{commit}
-sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml
-sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml
+sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml prometheus1.yml
+sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml prometheus1.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 ln -s ../node_modules password-page/node_modules
@@ -63,6 +63,7 @@ mv tmpfiles.d-pmm.conf %{buildroot}%{_sysconfdir}/tmpfiles.d/pmm.conf
 mv sysconfig %{buildroot}%{_sysconfdir}/sysconfig
 mv orchestrator.conf.json %{buildroot}%{_sysconfdir}/orchestrator.conf.json
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
+mv prometheus1.yml %{buildroot}%{_sysconfdir}/prometheus1.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
 mv clickhouse.xml %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
@@ -100,6 +101,7 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 %{_sysconfdir}/sysconfig
 %{_sysconfdir}/supervisord.d
 %{_sysconfdir}/prometheus.yml
+%{_sysconfdir}/prometheus1.yml
 %{_sysconfdir}/nginx/.htpasswd
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
@@ -113,6 +115,9 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
+* Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
+- PMM-2629 add prometheus1 config
+
 * Wed Mar 21 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.0-10
 - PMM-1823 add password page compilation
 
