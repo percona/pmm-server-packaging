@@ -1,8 +1,8 @@
 diff --git a/public/app/features/dashboard/partials/shareModal.html b/public/app/features/dashboard/partials/shareModal.html
-index 6d7c132f3..9fb8bd8eb 100644
+index 6d7c132f3..bf174ed77 100644
 --- a/public/app/features/dashboard/partials/shareModal.html
 +++ b/public/app/features/dashboard/partials/shareModal.html
-@@ -108,13 +108,36 @@
+@@ -108,13 +108,34 @@
        <div class="share-modal-content">
          <div ng-if="step === 1">
            <p class="share-modal-info-text">
@@ -30,9 +30,7 @@ index 6d7c132f3..9fb8bd8eb 100644
 +            </li>
 +            <li>
 +              <strong>Timeout (seconds):</strong> Duration the dashboard will take to load before the snapshot is
-+              generated. Can lead to
-+              empty values on some graphs in the snapshot version, considering increasing this value if Percona reports
-+              only partial Dashboard contents were transmitted.
++              generated.
 +            </li>
 +          </ul>
 +
@@ -44,7 +42,7 @@ index 6d7c132f3..9fb8bd8eb 100644
            </p>
          </div>
  
-@@ -136,7 +159,10 @@
+@@ -136,7 +157,10 @@
  							<select class="gf-form-input" ng-model="snapshot.expires" ng-options="f.value as f.text for f in expireOptions"></select>
  						</div>
  					</div>
@@ -56,7 +54,7 @@ index 6d7c132f3..9fb8bd8eb 100644
  					<div class="gf-form" ng-if="step === 2" style="margin-top: 40px">
  						<div class="gf-form-row">
  							<a href="{{snapshotUrl}}" class="large share-modal-link" target="_blank">
-@@ -149,19 +175,6 @@
+@@ -149,20 +173,7 @@
  					</div>
  				</div>
  
@@ -73,9 +71,11 @@ index 6d7c132f3..9fb8bd8eb 100644
 -					</div>
 -				</div>
 -
- 				<div ng-if="step === 1" class="gf-form-button-row">
+-				<div ng-if="step === 1" class="gf-form-button-row">
++				<div ng-if="step === 1" class="gf-form-button-row gf-form-button-row-custom">
  					<button class="btn gf-form-btn width-10 btn-success" ng-click="createSnapshot()" ng-disabled="loading">
  						<i class="fa fa-save"></i>
+ 						Local Snapshot
 diff --git a/public/app/features/dashboard/share_snapshot_ctrl.ts b/public/app/features/dashboard/share_snapshot_ctrl.ts
 index aa146dcad..9cdf735a1 100644
 --- a/public/app/features/dashboard/share_snapshot_ctrl.ts
@@ -98,6 +98,34 @@ index aa146dcad..9cdf735a1 100644
 +      { text: '90 Days', value: 60 * 60 * 24 * 90 },
        { text: 'Never', value: 0 },
      ];
+ 
+diff --git a/public/sass/components/_gf-form.scss b/public/sass/components/_gf-form.scss
+index 756d88ee9..3ed2fe5a9 100644
+--- a/public/sass/components/_gf-form.scss
++++ b/public/sass/components/_gf-form.scss
+@@ -94,6 +94,10 @@ $input-border: 1px solid $input-border-color;
+   }
+ }
+ 
++.gf-form-button-row-custom {
++  padding-top: 1rem;
++}
++
+ .gf-form-label {
+   padding: $input-padding-y $input-padding-x;
+   flex-shrink: 0;
+diff --git a/public/sass/components/_modals.scss b/public/sass/components/_modals.scss
+index 260c1c9fc..b2a8bb9d2 100644
+--- a/public/sass/components/_modals.scss
++++ b/public/sass/components/_modals.scss
+@@ -137,7 +137,7 @@
+   }
+ 
+   .share-modal-options {
+-    margin: 11px 0px 33px 0px;
++    margin: 11px 0px 25px 0px;
+     display: inline-block;
+   }
  
 diff --git a/public/sass/components/_panel_graph.scss b/public/sass/components/_panel_graph.scss
 index 72f3ca3db..6d9fd03a5 100644

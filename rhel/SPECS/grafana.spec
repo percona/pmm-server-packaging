@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -137,6 +137,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-3
+- PMM-2625 fix share-panel patch
+
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-2
 - PMM-2625 add share-panel patch
 
