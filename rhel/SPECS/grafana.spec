@@ -14,13 +14,14 @@
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        1%{?dist}
+Release:        3%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
 Source3:        grafana-server.service
+Patch0:         grafana-5.1.3-share-panel.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -41,6 +42,7 @@ Graphite, InfluxDB & OpenTSDB.
 
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
+%patch0 -p 1
 rm -rf Godeps
 
 %build
@@ -135,6 +137,12 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-3
+- PMM-2625 fix share-panel patch
+
+* Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-2
+- PMM-2625 add share-panel patch
+
 * Mon May 21 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 5.1.3-1
 - PMM-2561 update to 5.1.3
 
