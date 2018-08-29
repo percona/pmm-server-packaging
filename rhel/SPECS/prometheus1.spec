@@ -44,7 +44,7 @@
 
 Name:           percona-%{repo}1
 Version:        1.8.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -364,6 +364,9 @@ fi
 %endif
 
 %changelog
+* Tue Aug 28 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-4
+- PMM-2841 decrease prom1 memory
+
 * Tue Apr 17 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.8.2-3
 - PMM-2358 add sleep to unit file, maybe system time will be synced
 
