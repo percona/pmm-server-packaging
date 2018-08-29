@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -22,6 +22,7 @@ Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.
 Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
 Source3:        grafana-server.service
 Patch0:         grafana-5.1.3-share-panel.patch
+Patch1:         grafana-5.1.3-refresh-auth.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -43,6 +44,7 @@ Graphite, InfluxDB & OpenTSDB.
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
 %patch0 -p 1
+%patch1 -p 1
 rm -rf Godeps
 
 %build
