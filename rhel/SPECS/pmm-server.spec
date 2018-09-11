@@ -13,6 +13,10 @@ Version:	1.12.0
 Release:	11.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
+License:	AGPLv3
+URL:		https://%{provider_prefix}
+Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+
 BuildArch:	noarch
 Requires:	nginx ansible git bats
 BuildRequires:	openssl
