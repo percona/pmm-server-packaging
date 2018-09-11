@@ -34,7 +34,7 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -a 1 -n %{repo}-%{commit}
+%setup -q -n %{repo}-%{commit}
 sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml prometheus1.yml
 sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml prometheus1.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
