@@ -10,13 +10,12 @@
 
 Name:		%{repo}
 Version:	1.12.0
-Release:	11.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	12.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	pmm-server-node_modules-1.9.0.tar.gz
 
 BuildArch:	noarch
 Requires:	nginx ansible git bats
@@ -35,18 +34,11 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -a 1 -n %{repo}-%{commit}
+%setup -q -n %{repo}-%{commit}
 sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml prometheus1.yml
 sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml prometheus1.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
-ln -s ../node_modules password-page/node_modules
-diff password-page/package.json node_modules/package.json
-
-%build
-pushd password-page
-    npm run build
-popd
 
 %install
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
