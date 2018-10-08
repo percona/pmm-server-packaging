@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -142,7 +142,7 @@ exit 0
 
 %changelog
 * Mon Oct 8 2018 Daria Lymanska <daria.lymanska@percona.com> - 5.1.3-4
-- PMM-2880 change browser icon
+- PMM-2880 add change-icon patch
 
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-3
 - PMM-2625 fix share-panel patch
