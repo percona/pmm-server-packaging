@@ -9,7 +9,7 @@
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
-%define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**}; 
+%define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**};
 %endif
 
 Name:           percona-%{repo}
@@ -23,6 +23,7 @@ Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
 Source3:        grafana-server.service
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
+Patch2:         grafana-5.1.3-change-icon.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -45,6 +46,7 @@ Graphite, InfluxDB & OpenTSDB.
 %setup -q -a 2 -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
+%patch2 -p 1
 rm -rf Godeps
 
 %build
@@ -139,6 +141,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Mon Oct 8 2018 Daria Lymanska <daria.lymanska@percona.com> - 5.1.3-4
+- PMM-2880 change browser icon
+
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-3
 - PMM-2625 fix share-panel patch
 

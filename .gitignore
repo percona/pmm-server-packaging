@@ -1,4 +1,5 @@
 *~
+.idea/
 rhel/BUILD
 rhel/BUILDROOT
 rhel/RPMS
