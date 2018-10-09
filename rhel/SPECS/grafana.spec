@@ -56,7 +56,6 @@ mv vendor/cloud.google.com _build/src/
 mv vendor/github.com _build/src/
 mv vendor/golang.org _build/src/
 mv vendor/gopkg.in   _build/src/
-mv rhel/SOURCES/percona-favicon.ico public/img/percona-favicon.ico
 
 mkdir -p ./_build/src/github.com/grafana
 ln -s $(pwd) ./_build/src/github.com/grafana/grafana
@@ -72,6 +71,8 @@ install -d -p %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
+
+install -m 644 %{SOURCE4} %{buildroot}/public/img/percona-favicon.ico
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
