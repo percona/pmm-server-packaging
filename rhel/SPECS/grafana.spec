@@ -46,7 +46,7 @@ Graphite, InfluxDB & OpenTSDB.
 %setup -q -a 2 -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
-%patch2 -p 1
+%git apply patch2
 rm -rf Godeps
 
 %build
