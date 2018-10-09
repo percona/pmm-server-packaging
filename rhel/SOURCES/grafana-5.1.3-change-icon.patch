@@ -18,7 +18,7 @@ literal 0
 HcmV?d00001
 
 diff --git a/public/views/error.html b/public/views/error.html
-index 5c51e28ef..b63edd2e6 100644
+index 5c51e28eff4ddb5c6642c19210d26604a4435520..b63edd2e6c2d11aeeca8fa7f89b595feb0968e36 100644
 --- a/public/views/error.html
 +++ b/public/views/error.html
 @@ -12,7 +12,7 @@
@@ -31,7 +31,7 @@ index 5c51e28ef..b63edd2e6 100644
  
    </head>
 diff --git a/public/views/index.template.html b/public/views/index.template.html
-index 79da1d717..a672ab15b 100644
+index 79da1d7179ca4d5414576c4409eac513f8977515..a672ab15bad3afe954178a5e73cbdd116f6263d2 100644
 --- a/public/views/index.template.html
 +++ b/public/views/index.template.html
 @@ -13,7 +13,7 @@
