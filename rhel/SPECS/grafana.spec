@@ -46,7 +46,7 @@ Graphite, InfluxDB & OpenTSDB.
 %setup -q -a 2 -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
-%git apply patch2
+%patch2 -p 1
 rm -rf Godeps
 
 %build
@@ -56,6 +56,7 @@ mv vendor/cloud.google.com _build/src/
 mv vendor/github.com _build/src/
 mv vendor/golang.org _build/src/
 mv vendor/gopkg.in   _build/src/
+mv rhel/SOURCES/percona-favicon.ico public/img/percona-favicon.ico
 
 mkdir -p ./_build/src/github.com/grafana
 ln -s $(pwd) ./_build/src/github.com/grafana/grafana

@@ -1,24 +1,5 @@
-diff --git a/public/img/percona-favicon.ico b/public/img/percona-favicon.ico
-new file mode 100644
-index 0000000000000000000000000000000000000000..f426064d6f505e77365a8980046b58ae465ea6b0
-GIT binary patch
-literal 894
-zcma)*y-QnR6o=2f1!I;Hp`@aNT`C2!h#-ZEi~0xX;8Hu38qlQ<ii;p9IEZvnhb|pd
-z5C;dpQ2H?>*ox_(f?^{iiV^YKL1IHplY4#M`^rTkf;YeS@;mQ&&U<do<%$^md_Lh`
-zC~Z$f{37y-#g@Easr^S@W0S|_)vNx}FsiIw@95cmsBrP;xoum`pQ2(0je_4uyi0gb
-z;jjBu^$i<ME!(zjw{|LCk&bQ)%^+E~k!HASp4!2oeT31x>SYFXmp^NlI@J9BQIe;k
-z(7CLs*^{Tm%esmOqlG%$X{~wSukq}gkcBW*F#!N|rgw=JOye#;bCk`Wvs@9{nXJn&
-zG3KUg_4yxH{sTW-un~rkj_S`kEr5%v){K&{_`^(+RM%$4oWA8TgglZOvOf$4T=hO?
-zRIH<yjge&PI-1D7{;o<8hVWl9O-eI0fmr{<saf||3(si>$;{_SdMJ{{5as}k=y@QX
-z_io42yoUznE;!H`sf8ibDehqUl@0$$7;OjM_CtiJ=s)`~et|G|_rHV^?kn#8c4_vU
-zdHc?_@HruX3u`m6bzL@kl|PazHc92cZb*umznxDZ%zZLdBC_WZ3Gv<Z8q}%vz@_qP
-JDOS~}+8cb5Xo~;<
-
-literal 0
-HcmV?d00001
-
 diff --git a/public/views/error.html b/public/views/error.html
-index 5c51e28eff4ddb5c6642c19210d26604a4435520..b63edd2e6c2d11aeeca8fa7f89b595feb0968e36 100644
+index 5c51e28ef..b63edd2e6 100644
 --- a/public/views/error.html
 +++ b/public/views/error.html
 @@ -12,7 +12,7 @@
@@ -31,7 +12,7 @@ index 5c51e28eff4ddb5c6642c19210d26604a4435520..b63edd2e6c2d11aeeca8fa7f89b595fe
  
    </head>
 diff --git a/public/views/index.template.html b/public/views/index.template.html
-index 79da1d7179ca4d5414576c4409eac513f8977515..a672ab15bad3afe954178a5e73cbdd116f6263d2 100644
+index 79da1d717..a672ab15b 100644
 --- a/public/views/index.template.html
 +++ b/public/views/index.template.html
 @@ -13,7 +13,7 @@
