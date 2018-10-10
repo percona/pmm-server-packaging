@@ -73,7 +73,7 @@ cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
 
-install -m 644 %{SOURCE4} %{buildroot}/public/img/percona-favicon.ico
+install -m 644 %{SOURCE4} %{buildroot}/public/img/
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
