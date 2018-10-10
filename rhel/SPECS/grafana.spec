@@ -21,7 +21,7 @@ URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
 Source3:        grafana-server.service
-Source4:        percona-favicon.iso
+Source4:        percona-favicon.ico
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
 Patch2:         grafana-5.1.3-change-icon.patch
