@@ -9,20 +9,22 @@
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
-%define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**}; 
+%define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**};
 %endif
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
 Source3:        grafana-server.service
+Source4:        percona-favicon.ico
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
+Patch2:         grafana-5.1.3-change-icon.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -45,6 +47,7 @@ Graphite, InfluxDB & OpenTSDB.
 %setup -q -a 2 -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
+%patch2 -p 1
 rm -rf Godeps
 
 %build
@@ -69,6 +72,8 @@ install -d -p %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
+
+install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
@@ -139,6 +144,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Mon Oct 8 2018 Daria Lymanska <daria.lymanska@percona.com> - 5.1.3-4
+- PMM-2880 add change-icon patch
+
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 5.1.3-3
 - PMM-2625 fix share-panel patch
 

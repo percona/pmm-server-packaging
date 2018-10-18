@@ -1,4 +1,5 @@
 *~
+.idea/
 rhel/BUILD
 rhel/BUILDROOT
 rhel/RPMS
@@ -6,4 +7,5 @@ rhel/SOURCES/*
 !rhel/SOURCES/*-node_modules-*
 !rhel/SOURCES/*.service
 !rhel/SOURCES/*.patch
+!rhel/SOURCES/*.ico
 rhel/SRPMS
