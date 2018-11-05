@@ -22,6 +22,7 @@ Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.
 Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
 Source3:        grafana-server.service
 Source4:        percona-favicon.ico
+Source5:        phantomjs
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
 Patch2:         grafana-5.1.3-change-icon.patch
@@ -72,8 +73,10 @@ install -d -p %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
+cp -rpav tmp/tools %{buildroot}%{_datadir}/%{repo}
 
 install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
+install -m 644 %{SOURCE5} %{buildroot}/usr/share/grafana/tools/phantomjs/phantomjs
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
