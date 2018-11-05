@@ -76,7 +76,6 @@ cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/tools %{buildroot}%{_datadir}/%{repo}
 
 install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
-install -m 644 %{SOURCE5} %{buildroot}/usr/share/grafana/tools/phantomjs/phantomjs
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
