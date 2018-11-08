@@ -145,6 +145,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Mon Nov 5 2018 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 5.1.3-5
+- PMM-2837 Fix image rendering
+
 * Mon Oct 8 2018 Daria Lymanska <daria.lymanska@percona.com> - 5.1.3-4
 - PMM-2880 add change-icon patch
 
