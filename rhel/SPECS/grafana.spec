@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -72,6 +72,7 @@ install -d -p %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
+cp -rpav tmp/tools %{buildroot}%{_datadir}/%{repo}
 
 install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
 
@@ -144,6 +145,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Mon Nov 5 2018 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 5.1.3-5
+- PMM-2837 Fix image rendering
+
 * Mon Oct 8 2018 Daria Lymanska <daria.lymanska@percona.com> - 5.1.3-4
 - PMM-2880 add change-icon patch
 
