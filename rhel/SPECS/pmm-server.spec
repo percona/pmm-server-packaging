@@ -58,7 +58,7 @@ mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 mv prometheus1.yml %{buildroot}%{_sysconfdir}/prometheus1.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
-mv clickhouse.xml %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
+#mv clickhouse.xml %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
 
 install -d %{buildroot}%{_sysconfdir}/my.cnf.d
 mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
@@ -100,7 +100,6 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 %{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_sysconfdir}/orchestrator.conf.json
 %{_sysconfdir}/cron.daily/purge-qan-data
-%{_sysconfdir}/clickhouse-server/config.xml
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 /usr/lib/systemd/system/node_exporter.service

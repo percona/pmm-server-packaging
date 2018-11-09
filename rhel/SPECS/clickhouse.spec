@@ -1,7 +1,7 @@
 %define clickhouse_user clickhouse
 %define clickhouse_group clickhouse
 
-%global commit             9dd4a5c72710fc0ecf6c28a40b2ded44a5bcc0f1 
+%global commit             fcce722c26eaa9a3bae58a66da13a7ce7a359537
 %global shortcommit        %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-clickhouse
