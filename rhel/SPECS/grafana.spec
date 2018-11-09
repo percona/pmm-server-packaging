@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v5.1.3
+%global commit          v5.3.2
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,18 +13,18 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        5.1.3
-Release:        6%{?dist}
+Version:        5.3.2
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v5.1.3.el7.tar.gz
+Source2:        grafana-node_modules-v5.3.2.el7.tar.gz
 Source3:        grafana-server.service
 Source4:        percona-favicon.ico
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
-Patch2:         grafana-5.1.3-change-icon.patch
+Patch2:         grafana-5.3.2-change-icon.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -74,6 +74,13 @@ cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/tools %{buildroot}%{_datadir}/%{repo}
 
+if [ -d tmp/bin ]; then
+ cp -rpav bin/* tmp/bin/
+else
+ mkdir -p tmp/bin
+ cp -rpav bin/* tmp/bin/
+fi
+
 install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
 
 install -d -p %{buildroot}%{_sbindir}
@@ -101,7 +108,6 @@ export GOPATH=$(pwd)/_build:%{gopath}
 go test ./pkg/api
 go test ./pkg/bus
 go test ./pkg/components/apikeygen
-go test ./pkg/components/renderer
 go test ./pkg/events
 go test ./pkg/models
 go test ./pkg/plugins
@@ -145,6 +151,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Thu Nov 8 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 5.3.2-1
+- PMM-2685 Grafana 5.3.2
+
 * Mon Nov 5 2018 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 5.1.3-5
 - PMM-2837 Fix image rendering
 
