@@ -6,7 +6,7 @@
 
 Name:           percona-clickhouse
 Version:        18.12.17
-Release:        1%{?dist}
+Release:        stable%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
 License:        Apache-2.0
