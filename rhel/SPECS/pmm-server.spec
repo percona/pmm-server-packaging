@@ -100,12 +100,14 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 %{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_sysconfdir}/orchestrator.conf.json
 %{_sysconfdir}/cron.daily/purge-qan-data
+%{_sysconfdir}/clickhouse-server/config.xml
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 /usr/lib/systemd/system/node_exporter.service
 
 
 %changelog
+
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
 - PMM-2629 add prometheus1 config
 
