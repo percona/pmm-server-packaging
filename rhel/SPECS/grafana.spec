@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        5.1.3
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -25,6 +25,7 @@ Source4:        percona-favicon.ico
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
 Patch2:         grafana-5.1.3-change-icon.patch
+Patch3:         grafana-5.1.3-security-fix.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -48,6 +49,7 @@ Graphite, InfluxDB & OpenTSDB.
 %patch0 -p 1
 %patch1 -p 1
 %patch2 -p 1
+%patch3 -p 0
 rm -rf Godeps
 
 %build
@@ -145,6 +147,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Wed Nov 14 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 5.1.3-7
+- PMM-3257 Apply Patch from Grafana 5.3.3 to latest PMM version
+
 * Mon Nov 5 2018 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 5.1.3-5
 - PMM-2837 Fix image rendering
 
