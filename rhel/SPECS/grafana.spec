@@ -25,6 +25,7 @@ Source4:        percona-favicon.ico
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-5.1.3-refresh-auth.patch
 Patch2:         grafana-5.1.3-change-icon.patch
+Patch3:         grafana-5.1.3-security-fix.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -48,6 +49,7 @@ Graphite, InfluxDB & OpenTSDB.
 %patch0 -p 1
 %patch1 -p 1
 %patch2 -p 1
+%patch3 -p 0
 rm -rf Godeps
 
 %build
