@@ -39,11 +39,11 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          71af5e29e815795e9dd14742ee7725682fa14b7b
+%global commit          67dc912ac8b24f94a1fc478f352d25179c94ab9b
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        2.3.2
+Version:        2.5.0
 Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
@@ -364,6 +364,9 @@ fi
 %endif
 
 %changelog
+* Fri Nov  9 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 2.5.0-1
+- PMM-2912 update to 2.5.0
+
 * Tue Jul 24 2018 Kamil Dziedzic <kamil.dziedzic@percona.com> - 2.3.2-1
 - PMM-2725 update to 2.3.2
 

@@ -1,12 +1,12 @@
 %define clickhouse_user clickhouse
 %define clickhouse_group clickhouse
 
-%global commit             96485e41c5b1d65fa2fbf016523f5e1fb37d3ffd
+%global commit             5e86adf0260486170522a422b669c73e6d85791e
 %global shortcommit        %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-clickhouse
-Version:        1.1.54236
-Release:        4%{?dist}
+Version:        18.14.13
+Release:        stable%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
 License:        Apache-2.0
@@ -167,6 +167,9 @@ exit 0
 
 
 %changelog
+* Fri Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.14.13-1
+- update to the version v18.14.13
+
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-4
 - avoid colision with pmm-server rpm
 
