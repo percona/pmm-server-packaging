@@ -9,8 +9,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.12.0
-Release:	12.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.17.1
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
