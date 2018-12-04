@@ -9,8 +9,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.12.0
-Release:	13.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	2.0.0
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -35,8 +35,8 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -n %{repo}-%{commit}
-sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml prometheus1.yml
-sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml prometheus1.yml
+sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml
+sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
@@ -55,7 +55,6 @@ mv tmpfiles.d-pmm.conf %{buildroot}%{_sysconfdir}/tmpfiles.d/pmm.conf
 mv sysconfig %{buildroot}%{_sysconfdir}/sysconfig
 mv orchestrator.conf.json %{buildroot}%{_sysconfdir}/orchestrator.conf.json
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
-mv prometheus1.yml %{buildroot}%{_sysconfdir}/prometheus1.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
 
@@ -92,7 +91,6 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 %{_sysconfdir}/sysconfig
 %{_sysconfdir}/supervisord.d
 %{_sysconfdir}/prometheus.yml
-%{_sysconfdir}/prometheus1.yml
 %{_sysconfdir}/nginx/.htpasswd
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
@@ -105,8 +103,11 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
+* Tue Dec  4 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-1
+- PMM-3176 Remove Prometheus 1.x
+
 * Thu Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 1.12.0-13
-- PMM-2911 PMM with Clickhouse 
+- PMM-2911 PMM with Clickhouse
 
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
 - PMM-2629 add prometheus1 config
