@@ -10,7 +10,7 @@
 
 Name:		%{repo}
 Version:	1.17.1
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	14.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -72,17 +72,21 @@ cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
+install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/system/clickhouse_exporter.service
 
 
 %post
 /usr/bin/systemd-tmpfiles --create
 %systemd_post node_exporter.service
+%systemd_post clickhouse_exporter.service
 
 %preun
 %systemd_preun node_exporter.service
+%systemd_preun clickhouse_exporter.service
 
 %postun
 %systemd_postun node_exporter.service
+%systemd_postun clickhouse_exporter.service
 
 
 %files
@@ -101,10 +105,11 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 /usr/lib/systemd/system/node_exporter.service
+/usr/lib/systemd/system/clickhouse_exporter.service
 
 
 %changelog
-* Tue Nov 27 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 1.17.1-1
+* Tue Nov 27 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 1.17.1-14
 - PMM-3176 Remove Prometheus 1.x
 
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
