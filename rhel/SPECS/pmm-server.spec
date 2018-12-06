@@ -73,17 +73,21 @@ cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
+install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/system/clickhouse_exporter.service
 
 
 %post
 /usr/bin/systemd-tmpfiles --create
 %systemd_post node_exporter.service
+%systemd_post clickhouse_exporter.service
 
 %preun
 %systemd_preun node_exporter.service
+%systemd_preun clickhouse_exporter.service
 
 %postun
 %systemd_postun node_exporter.service
+%systemd_postun clickhouse_exporter.service
 
 
 %files
@@ -104,6 +108,7 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 /usr/lib/systemd/system/node_exporter.service
+/usr/lib/systemd/system/clickhouse_exporter.service
 
 
 %changelog
