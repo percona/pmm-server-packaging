@@ -20,7 +20,7 @@ Summary:        Query Analytics API v2 for PMM
 
 License:        AGPLv3
 URL:            https://%{provider_prefix}
-Source0:       https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source1:        %{name}.service
 
 BuildRequires:  golang
