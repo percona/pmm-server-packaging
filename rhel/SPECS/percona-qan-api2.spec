@@ -9,7 +9,7 @@
 %global repo            qan-api
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          65026e8d6eec92df8a1e496ee54ccca37ba0d1e2
+%global commit          79b346a99e5eac2c1dc9508dab5a654cbc3da549
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
