@@ -1,7 +1,7 @@
 %define clickhouse_user clickhouse
 %define clickhouse_group clickhouse
 
-%global commit             fcce722c26eaa9a3bae58a66da13a7ce7a359537
+%global commit             5e86adf0260486170522a422b669c73e6d85791e
 %global shortcommit        %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-clickhouse
@@ -167,8 +167,8 @@ exit 0
 
 
 %changelog
-* Fri Nov  9 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.12.17-1 
-- update to the version v18.12.17 
+* Fri Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.14.13-1
+- update to the version v18.14.13
 
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-4
 - avoid colision with pmm-server rpm

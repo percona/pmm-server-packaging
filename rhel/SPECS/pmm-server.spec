@@ -9,8 +9,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.17.1
-Release:	14.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	2.0.0
+Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -57,7 +57,6 @@ mv orchestrator.conf.json %{buildroot}%{_sysconfdir}/orchestrator.conf.json
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
-#mv clickhouse.xml %{buildroot}%{_sysconfdir}/clickhouse-server/config.xml
 
 install -d %{buildroot}%{_sysconfdir}/my.cnf.d
 mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
@@ -109,8 +108,11 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 
 
 %changelog
-* Tue Nov 27 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 1.17.1-14
+* Tue Dec  4 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-1
 - PMM-3176 Remove Prometheus 1.x
+
+* Thu Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 1.12.0-13
+- PMM-2911 PMM with Clickhouse
 
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
 - PMM-2629 add prometheus1 config

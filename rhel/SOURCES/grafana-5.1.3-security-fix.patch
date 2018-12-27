@@ -1,0 +1,12 @@
+--- pkg/components/renderer/renderer.go.orig	2018-11-14 14:27:45.118644303 +0200
++++ pkg/components/renderer/renderer.go	2018-11-14 14:28:19.390545456 +0200
+@@ -100,7 +100,8 @@
+ 
+ 	cmdArgs := []string{
+ 		"--ignore-ssl-errors=true",
+-		"--web-security=false",
++		"--web-security=true",
++		"--local-url-access=false",
+ 		phantomDebugArg,
+ 		scriptPath,
+ 		"url=" + url,
