@@ -135,7 +135,7 @@ index 72f3ca3db..6d9fd03a5 100644
  .graph-legend {
    display: flex;
    flex: 0 1 auto;
--  max-height: 30%;
+-  max-height: 35%;
 +  max-height: 50%;
    margin: 0;
    text-align: center;
