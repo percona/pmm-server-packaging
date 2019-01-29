@@ -39,12 +39,12 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          24f19f03dbcb8791837b5d4e95827c180c319497 
+%global commit          410ee9e04acb8f59f400858752ca82b4ef88035e 
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
 Version:        2.7.0
-Release:        rc.0%{?dist}
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
