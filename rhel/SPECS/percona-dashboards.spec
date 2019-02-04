@@ -44,7 +44,9 @@ popd
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}/pmm-app
+install -d %{buildroot}%{_datadir}/%{name}/panels
 cp -pa ./pmm-app/dist %{buildroot}%{_datadir}/%{name}/pmm-app
+cp -pa ./panels %{buildroot}%{_datadir}/%{name}/panels
 echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
