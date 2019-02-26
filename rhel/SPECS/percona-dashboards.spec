@@ -10,7 +10,7 @@
 
 Name:		%{project}-dashboards
 Version:	1.9.0
-Release:	5.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	6.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
 License:	AGPLv3
@@ -44,7 +44,9 @@ popd
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}/pmm-app
+install -d %{buildroot}%{_datadir}/%{name}/panels
 cp -pa ./pmm-app/dist %{buildroot}%{_datadir}/%{name}/pmm-app
+cp -pa ./panels %{buildroot}%{_datadir}/%{name}
 echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
@@ -55,6 +57,9 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
+* Mon Feb  4 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 1.9.0-6
+- PMM-3488 Add some plugins into PMM
+
 * Wed Mar 14 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.9.0-5
 - use more new node_modules
 
