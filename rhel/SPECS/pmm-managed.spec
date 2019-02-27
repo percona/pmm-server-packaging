@@ -43,7 +43,7 @@ ln -s $(pwd) src/%{provider_prefix}
 
 %build
 export GOPATH=$(pwd)
-go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n')" -a -v -x %{provider_prefix}/cmd/pmm-managed
+go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n')" -a -v -x %{provider_prefix}
 
 
 %install
