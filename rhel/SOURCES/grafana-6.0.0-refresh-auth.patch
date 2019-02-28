@@ -1,0 +1,22 @@
+--- public/app/core/services/backend_srv.ts.orig  2019-02-28 16:49:48.139662664 +0200
++++ public/app/core/services/backend_srv.ts      2019-02-28 16:47:21.722940130 +0200
+@@ -103,7 +103,8 @@
+       },
+       err => {
+         // handle unauthorized
+-        if (err.status === 401 && this.contextSrv.user.isSignedIn && firstAttempt) {
++        const isRemembered = document.cookie.indexOf('grafana_remember') !== -1;
++        if (err.status === 401 && this.contextSrv.user.isSignedIn && firstAttempt && isRemembered) {
+           return this.loginPing()
+             .then(() => {
+               options.retry = 1;
+@@ -191,7 +192,8 @@
+         }
+ 
+         // handle unauthorized for backend requests
+-        if (requestIsLocal && firstAttempt && err.status === 401) {
++        const isRemembered = document.cookie.indexOf('grafana_remember') !== -1;
++        if (requestIsLocal && firstAttempt && err.status === 401 && isRemembered) {
+           return this.loginPing()
+             .then(() => {
+               options.retry = 1;
