@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v5.4.2
+%global commit          v6.0.0
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,17 +13,17 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        5.4.2
+Version:        6.0.0
 Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v5.4.2.el7.tar.gz
+Source2:        grafana-node_modules-v6.0.0.el7.tar.gz
 Source3:        grafana-server.service
 Source4:        percona-favicon.ico
 Patch0:         grafana-5.1.3-share-panel.patch
-Patch1:         grafana-5.1.3-refresh-auth.patch
+Patch1:         grafana-6.0.0-refresh-auth.patch
 Patch2:         grafana-5.4.2-change-icon.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
@@ -45,8 +45,8 @@ Graphite, InfluxDB & OpenTSDB.
 
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
-%patch0 -p 1
-%patch1 -p 1
+#%patch0 -p 1
+%patch1 -p 0
 %patch2 -p 0
 rm -rf Godeps
 
@@ -151,6 +151,9 @@ exit 0
 %systemd_postun grafana.service
 
 %changelog
+* Thu Feb 28 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.0.0-1
+- PMM-3561 grafana update for 6.0
+
 * Mon Jan  7 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 5.4.2-1
 - PMM-2685 Grafana 5.4.2
 
