@@ -37,7 +37,6 @@ install -d %{buildroot}%{_bindir}
 cp -pav ./bin/* %{buildroot}%{_bindir}
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./ansible %{buildroot}%{_datadir}/%{name}
-cp -pav ./helpers %{buildroot}%{_datadir}/%{name}
 
 
 %files
