@@ -1,0 +1,21 @@
+--- public/views/error-template.html.orig       2018-12-13 14:49:23.000000000 +0200
++++ public/views/error-template.html    2019-01-08 15:14:27.347556180 +0200
+@@ -12,7 +12,7 @@
+ 
+     <link rel="stylesheet" href="public/build/grafana.[[ .Theme ]].<%= webpack.hash %>.css">
+ 
+-    <link rel="icon" type="image/png" href="public/img/fav32.png">
++    <link rel="icon" type="image/x-icon" href="public/img/percona-favicon.ico">
+     <link rel="mask-icon" href="public/img/grafana_mask_icon.svg" color="#F05A28">
+ 
+   </head>
+--- public/views/index-template.html.orig       2018-12-13 14:49:23.000000000 +0200
++++ public/views/index-template.html    2019-01-08 15:14:27.347556180 +0200
+@@ -11,7 +11,7 @@
+ 
+   <base href="[[.AppSubUrl]]/" />
+ 
+-  <link rel="icon" type="image/png" href="public/img/fav32.png">
++  <link rel="icon" type="image/x-icon" href="public/img/percona-favicon.ico">
+   <link rel="mask-icon" href="public/img/grafana_mask_icon.svg" color="#F05A28">
+   <link rel="apple-touch-icon" sizes="180x180" href="public/img/apple-touch-icon.png">
