@@ -4,7 +4,7 @@
 %global repo		grafana-dashboards
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		d4e98afbedf4af696ab68c2b8265a9c6652e5c76
+%global commit		64f4c3758af02f900ddc59cd74657bdcd0ca2038
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 

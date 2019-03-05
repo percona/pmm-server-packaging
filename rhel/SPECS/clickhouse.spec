@@ -1,11 +1,11 @@
 %define clickhouse_user clickhouse
 %define clickhouse_group clickhouse
 
-%global commit             5e86adf0260486170522a422b669c73e6d85791e
+%global commit             c7e597ec5e96883ed58e2aa3154ea05c124017cd 
 %global shortcommit        %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-clickhouse
-Version:        18.14.13
+Version:        19.1.10
 Release:        stable%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
