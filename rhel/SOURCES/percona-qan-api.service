@@ -1,7 +1,7 @@
 [Unit]
 Description=Percona Query Analytics API
-After=network.target mysqld.service
-Requires=mysqld.service
+After=network.target postgresql.service
+Requires=postgresql.service
 
 [Service]
 User=nobody

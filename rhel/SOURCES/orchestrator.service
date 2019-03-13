@@ -1,7 +1,7 @@
 [Unit]
 Description=MySQL replication topology management and HA
-After=network.target mysqld.service
-Requires=mysqld.service
+After=network.target postgresql.service
+Requires=postgresql.service
 
 [Service]
 User=nobody
