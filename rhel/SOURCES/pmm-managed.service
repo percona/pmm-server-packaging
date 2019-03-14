@@ -4,9 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-Environment=CONFIG="/etc/prometheus.yml"
 EnvironmentFile=-/etc/sysconfig/pmm-managed
-ExecStart=/usr/sbin/pmm-managed --prometheus-config $CONFIG $OPTIONS
+ExecStart=/usr/sbin/pmm-managed $OPTIONS
 Restart=on-failure
 RestartSec=10s
 
