@@ -8,7 +8,7 @@
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %global pmm_repo        pmm
-%global pmm_prefix      %{provider}.%{provider_tld}/%{project}%{pmm_repo}
+%global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      4ebf620263b318f98906a4da36c17679a91989b1
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
 
