@@ -1,7 +1,7 @@
 [Unit]
 Description=Percona Query Analytics API
-After=network.target postgresql.service
-Requires=postgresql.service
+After=network.target clickhouse.service
+Requires=clickhouse.service
 
 [Service]
 User=nobody
