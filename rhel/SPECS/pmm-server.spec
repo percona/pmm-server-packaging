@@ -49,7 +49,6 @@ sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
 %install
 tar -zxvf %SOURCE1
-rm -f %SOURCE1
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
 mv .htpasswd  %{buildroot}%{_sysconfdir}/nginx/.htpasswd
 mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
