@@ -48,7 +48,6 @@ sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
 
 %install
-ls -la
 tar -zxvf %SOURCE1
 rm -f %SOURCE1
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
@@ -78,8 +77,8 @@ install -d %{buildroot}%{_datadir}/%{name}/landing-page/img
 cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./password-page/dist %{buildroot}%{_datadir}/%{name}/password-page
 cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-page/img/pmm-logo.svg
-mv pmm/api/swagger %{buildroot}%{_datadir}/%{name}/ 
-rm -rf pmm
+cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger 
+rm -rf %{pmm_repo}-%{pmm_commit}
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
