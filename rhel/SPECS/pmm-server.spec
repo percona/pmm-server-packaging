@@ -48,7 +48,8 @@ sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
 
 %install
-tar -xfvz %SOURCE1
+ls -la
+tar -zxvf %SOURCE1
 rm -f %SOURCE1
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
 mv .htpasswd  %{buildroot}%{_sysconfdir}/nginx/.htpasswd
