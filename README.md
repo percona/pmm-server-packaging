@@ -1,4 +1,5 @@
 # PMM Server packages
+[![CLA assistant](https://cla-assistant.percona.com/readme/badge/percona/pmm-server-packaging)](https://cla-assistant.percona.com/percona/pmm-server-packaging)
 ## CentOS/RHEL 7
 * Prepare environment
 ```
