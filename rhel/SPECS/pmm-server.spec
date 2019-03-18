@@ -4,18 +4,23 @@
 %global repo		pmm-server
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		313549577c9517dd16f381001d1642e6fc73ed8b
+%global commit	        0dbbc0ca255591000f0371012cd4e7515624a059
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
+%global pmm_repo        pmm
+%global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
+%global pmm_commit      4ebf620263b318f98906a4da36c17679a91989b1
+%global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
 
 Name:		%{repo}
 Version:	2.0.0
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+Source1:	https://%{pmm_prefix}/archive/%{pmm_commit}/%{pmm_repo}-%{pmm_shortcommit}.tar.gz
 
 BuildArch:	noarch
 Requires:	nginx ansible git bats
@@ -27,6 +32,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 %endif
+
 
 %description
 Percona Monitoring and Management (PMM) Server.
@@ -40,7 +46,9 @@ sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
+
 %install
+tar -zxvf %SOURCE1
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
 mv .htpasswd  %{buildroot}%{_sysconfdir}/nginx/.htpasswd
 mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
@@ -68,6 +76,8 @@ install -d %{buildroot}%{_datadir}/%{name}/landing-page/img
 cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./password-page/dist %{buildroot}%{_datadir}/%{name}/password-page
 cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-page/img/pmm-logo.svg
+cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger 
+rm -rf %{pmm_repo}-%{pmm_commit}
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
@@ -108,6 +118,9 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 
 
 %changelog
+* Fri Mar 15 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-2
+- PMM-3606 Serve new Swagger spec and UI
+
 * Tue Dec  4 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-1
 - PMM-3176 Remove Prometheus 1.x
 
