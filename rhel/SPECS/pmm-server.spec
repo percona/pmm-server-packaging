@@ -14,7 +14,7 @@
 
 Name:		%{repo}
 Version:	2.0.0
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -61,13 +61,9 @@ install -d %{buildroot}%{_sysconfdir}/tmpfiles.d
 mv tmpfiles.d-pmm.conf %{buildroot}%{_sysconfdir}/tmpfiles.d/pmm.conf
 
 mv sysconfig %{buildroot}%{_sysconfdir}/sysconfig
-mv orchestrator.conf.json %{buildroot}%{_sysconfdir}/orchestrator.conf.json
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
-
-install -d %{buildroot}%{_sysconfdir}/my.cnf.d
-mv my.cnf %{buildroot}%{_sysconfdir}/my.cnf.d/00-pmm.cnf
 
 install -d %{buildroot}%{_sysconfdir}/supervisord.d
 mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
@@ -101,7 +97,6 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 %files
 %license LICENSE
 %doc README.md CHANGELOG.md
-%{_sysconfdir}/my.cnf.d
 %{_sysconfdir}/sysconfig
 %{_sysconfdir}/supervisord.d
 %{_sysconfdir}/prometheus.yml
@@ -109,7 +104,6 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 %{_sysconfdir}/tmpfiles.d/pmm.conf
-%{_sysconfdir}/orchestrator.conf.json
 %{_sysconfdir}/cron.daily/purge-qan-data
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
@@ -118,6 +112,9 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 
 
 %changelog
+* Mon Mar 18 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-3
+- PMM-3677 remove Orchestrator from pmm2
+
 * Fri Mar 15 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-2
 - PMM-3606 Serve new Swagger spec and UI
 
