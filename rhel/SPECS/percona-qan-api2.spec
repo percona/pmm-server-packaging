@@ -5,17 +5,17 @@
 
 %global provider        github
 %global provider_tld    com
-%global project         Percona-Lab
-%global repo            qan-api
+%global project         Percona
+%global repo            qan-api2
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          79b346a99e5eac2c1dc9508dab5a654cbc3da549
+%global commit          60faa32891b1e55298a07adc06820a8765d97b45
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:           percona-qan-api2
 Version:        2.0.0
-Release:        3.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:        4.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:        Query Analytics API v2 for PMM
 
 License:        AGPLv3
@@ -81,5 +81,8 @@ install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.servic
 /usr/lib/systemd/system/%{name}.service
 
 %changelog
+* Tue Mar 19 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-4
+- PMM-3681 Remove old qan-api and move qan-api2 in feature builds.
+
 * Wed Dec 19 2018 Andrii Skomorokhov <andrii.skomorokhov@percona.com> - 2.0.0-1
 - Initial.
