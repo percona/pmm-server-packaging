@@ -5,7 +5,7 @@
 
 %global provider        github
 %global provider_tld    com
-%global project         Percona
+%global project         percona
 %global repo            qan-api2
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
@@ -44,11 +44,10 @@ See the PMM docs for more information.
 mkdir -p src/%{provider}.%{provider_tld}/%{project}
 mv %{repo}-%{commit} src/%{provider_prefix}
 
-
 %build
 export GOPATH=$(pwd)
 export APP_VERSION="%{version}-%{build_timestamp}.%{shortcommit}"
-go build -o ./percona-qan-api2 -ldflags "-X main.version=${APP_VERSION}" ./src/%{provider_prefix}/*.go
+go build -o ./percona-qan-api2 -ldflags "-X main.version=${APP_VERSION}" ./src/%{provider_prefix}/db.go ./src/%{provider_prefix}/main.go ./src/%{provider_prefix}/maincover_test.go
 
 
 %install
