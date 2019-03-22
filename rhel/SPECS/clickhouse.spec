@@ -170,7 +170,7 @@ exit 0
 * Fri Mar 22 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 19.1.14-stable
 - PMM-3722 Allow external connection for Clickhouse in PMM
 
-* Fri Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.14.13-1
+* Fri Nov 16 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.14.13-1
 - update to the version v18.14.13
 
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-4
