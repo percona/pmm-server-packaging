@@ -1,11 +1,11 @@
 %define clickhouse_user clickhouse
 %define clickhouse_group clickhouse
 
-%global commit             c7e597ec5e96883ed58e2aa3154ea05c124017cd 
+%global commit             d724362dd506c8640d419f45f99d736afdb559fc
 %global shortcommit        %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-clickhouse
-Version:        19.1.10
+Version:        19.1.14
 Release:        stable%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
@@ -167,7 +167,10 @@ exit 0
 
 
 %changelog
-* Fri Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.14.13-1
+* Fri Mar 22 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 19.1.14-stable
+- PMM-3722 Allow external connection for Clickhouse in PMM
+
+* Fri Nov 16 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 18.14.13-1
 - update to the version v18.14.13
 
 * Tue Aug 22 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.54236-4
