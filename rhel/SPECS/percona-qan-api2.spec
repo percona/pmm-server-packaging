@@ -46,8 +46,7 @@ mv %{repo}-%{commit} src/%{provider_prefix}
 
 %build
 export GOPATH=$(pwd)
-export APP_VERSION="%{version}-%{build_timestamp}.%{shortcommit}"
-go build -o ./percona-qan-api2 -ldflags "-X main.version=${APP_VERSION}" ./src/%{provider_prefix}/db.go ./src/%{provider_prefix}/main.go ./src/%{provider_prefix}/maincover_test.go
+go build -o ./percona-qan-api2 -v -x %{provider_prefix}
 
 
 %install
