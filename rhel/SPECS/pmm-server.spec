@@ -9,12 +9,12 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %global pmm_repo        pmm
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
-%global pmm_commit      4ebf620263b318f98906a4da36c17679a91989b1
+%global pmm_commit      cfd74991cc7c03fb73e351154f734660b47f532d
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
 
 Name:		%{repo}
 Version:	2.0.0
-Release:	3.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	4.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -112,6 +112,9 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 
 
 %changelog
+* Thu Apr 11 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-4
+- PMM-3606 get the latest version of Swagger
+
 * Mon Mar 18 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-3
 - PMM-3677 remove Orchestrator from pmm2
 
