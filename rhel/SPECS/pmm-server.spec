@@ -9,9 +9,9 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %global pmm_repo        pmm
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
-%global pmm_commit      cfd74991cc7c03fb73e351154f734660b47f532d
+%global pmm_commit      @@pmm_commit@@
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
-%define release         5  
+%define release         5
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -74,7 +74,7 @@ install -d %{buildroot}%{_datadir}/%{name}/landing-page/img
 cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./password-page/dist %{buildroot}%{_datadir}/%{name}/password-page
 cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-page/img/pmm-logo.svg
-cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger 
+cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger
 rm -rf %{pmm_repo}-%{pmm_commit}
 
 install -d %{buildroot}/usr/lib/systemd/system
