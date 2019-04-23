@@ -67,6 +67,7 @@ install -d %{buildroot}%{_sysconfdir}/clickhouse-server
 install -d %{buildroot}%{_sysconfdir}/supervisord.d
 mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
 
+install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./password-page/dist %{buildroot}%{_datadir}/%{name}/password-page
 cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger
