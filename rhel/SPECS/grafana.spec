@@ -154,10 +154,10 @@ exit 0
 * Fri Apr 26 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.1.4-1
 - PMM-3936 Grafana v6.1.4
 
-* Thu Apr 10 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.1.3-1
+* Wed Apr 10 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.1.3-1
 - PMM-3806 Grafana 6.1.2 update
 
-* Thu Apr  9 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.1.2-1
+* Tue Apr  9 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.1.2-1
 - PMM-3806 Grafana 6.1.2 update
 
 * Thu Apr  4 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.1.0-1
