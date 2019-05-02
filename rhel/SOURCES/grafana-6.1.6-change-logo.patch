@@ -12,12 +12,12 @@ index b0ef053f7..f316ab4f5 100644
        <div className="sidemenu__logo_small_breakpoint" onClick={this.toggleSideMenuSmallBreakpoint} key="hamburger">
          <i className="fa fa-bars" />
 diff --git a/public/sass/components/_sidemenu.scss b/public/sass/components/_sidemenu.scss
-index 334378036..5838367d2 100644
+index 7e68ed8d3..b4a778907 100644
 --- a/public/sass/components/_sidemenu.scss
 +++ b/public/sass/components/_sidemenu.scss
-@@ -198,8 +198,10 @@ li.sidemenu-org-switcher {
+@@ -196,8 +196,10 @@ li.sidemenu-org-switcher {
  }
- 
+
  .sidemenu__logo {
 -  display: block;
 -  padding: 6px 14px 6px 9px;
@@ -28,8 +28,8 @@ index 334378036..5838367d2 100644
    min-height: $navbarHeight;
    position: relative;
    height: $navbarHeight - 1px;
-@@ -210,9 +212,9 @@ li.sidemenu-org-switcher {
- 
+@@ -208,9 +210,9 @@ li.sidemenu-org-switcher {
+
    img {
      width: 30px;
 -    position: relative;
@@ -40,9 +40,9 @@ index 334378036..5838367d2 100644
 +    left: 0;
    }
  }
- 
+
 diff --git a/public/views/index-template.html b/public/views/index-template.html
-index fa19ae599..1a77d64fa 100644
+index ad2882123..bb6cea9a0 100644
 --- a/public/views/index-template.html
 +++ b/public/views/index-template.html
 @@ -59,7 +59,7 @@
