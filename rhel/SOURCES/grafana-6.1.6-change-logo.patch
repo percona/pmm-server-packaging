@@ -11,6 +11,19 @@ index b0ef053f7..f316ab4f5 100644
        </a>,
        <div className="sidemenu__logo_small_breakpoint" onClick={this.toggleSideMenuSmallBreakpoint} key="hamburger">
          <i className="fa fa-bars" />
+diff --git public/app/partials/login.html public/app/partials/login.html
+index 33872c7d6..a6d9416c6 100644
+--- public/app/partials/login.html
++++ public/app/partials/login.html
+@@ -1,7 +1,7 @@
+ <div class="login container">
+   <div class="login-content">
+     <div class="login-branding">
+-      <img class="logo-icon" src="public/img/grafana_icon.svg" alt="Grafana" />
++      <img class="logo-icon" src="public/img/percona-logo.png" alt="Percona" />
+       <div class="logo-wordmark" />
+     </div>
+     <div class="login-outer-box">
 diff --git public/sass/components/_sidemenu.scss public/sass/components/_sidemenu.scss
 index 7e68ed8d3..b4a778907 100644
 --- public/sass/components/_sidemenu.scss
