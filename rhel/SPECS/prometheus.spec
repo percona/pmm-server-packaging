@@ -39,11 +39,11 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          62e591f928ddf6b3468308b7ac1de1c63aa7fcf3
+%global commit          d3245f15022551c6fc8281766ea62db4d71e2747
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-%{repo}
-Version:        2.7.1
+Version:        2.9.2
 Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
@@ -68,7 +68,7 @@ ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{isgccgoarch}
 BuildRequires:   gcc-go >= %{gccgo_min_vers}
 %else
-BuildRequires:   golang >= 1.7.3
+BuildRequires:   golang >= 1.12.0
 %endif
 
 %description
@@ -222,7 +222,7 @@ ln -s ../../../ src/github.com/prometheus/prometheus
 export GOPATH=$(pwd):%{gopath}
 %else
 # build from bundled dependencies
-export GOPATH=$(pwd):$(pwd)/Godeps/_workspace:%{gopath}
+export GOPATH=$(pwd)/Godeps/_workspace:%{gopath}
 %endif
 
 # set environment variables
