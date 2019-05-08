@@ -11,10 +11,12 @@
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      cfd74991cc7c03fb73e351154f734660b47f532d
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
+%define release         5  
+%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
-Version:	2.0.0
-Release:	4.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	%{version}
+Release:	%{rpm_release}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3

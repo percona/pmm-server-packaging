@@ -7,10 +7,12 @@
 %global commit		64f4c3758af02f900ddc59cd74657bdcd0ca2038
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
+%define release         7
+%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{project}-dashboards
-Version:	1.9.0
-Release:	6.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	%{version}
+Release:	%{rpm_release}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
 License:	AGPLv3
