@@ -1,11 +1,11 @@
 %define clickhouse_user clickhouse
 %define clickhouse_group clickhouse
 
-%global commit             d724362dd506c8640d419f45f99d736afdb559fc
+%global commit             ed0a049fa5b93f2c14499b7f788b66efd0c2ef7d
 %global shortcommit        %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-clickhouse
-Version:        19.1.14
+Version:        19.5.3.8
 Release:        stable%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
@@ -77,6 +77,7 @@ cmake .. \
   -DUSE_INTERNAL_RE2_LIBRARY=0 \
   -DUSE_INTERNAL_ZSTD_LIBRARY=0 \
   -DUSE_INTERNAL_ZLIB_LIBRARY=0 \
+  -DGLIBC_COMPATIBILITY=OFF \
   -DENABLE_TESTS=0
 %{__make} %{?_smp_mflags}
 EOF
@@ -167,6 +168,9 @@ exit 0
 
 
 %changelog
+* Mon May 06 2019 Vyacheslav Sarzhan <slava.sarzhan@percona.com> - 19.5.3.8-stable
+- PMM-3985 update clickhouse to 19.5.3.8
+
 * Fri Mar 22 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 19.1.14-stable
 - PMM-3722 Allow external connection for Clickhouse in PMM
 
