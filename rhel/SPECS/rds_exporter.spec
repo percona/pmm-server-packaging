@@ -9,10 +9,12 @@
 %global commit		16241617f6758d82105ac20793b98a92139254b6
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
+%define release         2
+%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
-Version:	1.5.0
-Release:	1.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	%{version}
+Release:	%{rpm_release}
 Summary:	Prometheus exporter for RDS metrics, written in Go with pluggable metric collectors
 
 License:	ASL 2.0

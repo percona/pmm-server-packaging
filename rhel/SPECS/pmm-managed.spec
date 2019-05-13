@@ -9,10 +9,12 @@
 %global commit		8f3d007617941033867aea6a134c48b39142427f
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
+%define release         3
+%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
-Version:	1.3.0
-Release:	2.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	%{version}
+Release:	%{rpm_release}
 Summary:	Percona Monitoring and Management management daemon
 
 License:	AGPLv3
