@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        6.1.6
-Release:        3%{?dist}
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -22,11 +22,9 @@ Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.
 Source2:        grafana-node_modules-v6.1.6.el7.tar.gz
 Source3:        grafana-server.service
 Source4:        percona-favicon.ico
-Source5:        percona-logo.png
 Patch0:         grafana-5.1.3-share-panel.patch
 Patch1:         grafana-6.0.0-refresh-auth.patch
 Patch2:         grafana-5.4.2-change-icon.patch
-Patch3:         grafana-6.1.6-change-logo.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -50,7 +48,6 @@ Graphite, InfluxDB & OpenTSDB.
 #%patch0 -p 1
 #%patch1 -p 0
 %patch2 -p 0
-%patch3 -p 0
 rm -rf Godeps
 
 %build
@@ -85,7 +82,6 @@ else
 fi
 
 install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
-install -m 644 %{SOURCE5} %{buildroot}/usr/share/grafana/public/img/percona-logo.png
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
