@@ -1,3 +1,4 @@
+%undefine _missing_build_ids_terminate_build
 %global _dwz_low_mem_die_limit 0
 
 %global provider	github
@@ -9,8 +10,10 @@
 %global commit		8f3d007617941033867aea6a134c48b39142427f
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         3
+%define release         4
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
+
+%define full_pmm_version 2.0.0
 
 Name:		%{repo}
 Version:	%{version}
@@ -44,14 +47,19 @@ ln -s $(pwd) src/%{provider_prefix}
 
 
 %build
-export GOPATH=$(pwd)
-go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n')" -a -v -x %{provider_prefix}
+export GOPATH=$(pwd)/
+
+export PMM_RELEASE_VERSION=%{full_pmm_version}
+export PMM_RELEASE_FULLCOMMIT=%{commit}
+
+cd src/github.com/percona/pmm-managed
+make release
 
 
 %install
 install -d -p %{buildroot}%{_bindir}
 install -d -p %{buildroot}%{_sbindir}
-install -p -m 0755 pmm-managed %{buildroot}%{_sbindir}/pmm-managed
+install -p -m 0755 bin/pmm-managed %{buildroot}%{_sbindir}/pmm-managed
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.service
