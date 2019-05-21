@@ -12,8 +12,10 @@
 %global commit          376dbed06e403faad1b444f99ab3e1e28ac7687e
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         5
+%define release         6
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
+
+%define full_pmm_version 2.0.0
 
 Name:           percona-qan-api2
 Version:        %{version}
@@ -46,15 +48,23 @@ See the PMM docs for more information.
 mkdir -p src/%{provider}.%{provider_tld}/%{project}
 mv %{repo}-%{commit} src/%{provider_prefix}
 
+
 %build
-export GOPATH=$(pwd)
-export APP_VERSION="%{version}-%{build_timestamp}.%{shortcommit}"
-go build -o ./percona-qan-api2 -ldflags "-X main.version=${APP_VERSION}" ./src/%{provider_prefix}/db.go ./src/%{provider_prefix}/main.go ./src/%{provider_prefix}/maincover_test.go
+export GOPATH=$(pwd)/
+
+export PMM_RELEASE_VERSION=%{full_pmm_version}
+export PMM_RELEASE_FULLCOMMIT=%{commit}
+export PMM_RELEASE_BRANCH=""
+
+cd src/github.com/percona/qan-api2
+make release
 
 
 %install
+cd src/github.com/percona/qan-api2
+
 install -d -p %{buildroot}%{_sbindir}
-mv ./percona-qan-api2 %{buildroot}%{_sbindir}/%{name}
+install -p -m 0755 bin/qan-api2 %{buildroot}%{_sbindir}/%{name}
 
 install -d %{buildroot}/usr/lib/systemd/system
 install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.service
