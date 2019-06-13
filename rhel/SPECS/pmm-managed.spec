@@ -54,7 +54,8 @@ export PMM_RELEASE_FULLCOMMIT=%{commit}
 export PMM_RELEASE_BRANCH=""
 
 cd src/github.com/percona/pmm-managed
-make release
+# FIXME TODO HACK
+env PMM_RELEASE_VERSION=2.0.0-beta2 make release
 
 
 %install
