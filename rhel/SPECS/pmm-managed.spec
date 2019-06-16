@@ -10,7 +10,7 @@
 %global commit		8f3d007617941033867aea6a134c48b39142427f
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         7
+%define release         8
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -54,8 +54,7 @@ export PMM_RELEASE_FULLCOMMIT=%{commit}
 export PMM_RELEASE_BRANCH=""
 
 cd src/github.com/percona/pmm-managed
-# FIXME TODO HACK
-env PMM_RELEASE_VERSION=2.0.0-beta2 make release
+make release
 
 
 %install
