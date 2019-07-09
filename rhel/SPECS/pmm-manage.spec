@@ -9,7 +9,7 @@
 %global commit		56f6671dc4ac56cd835bc893469f092f2f8bea3c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         4
+%define release         5
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
