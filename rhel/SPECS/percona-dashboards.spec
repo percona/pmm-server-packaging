@@ -7,7 +7,7 @@
 %global commit		64f4c3758af02f900ddc59cd74657bdcd0ca2038
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         10
+%define release         11
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{project}-dashboards
