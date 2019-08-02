@@ -56,7 +56,6 @@ mv .htpasswd  %{buildroot}%{_sysconfdir}/nginx/.htpasswd
 mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
 mv nginx-ssl.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 install -d %{buildroot}%{_sysconfdir}/cron.daily
-mv purge-qan-data %{buildroot}%{_sysconfdir}/cron.daily/purge-qan-data
 install -d %{buildroot}%{_datadir}/percona-dashboards
 mv import-dashboards.py %{buildroot}%{_datadir}/percona-dashboards/import-dashboards.py
 install -d %{buildroot}%{_sysconfdir}/tmpfiles.d
@@ -106,7 +105,6 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 %{_sysconfdir}/tmpfiles.d/pmm.conf
-%{_sysconfdir}/cron.daily/purge-qan-data
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 /usr/lib/systemd/system/node_exporter.service
