@@ -11,7 +11,7 @@
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      @@pmm_commit@@
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
-%define release         9
+%define release         10
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -27,13 +27,6 @@ Source1:	https://%{pmm_prefix}/archive/%{pmm_commit}/%{pmm_repo}-%{pmm_shortcomm
 BuildArch:	noarch
 Requires:	nginx ansible git bats
 BuildRequires:	openssl
-
-%if 0%{?fedora} || 0%{?rhel} == 7
-BuildRequires: systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
-%endif
 
 
 %description
@@ -76,24 +69,6 @@ cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-
 cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger
 rm -rf %{pmm_repo}-%{pmm_commit}
 
-install -d %{buildroot}/usr/lib/systemd/system
-install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/node_exporter.service
-install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/system/clickhouse_exporter.service
-
-
-%post
-/usr/bin/systemd-tmpfiles --create
-%systemd_post node_exporter.service
-%systemd_post clickhouse_exporter.service
-
-%preun
-%systemd_preun node_exporter.service
-%systemd_preun clickhouse_exporter.service
-
-%postun
-%systemd_postun node_exporter.service
-%systemd_postun clickhouse_exporter.service
-
 
 %files
 %license LICENSE
@@ -107,8 +82,6 @@ install -p -m 0644 clickhouse_exporter.service %{buildroot}/usr/lib/systemd/syst
 %{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
-/usr/lib/systemd/system/node_exporter.service
-/usr/lib/systemd/system/clickhouse_exporter.service
 
 
 %changelog
