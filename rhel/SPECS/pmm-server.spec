@@ -48,7 +48,6 @@ install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
 mv .htpasswd  %{buildroot}%{_sysconfdir}/nginx/.htpasswd
 mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
 mv nginx-ssl.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
-install -d %{buildroot}%{_sysconfdir}/cron.daily
 install -d %{buildroot}%{_datadir}/percona-dashboards
 mv import-dashboards.py %{buildroot}%{_datadir}/percona-dashboards/import-dashboards.py
 install -d %{buildroot}%{_sysconfdir}/tmpfiles.d
