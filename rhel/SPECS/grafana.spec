@@ -16,7 +16,7 @@ Name:           percona-%{repo}
 Version:        6.2.5
 Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
-License:        ASL 2.0
+License:        Apache-2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-v6.2.5.el7.tar.gz
