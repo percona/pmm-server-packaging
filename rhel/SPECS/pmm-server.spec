@@ -43,8 +43,6 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -n %{repo}-%{commit}
-sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml
-sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
