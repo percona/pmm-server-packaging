@@ -17,7 +17,7 @@ Version:	%{version}
 Release:	%{rpm_release}
 Summary:	Prometheus exporter for RDS metrics, written in Go with pluggable metric collectors
 
-License:	ASL 2.0
+License:	Apache-2.0
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
