@@ -13,7 +13,7 @@
 %global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         11
+%define release         12
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -56,10 +56,6 @@ make release
 %install
 install -d %{buildroot}%{_bindir}
 
-install -p -m 0755 ./bin/pmm-update %{buildroot}%{_bindir}/pmm-update
-install -p -m 0755 ./bin/pmm-update-check %{buildroot}%{_bindir}/pmm-update-check
-install -p -m 0755 ./bin/pmm-update-stage2 %{buildroot}%{_bindir}/pmm-update-stage2
-
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./ansible %{buildroot}%{_datadir}/%{name}
 
@@ -78,11 +74,5 @@ install -p -m 0755 bin/pmm2-update %{buildroot}%{_sbindir}/
 
 
 %changelog
-* Fri Jun 30 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.6-1
-- move repository from Percona-Lab to percona organization
-
-* Mon Feb 13 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
-- add ansible dir to %{_datadir}/%{name}
-
-* Tue Feb  7 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
-- init version
+* Mon Sep 9 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.0.0-12
+- https://per.co.na/pmm/2.0.0-beta7
