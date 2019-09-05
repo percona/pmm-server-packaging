@@ -54,8 +54,6 @@ make release
 
 
 %install
-install -d %{buildroot}%{_bindir}
-
 install -d %{buildroot}%{_datadir}/%{name}
 cp -pav ./ansible %{buildroot}%{_datadir}/%{name}
 
@@ -67,7 +65,6 @@ install -p -m 0755 bin/pmm2-update %{buildroot}%{_sbindir}/
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/*
 %{_sbindir}/pmm2-update
 %{_datadir}/%{name}
 /usr/lib/debug/usr/sbin/pmm2-update.debug
