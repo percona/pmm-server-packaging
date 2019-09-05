@@ -3,6 +3,9 @@
 # https://bugzilla.redhat.com/show_bug.cgi?id=1295951
 %undefine _missing_build_ids_terminate_build
 
+# do not strip debug symbols
+%global debug_package   %{nil}
+
 %global provider        github
 %global provider_tld    com
 %global project         percona
@@ -12,7 +15,7 @@
 %global commit          376dbed06e403faad1b444f99ab3e1e28ac7687e
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         10
+%define release         11
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0

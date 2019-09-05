@@ -1,5 +1,8 @@
 %undefine _missing_build_ids_terminate_build
 
+# do not strip debug symbols
+%global debug_package   %{nil}
+
 # we need to remove it as soon as we remove all noarch pmm-update rpms
 # from 'pmm2-components/yum/laboratory'
 %define _binaries_in_noarch_packages_terminate_build   0
@@ -13,7 +16,7 @@
 %global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         12
+%define release         13
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -67,7 +70,6 @@ install -p -m 0755 bin/pmm2-update %{buildroot}%{_sbindir}/
 %doc README.md
 %{_sbindir}/pmm2-update
 %{_datadir}/%{name}
-/usr/lib/debug/usr/sbin/pmm2-update.debug
 
 
 %changelog
