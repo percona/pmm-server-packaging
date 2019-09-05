@@ -1,6 +1,9 @@
 %undefine _missing_build_ids_terminate_build
 %global _dwz_low_mem_die_limit 0
 
+# do not strip debug symbols
+%global debug_package   %{nil}
+
 %global provider	github
 %global provider_tld	com
 %global project		percona
@@ -10,7 +13,7 @@
 %global commit		8f3d007617941033867aea6a134c48b39142427f
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         9
+%define release         10
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -84,8 +87,5 @@ install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.servic
 
 
 %changelog
-* Thu Sep 21 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-2
-- add consul dependency for pmm-managed
-
-* Tue Sep 12 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.3.0-1
+* Thu Sep  5 2019 Viacheslav Sarzhan <slava.sarzhan@percona.com> - 2.0.0-10
 - init version

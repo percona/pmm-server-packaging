@@ -1,5 +1,8 @@
 %global _dwz_low_mem_die_limit 0
 
+# do not strip debug symbols
+%global debug_package   %{nil}
+
 %global provider	github
 %global provider_tld	com
 %global project		percona
@@ -9,7 +12,7 @@
 %global commit		56f6671dc4ac56cd835bc893469f092f2f8bea3c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         5
+%define release         6
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -76,14 +79,5 @@ install -p -m 0644 packaging/pmm-manage.service %{buildroot}/usr/lib/systemd/sys
 
 
 %changelog
-* Fri Jun 30 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.6-1
-- move repository from Percona-Lab to percona organization
-
-* Fri Mar  3 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.1-1
-- add pmm-configure
-
-* Fri Feb  3 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-2
-- add build_timestamp to Release value
-
-* Wed Feb  1 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.1.0-1
+* Thu Sep  5 2019 Viacheslav Sarzhan <slava.sarzhan@percona.com> - 2.0.0-6
 - init version

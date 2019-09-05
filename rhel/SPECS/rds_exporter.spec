@@ -1,5 +1,8 @@
 %global _dwz_low_mem_die_limit 0
 
+# do not strip debug symbols
+%global debug_package   %{nil}
+
 %global provider	github
 %global provider_tld	com
 %global project		percona
@@ -9,7 +12,7 @@
 %global commit		16241617f6758d82105ac20793b98a92139254b6
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         6
+%define release         7
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -58,5 +61,5 @@ install -p -m 0755 %{repo} %{buildroot}%{_sbindir}/%{repo}
 
 
 %changelog
-* Thu Nov 16 2017 Mykola Marzhan <mykola.marzhan@percona.com> - 1.5.0-1
-- move repository from Percona-Lab to percona organization
+* Thu Sep  5 2019 Viacheslav Sarzhan <slava.sarzhan@percona.com> - 2.0.0-7
+- init version
