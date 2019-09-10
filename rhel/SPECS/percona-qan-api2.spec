@@ -15,7 +15,7 @@
 %global commit          376dbed06e403faad1b444f99ab3e1e28ac7687e
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         11
+%define release         12
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -28,17 +28,9 @@ Summary:        Query Analytics API v2 for PMM
 License:        AGPLv3
 URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:        %{name}.service
 
 BuildRequires:  golang
 Requires:       perl
-
-%if 0%{?fedora} || 0%{?rhel} == 7
-BuildRequires: systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
-%endif
 
 %description
 Percona Query Analytics (QAN) API v2 is part of Percona Monitoring and Management.
@@ -69,30 +61,9 @@ cd src/github.com/percona/qan-api2
 install -d -p %{buildroot}%{_sbindir}
 install -p -m 0755 bin/qan-api2 %{buildroot}%{_sbindir}/%{name}
 
-install -d %{buildroot}/usr/lib/systemd/system
-install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{name}.service
-
-%post
-%if 0%{?fedora} || 0%{?rhel} == 7
-%systemd_post %{name}.service
-%endif
-
-%preun
-%if 0%{?fedora} || 0%{?rhel} == 7
-%systemd_preun %{name}.service
-%endif
-
-%postun
-%if 0%{?fedora} || 0%{?rhel} == 7
-%systemd_postun %{name}.service
-%endif
-
 
 %files
-#%license src/%{provider_prefix}/LICENSE
-#%doc src/%{provider_prefix}/README.md src/%{provider_prefix}/CHANGELOG.md
 %attr(0755, root, root) %{_sbindir}/%{name}
-/usr/lib/systemd/system/%{name}.service
 
 %changelog
 * Tue Mar 19 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-4

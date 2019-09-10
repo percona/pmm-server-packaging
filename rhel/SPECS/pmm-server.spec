@@ -11,7 +11,7 @@
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      @@pmm_commit@@
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
-%define release         11
+%define release         14
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -27,14 +27,6 @@ Source1:	https://%{pmm_prefix}/archive/%{pmm_commit}/%{pmm_repo}-%{pmm_shortcomm
 BuildArch:	noarch
 Requires:	nginx ansible git bats
 BuildRequires:	openssl
-
-%if 0%{?fedora} || 0%{?rhel} == 7
-BuildRequires: systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
-%endif
-
 
 %description
 Percona Monitoring and Management (PMM) Server.
@@ -55,10 +47,7 @@ mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
 mv nginx-ssl.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 install -d %{buildroot}%{_datadir}/percona-dashboards
 mv import-dashboards.py %{buildroot}%{_datadir}/percona-dashboards/import-dashboards.py
-install -d %{buildroot}%{_sysconfdir}/tmpfiles.d
-mv tmpfiles.d-pmm.conf %{buildroot}%{_sysconfdir}/tmpfiles.d/pmm.conf
 
-mv sysconfig %{buildroot}%{_sysconfdir}/sysconfig
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
@@ -74,20 +63,14 @@ cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/
 rm -rf %{pmm_repo}-%{pmm_commit}
 
 
-%post
-/usr/bin/systemd-tmpfiles --create
-
-
 %files
 %license LICENSE
 %doc README.md CHANGELOG.md
-%{_sysconfdir}/sysconfig
 %{_sysconfdir}/supervisord.d
 %{_sysconfdir}/prometheus.yml
 %{_sysconfdir}/nginx/.htpasswd
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
-%{_sysconfdir}/tmpfiles.d/pmm.conf
 %{_datadir}/percona-dashboards/import-dashboards.py*
 %{_datadir}/%{name}
 
