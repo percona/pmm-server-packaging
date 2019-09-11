@@ -16,7 +16,7 @@
 %global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         13
+%define release         14
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -62,16 +62,20 @@ cp -pav ./ansible %{buildroot}%{_datadir}/%{name}
 
 install -d %{buildroot}%{_sbindir}
 cd src/github.com/percona/pmm-update
-install -p -m 0755 bin/pmm2-update %{buildroot}%{_sbindir}/
+install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 
 
 %files
 %license LICENSE
 %doc README.md
-%{_sbindir}/pmm2-update
+%{_sbindir}/pmm-update
 %{_datadir}/%{name}
 
 
 %changelog
-* Mon Sep 9 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.0.0-12
+
+* Wed Sep 11 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.0.0-14
+- https://per.co.na/pmm/2.0.0-rc1
+
+* Mon Sep  9 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.0.0-12
 - https://per.co.na/pmm/2.0.0-beta7
