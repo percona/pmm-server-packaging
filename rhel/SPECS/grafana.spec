@@ -14,28 +14,18 @@
 
 Name:           percona-%{repo}
 Version:        6.3.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-v6.3.5.el7.tar.gz
-Source3:        grafana-server.service
 Source4:        percona-favicon.ico
-Patch0:         grafana-5.1.3-share-panel.patch
-Patch1:         grafana-6.0.0-refresh-auth.patch
-Patch2:         grafana-5.4.2-change-icon.patch
+Patch0:         grafana-5.4.2-change-icon.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
 BuildRequires: nodejs-grunt-cli fontconfig
-
-%if 0%{?fedora} || 0%{?rhel} == 7
-BuildRequires: systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
-%endif
 
 Requires:       fontconfig freetype urw-fonts
 
@@ -45,9 +35,7 @@ Graphite, InfluxDB & OpenTSDB.
 
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
-#%patch0 -p 1
-#%patch1 -p 0
-%patch2 -p 0
+%patch0 -p 0
 rm -rf Godeps
 
 %build
@@ -92,10 +80,7 @@ install -d -p %{buildroot}%{_sysconfdir}/%{repo}
 cp tmp/conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
 mv tmp/conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
 
-%if 0%{?fedora} || 0%{?rhel} == 7
-mkdir -p %{buildroot}/usr/lib/systemd/system
-install -p -m 0644 %{SOURCE3} %{buildroot}/usr/lib/systemd/system/
-%else
+%if  0%{?rhel} == 6
 mkdir -p %{buildroot}%{_initddir}/
 install -p -m 0644 packaging/rpm/init.d/grafana-server %{buildroot}%{_initddir}/
 %endif
@@ -125,12 +110,9 @@ go test ./pkg/bus
 %attr(0755, root, root) %{_bindir}/%{repo}-cli
 %{_sysconfdir}/%{repo}/grafana.ini
 %{_sysconfdir}/%{repo}/ldap.toml
-%if 0%{?fedora} || 0%{?rhel} == 7
-%attr(-, root, root) /usr/lib/systemd/system/grafana-server.service
-%else
+%if 0%{?rhel} == 6
 %attr(-, root, root) %{_initddir}/grafana-server
 %endif
-#attr(-, root, root) %{_sysconfdir}/sysconfig/grafana-server
 %dir %{_sharedstatedir}/%{repo}
 %dir /var/log/%{repo}
 
@@ -141,16 +123,11 @@ getent passwd grafana >/dev/null || \
     -c "Grafana Dashboard" grafana
 exit 0
 
-%post
-%systemd_post grafana.service
-
-%preun
-%systemd_preun grafana.service
-
-%postun
-%systemd_postun grafana.service
-
 %changelog
+
+* Wed Sep 18 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 6.3.5-2
+- Remove old patches.
+
 * Wed Sep  4 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.3.5-1
 - PMM-4592 Grafana v6.3.5
 
@@ -191,7 +168,7 @@ exit 0
 - PMM-2685 Grafana 5.4.2
 
 * Thu Nov 15 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 5.3.3-1
-- PMM-2685 Grafana 5.3 
+- PMM-2685 Grafana 5.3
 
 * Wed Nov 14 2018 Vadim Yalovets <vadim.yalovets@percona.com> - 5.1.3-7
 - PMM-3257 Apply Patch from Grafana 5.3.3 to latest PMM version
