@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v6.3.5
+%global commit          v6.3.6
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,15 +13,16 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        6.3.5
-Release:        2%{?dist}
+Version:        6.3.6
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v6.3.5.el7.tar.gz
+Source2:        grafana-node_modules-v6.3.6.el7.tar.gz
 Source4:        percona-favicon.ico
 Patch0:         grafana-5.4.2-change-icon.patch
+Patch1:         grafana-6.3.6-share-panel.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 BuildRequires: golang >= 1.7.3
@@ -36,6 +37,7 @@ Graphite, InfluxDB & OpenTSDB.
 %prep
 %setup -q -a 2 -n %{repo}-%{version}
 %patch0 -p 0
+%patch1 -p 0 
 rm -rf Godeps
 
 %build
@@ -124,6 +126,8 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Fri Oct 04 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 6.3.6-1
+- PMM-4779 Restored grafana patch for snapshots dialog
 
 * Wed Sep 18 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 6.3.5-2
 - Remove old patches.
