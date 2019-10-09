@@ -20,8 +20,7 @@ URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source1:	qan-app-node_modules-1.12.0.tar.gz
 
-BuildRequires:	nodejs-packaging
-BuildRequires:	npm(typescript)
+BuildRequires:	nodejs
 BuildArch:	noarch
 Requires:	nginx
 
@@ -31,14 +30,14 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -a 1 -n %{repo}-%{commit}
-sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.json node_modules/package.json
+%setup -q -n %{repo}-%{commit}
 
+%build
+npm install
+npm run build
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}
-npm install
-npm run build
 cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
 
