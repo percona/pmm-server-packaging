@@ -18,11 +18,6 @@ Summary:	Query Analytics API for PMM
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app-node_modules-1.12.0.tar.gz
-
-BuildRequires:	nodejs
-BuildArch:	noarch
-Requires:	nginx
 
 %description
 Percona Query Analytics (QAN) API is part of Percona Monitoring and Management.
