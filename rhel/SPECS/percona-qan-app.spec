@@ -36,6 +36,7 @@ sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.jso
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}
+npm install -g typescript@'>=2.4.2 <2.7.0'
 npm run build
 cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
