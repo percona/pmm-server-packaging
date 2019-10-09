@@ -20,7 +20,8 @@ URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source1:	qan-app-node_modules-1.12.0.tar.gz
 
-BuildRequires:	nodejs
+BuildRequires:	nodejs-packaging
+BuildRequires:	npm(typescript)
 BuildArch:	noarch
 Requires:	nginx
 
@@ -36,7 +37,7 @@ sed -i 's/"version": "v[0-9].[0-9].[0-9]"/"version": "v%{version}"/' package.jso
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}
-npm install -g typescript@'>=2.4.2 <2.7.0'
+npm install
 npm run build
 cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
