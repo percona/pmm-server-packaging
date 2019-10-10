@@ -7,7 +7,7 @@
 %global commit		29d58f8587e227671182812d2c5805b15240c1bf
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         8
+%define release         9
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{project}-%{repo}
@@ -44,5 +44,5 @@ cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
-* Thu Oct 10 2019 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.0.1-1
+* Thu Oct 10 2019 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.0.1-9
 - PMM-4504 Build qan-app on packaging
