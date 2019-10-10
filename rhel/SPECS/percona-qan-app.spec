@@ -44,5 +44,5 @@ cp -pav ./dist/qan-app/*    %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
-* Thu Oct 10 2019 Mykola Marzhan <mykola.marzhan@percona.com> - 2.0.1-1
+* Thu Oct 10 2019 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.0.1-1
 - PMM-4504 Build qan-app on packaging
