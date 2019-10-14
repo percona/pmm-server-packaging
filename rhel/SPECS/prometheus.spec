@@ -20,17 +20,11 @@
 
 Name:           percona-%{repo}
 Version:        2.12.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:        %{repo}.service
-
-BuildRequires: systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
 
 %if %{install_golang}
 BuildRequires:   golang >= 1.12.0
@@ -64,21 +58,7 @@ install -D -p -m 0755 ./promtool %{buildroot}%{_bindir}/promtool
 install -d %{buildroot}%{_datadir}/%{repo}
 cp -rpa ./consoles %{buildroot}%{_datadir}/%{repo}/consoles
 cp -rpa ./console_libraries %{buildroot}%{_datadir}/%{repo}/console_libraries
-install -d %{buildroot}/usr/lib/systemd/system
-install -p -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/%{repo}.service
 install -d %{buildroot}%{_sharedstatedir}/%{repo}
-
-
-%post
-%systemd_post %{repo}.service
-
-
-%preun
-%systemd_preun %{repo}.service
-
-
-%postun
-%systemd_postun %{repo}.service
 
 
 %files
@@ -88,7 +68,6 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo}
 %{_sbindir}/%{repo}
 %{_bindir}/promtool
 %{_datadir}/%{repo}
-/usr/lib/systemd/system/%{repo}.service
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
 
 %changelog
