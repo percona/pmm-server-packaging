@@ -75,8 +75,8 @@
    					</button>
 --- public/app/features/dashboard/components/ShareModal/ShareSnapshotCtrl.ts.org        2019-10-04 12:40:09.930181968 +0300
 +++ public/app/features/dashboard/components/ShareModal/ShareSnapshotCtrl.ts    2019-10-04 12:42:01.970638999 +0300
-@@ -6,8 +6,8 @@
-   constructor($scope, $rootScope, $location, backendSrv, $timeout, timeSrv) {
+@@ -17,8 +17,8 @@
+   ) {
      $scope.snapshot = {
        name: $scope.dashboard.title,
 -      expires: 0,
@@ -84,22 +84,22 @@
 +      expires: 7776000,
 +      timeoutSeconds: 30,
      };
-
+ 
      $scope.step = 1;
-@@ -16,6 +16,7 @@
+@@ -27,6 +27,7 @@
        { text: '1 Hour', value: 60 * 60 },
        { text: '1 Day', value: 60 * 60 * 24 },
        { text: '7 Days', value: 60 * 60 * 24 * 7 },
 +      { text: '90 Days', value: 60 * 60 * 24 * 90 },
        { text: 'Never', value: 0 },
      ];
-
+ 
 --- public/sass/components/_gf-form.scss.orig   2019-10-04 12:50:30.653047840 +0300
 +++ public/sass/components/_gf-form.scss        2019-10-04 12:51:18.557292892 +0300
-@@ -97,6 +97,10 @@
+@@ -101,6 +101,10 @@
    }
  }
-
+ 
 +.gf-form-button-row-custom {
 +  padding-top: 1rem;
 +}
@@ -107,7 +107,6 @@
  .gf-form-label {
    padding: $input-padding;
    flex-shrink: 0;
-
 --- public/sass/components/_modals.scss.orig    2019-10-04 12:51:36.749386500 +0300
 +++ public/sass/components/_modals.scss 2019-10-04 12:52:45.533742925 +0300
 @@ -137,7 +137,7 @@
