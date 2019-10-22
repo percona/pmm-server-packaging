@@ -29,8 +29,7 @@ See the PMM docs for more information.
 
 %build
 npm version
-npm install
-npm run build
+make release
 
 %install
 install -d %{buildroot}%{_datadir}/%{name}
