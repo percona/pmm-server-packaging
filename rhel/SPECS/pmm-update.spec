@@ -16,7 +16,7 @@
 %global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         21
+%define release         22
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -76,6 +76,9 @@ install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 # Specifically, the change date is ignored – RPM's "Buildtime" is used instead.
 
 %changelog
+
+* Mon Nov 4 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.1.0-22
+- https://per.co.na/pmm/2.1.0
 
 * Mon Sep 23 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.0.1-19
 - https://per.co.na/pmm/2.0.1
