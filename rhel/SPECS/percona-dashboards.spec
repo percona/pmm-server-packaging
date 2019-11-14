@@ -7,7 +7,7 @@
 %global commit		64f4c3758af02f900ddc59cd74657bdcd0ca2038
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         13
+%define release         12
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{project}-dashboards
@@ -37,8 +37,11 @@ Dashboards are also a part of Percona Monitoring and Management project.
 
 
 %build
-npm version
-make release
+pushd pmm-app
+    ln -s ../node_modules node_modules
+    npm run build
+    rm node_modules
+popd
 
 
 %install
@@ -56,9 +59,6 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
-* Tue Oct 29 2019 Roman Misyurin <roman.misyurinv@percona.com> - 1.9.0-7
-- build process fix
-
 * Mon Feb  4 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 1.9.0-6
 - PMM-3488 Add some plugins into PMM
 
