@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v6.4.1
+%global commit          v6.4.4
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %if ! 0%{?gobuild:1}
@@ -13,13 +13,13 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        6.4.1
-Release:        2%{?dist}
+Version:        6.4.4
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v6.4.1.el7.tar.gz
+Source2:        grafana-node_modules-v6.4.4.el7.tar.gz
 Source4:        percona-favicon.ico
 Patch0:         grafana-5.4.2-change-icon.patch
 Patch1:         grafana-6.3.6-share-panel.patch
@@ -126,6 +126,8 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Tue Nov 19 2019 Vadim Yalovets  <vadim.yalovets@percona.com> - 6.4.4-1
+- PMM-4969 update Grafana v.6.4.4
 
 * Wed Sep 18 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 6.3.5-2
 - Remove old patches.
