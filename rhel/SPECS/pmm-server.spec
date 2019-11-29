@@ -37,6 +37,9 @@ See the PMM docs for more information.
 %setup -q -n %{repo}-%{commit}
 
 
+%build
+make build-installation-wizard-page
+
 %install
 tar -zxvf %SOURCE1
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
@@ -56,6 +59,7 @@ install -d %{buildroot}%{_datadir}/%{name}/landing-page/img
 cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-page/img/pmm-logo.svg
 cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger
+cp -pav installation-wizard-page/build %{buildroot}%{_datadir}/%{name}/installation-wizard-page
 rm -rf %{pmm_repo}-%{pmm_commit}
 
 
