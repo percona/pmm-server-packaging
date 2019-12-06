@@ -11,7 +11,7 @@
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      @@pmm_commit@@
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
-%define release         18
+%define release         19
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -37,6 +37,9 @@ See the PMM docs for more information.
 %setup -q -n %{repo}-%{commit}
 
 
+%build
+make build-installation-wizard-page
+
 %install
 tar -zxvf %SOURCE1
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
@@ -55,6 +58,7 @@ mv supervisord.conf %{buildroot}%{_sysconfdir}/supervisord.d/pmm.ini
 install -d %{buildroot}%{_datadir}/%{name}/landing-page/img
 cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-page/img/pmm-logo.svg
+cp -pav ./installation-wizard-page/build %{buildroot}%{_datadir}/%{name}/installation-wizard-page
 cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger
 rm -rf %{pmm_repo}-%{pmm_commit}
 
