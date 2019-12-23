@@ -16,7 +16,7 @@
 %global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         24
+%define release         25
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %define full_pmm_version 2.0.0
@@ -77,7 +77,7 @@ install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 
 %changelog
 
-* Mon Dec 23 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.2.0-24
+* Mon Dec 24 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.2.0-25
 - https://per.co.na/pmm/2.2.0
 
 * Mon Nov 11 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.1.0-23
