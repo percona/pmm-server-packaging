@@ -77,7 +77,7 @@ install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 
 %changelog
 
-* Mon Dec 24 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.2.0-25
+* Tue Dec 24 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.2.0-25
 - https://per.co.na/pmm/2.2.0
 
 * Mon Nov 11 2019 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.1.0-23
