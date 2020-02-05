@@ -118,15 +118,3 @@
      display: inline-block;
    }
 
---- public/sass/components/_panel_graph.scss.orig       2019-10-04 12:53:04.169840127 +0300
-+++ public/sass/components/_panel_graph.scss    2019-10-04 12:53:35.238002728 +0300
-@@ -47,7 +47,7 @@
- .graph-legend {
-   display: flex;
-   flex: 0 1 auto;
--  max-height: 35%;
-+  max-height: 55%;
-   margin: 0;
-   text-align: center;
-   padding-top: 6px;
-
