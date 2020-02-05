@@ -126,7 +126,7 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
-* Wed Feb  5 2019 Vadim Yalovets  <vadim.yalovets@percona.com> - 6.5.1-2
+* Wed Feb  5 2020 Vadim Yalovets  <vadim.yalovets@percona.com> - 6.5.1-2
 - PMM-5251 Last two rows are not visible when scrolling data tables
 
 * Mon Dec  9 2019 Vadim Yalovets  <vadim.yalovets@percona.com> - 6.5.1-1
