@@ -126,17 +126,4 @@ index 260c1c9fc..b2a8bb9d2 100644
 +    margin: 11px 0px 25px 0px;
      display: inline-block;
    }
- 
-diff --git a/public/sass/components/_panel_graph.scss b/public/sass/components/_panel_graph.scss
-index 72f3ca3db..6d9fd03a5 100644
---- a/public/sass/components/_panel_graph.scss
-+++ b/public/sass/components/_panel_graph.scss
-@@ -51,7 +51,7 @@
- .graph-legend {
-   display: flex;
-   flex: 0 1 auto;
--  max-height: 35%;
-+  max-height: 55%;
-   margin: 0;
-   text-align: center;
-   padding-top: 6px;
+
