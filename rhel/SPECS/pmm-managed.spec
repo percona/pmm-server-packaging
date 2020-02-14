@@ -56,6 +56,7 @@ make release
 install -d -p %{buildroot}%{_bindir}
 install -d -p %{buildroot}%{_sbindir}
 install -p -m 0755 bin/pmm-managed %{buildroot}%{_sbindir}/pmm-managed
+install -p -m 0755 bin/pmm-managed-init %{buildroot}%{_sbindir}/pmm-managed-init
 
 
 %files
