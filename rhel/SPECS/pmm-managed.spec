@@ -67,7 +67,7 @@ install -p -m 0755 bin/pmm-managed %{buildroot}%{_sbindir}/pmm-managed-init
 
 
 %changelog
-* Tue Fed 11 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.0.0-14
+* Tue Feb 11 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.0.0-14
 - added pmm-managed-init
 
 * Thu Sep  5 2019 Viacheslav Sarzhan <slava.sarzhan@percona.com> - 2.0.0-10
