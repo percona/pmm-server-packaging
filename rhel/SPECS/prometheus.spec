@@ -13,14 +13,14 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          43acd0e2e93f9f70c49b2267efa0124f1e759e86
+%global commit          b90be6f32a33c03163d700e1452b54454ddce0ec
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
 
 Name:           percona-%{repo}
-Version:        2.12.0
-Release:        3%{?dist}
+Version:        2.16.0
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -71,6 +71,9 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo}
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
 
 %changelog
+* Tue Feb 25 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.16.0-1
+- PMM-5329 Update Prometheus to version 2.16.0
+
 * Thu Aug 22 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.12.0-1
 - PMM-4559 Update to Prometheus v2.12.0
 
