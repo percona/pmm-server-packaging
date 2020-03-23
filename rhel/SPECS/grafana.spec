@@ -14,7 +14,7 @@
 
 Name:           percona-%{repo}
 Version:        6.5.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
