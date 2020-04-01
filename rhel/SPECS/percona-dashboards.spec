@@ -46,6 +46,7 @@ install -d %{buildroot}%{_datadir}/%{name}/pmm-app
 install -d %{buildroot}%{_datadir}/%{name}/panels
 cp -pa ./pmm-app/dist %{buildroot}%{_datadir}/%{name}/pmm-app
 cp -pa ./panels %{buildroot}%{_datadir}/%{name}
+mv fix-panels.py %{buildroot}%{_datadir}/%{name}
 echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
@@ -56,6 +57,9 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
+* Wed Apr 01 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.9.0-8
+- PMM-5655 remove leftovers of Grafana plugins
+
 * Tue Oct 29 2019 Roman Misyurin <roman.misyurinv@percona.com> - 1.9.0-7
 - build process fix
 
