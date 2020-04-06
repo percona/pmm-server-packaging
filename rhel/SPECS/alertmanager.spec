@@ -1,12 +1,5 @@
 %define debug_package %{nil}
 
-%define copying() \
-%if 0%{?fedora} >= 21 || 0%{?rhel} >= 7 \
-%license %{*} \
-%else \
-%doc %{*} \
-%endif
-
 %global provider        github
 %global provider_tld    com
 %global project         prometheus
@@ -60,9 +53,7 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo}
 
 
 %files
-%copying LICENSE
-%doc CHANGELOG.md README.md NOTICE
-#doc Godeps/Godeps.json
+%doc LICENSE CHANGELOG.md README.md NOTICE
 %{_sbindir}/%{repo}
 %{_bindir}/amtool
 %{_datadir}/%{repo}
