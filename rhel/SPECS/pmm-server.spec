@@ -69,6 +69,7 @@ rm -rf %{pmm_repo}-%{pmm_commit}
 %doc README.md CHANGELOG.md
 %{_sysconfdir}/supervisord.d
 %{_sysconfdir}/prometheus.yml
+%{_sysconfdir}/alertmanager.yml
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 %{_datadir}/percona-dashboards/import-dashboards.py*
