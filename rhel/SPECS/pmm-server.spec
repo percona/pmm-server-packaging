@@ -49,6 +49,7 @@ install -d %{buildroot}%{_datadir}/percona-dashboards
 mv import-dashboards.py %{buildroot}%{_datadir}/percona-dashboards/import-dashboards.py
 
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
+mv alertmanager.yml %{buildroot}%{_sysconfdir}/alertmanager.yml
 
 install -d %{buildroot}%{_sysconfdir}/clickhouse-server
 
