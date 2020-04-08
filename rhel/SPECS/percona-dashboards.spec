@@ -7,7 +7,7 @@
 %global commit		64f4c3758af02f900ddc59cd74657bdcd0ca2038
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         13
+%define release         14
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{project}-dashboards
@@ -46,7 +46,7 @@ install -d %{buildroot}%{_datadir}/%{name}/pmm-app
 install -d %{buildroot}%{_datadir}/%{name}/panels
 cp -pa ./pmm-app/dist %{buildroot}%{_datadir}/%{name}/pmm-app
 cp -pa ./panels %{buildroot}%{_datadir}/%{name}
-mv fix-panels.py %{buildroot}%{_datadir}/%{name}
+%{__cp} ./misc/fix-panels.py %{buildroot}%{_datadir}/%{name}
 echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
@@ -57,7 +57,7 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
-* Wed Apr 01 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.9.0-8
+* Wed Apr 08 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.5.0-14
 - PMM-5655 remove leftovers of Grafana plugins
 
 * Tue Oct 29 2019 Roman Misyurin <roman.misyurinv@percona.com> - 1.9.0-7
