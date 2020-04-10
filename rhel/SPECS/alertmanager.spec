@@ -13,7 +13,7 @@
 
 Name:           percona-%{repo}
 Version:        0.20.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
