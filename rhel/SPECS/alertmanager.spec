@@ -33,7 +33,7 @@ BuildRequires:   golang >= 1.12.0
 %prep
 %setup -q -n %{repo}-%{commit}
 mkdir -p ./build/src/github.com/prometheus
-cp -r $(pwd) ./build/src/github.com/prometheus/alertmanager
+ln -s $(pwd) ./build/src/github.com/prometheus/alertmanager
 
 
 %build
