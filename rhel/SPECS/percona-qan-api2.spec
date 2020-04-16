@@ -18,6 +18,8 @@
 %define release         14
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
+%global install_golang 0
+
 %define full_pmm_version 2.0.0
 
 Name:           percona-qan-api2
@@ -29,7 +31,9 @@ License:        AGPLv3
 URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
-BuildRequires:  golang
+%if %{install_golang}
+BuildRequires:   golang >= 1.12.0
+%endif
 Requires:       perl
 
 %description
