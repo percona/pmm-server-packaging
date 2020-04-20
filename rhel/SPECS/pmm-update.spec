@@ -19,6 +19,8 @@
 %define release         30
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
+%global install_golang 0
+
 # the line below is sed'ed by build/bin/build-server-rpm to set a correct version
 %define full_pmm_version 2.0.0
 
@@ -31,7 +33,9 @@ License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
-BuildRequires:  golang
+%if %{install_golang}
+BuildRequires:   golang >= 1.12.0
+%endif
 
 BuildArch:	noarch
 Requires:	PyYAML

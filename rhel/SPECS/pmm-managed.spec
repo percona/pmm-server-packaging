@@ -18,6 +18,8 @@
 
 %define full_pmm_version 2.0.0
 
+%global install_golang 0
+
 Name:		%{repo}
 Version:	%{version}
 Release:	%{rpm_release}
@@ -27,7 +29,9 @@ License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
-BuildRequires:	golang
+%if %{install_golang}
+BuildRequires:   golang >= 1.12.0
+%endif
 
 %description
 pmm-managed manages configuration of PMM server components (Prometheus,
