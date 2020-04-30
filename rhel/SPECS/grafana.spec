@@ -130,7 +130,7 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
-* Wen Apr 29 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.3-1
+* Wed Apr 29 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.3-1
 - PMM-5549 update Grafana v.6.7.3
 
 * Mon Mar 23 2020 Alexander Tymchuk <alexander.tymchuk@percona.com> - 6.5.1-4
