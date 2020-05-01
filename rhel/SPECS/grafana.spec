@@ -22,7 +22,7 @@ License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 #Source2:        grafana-node_modules-v6.7.3.el7.tar.gz
-Source4:        percona-favicon.ico
+Source2:        percona-favicon.ico
 Patch0:         grafana-6.7.3-fav-icon.patch
 Patch1:         grafana-6.7.3-share-panel.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
@@ -39,7 +39,8 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%setup -q -a 2 -n %{repo}-%{version}
+#%setup -q -a 2 -n %{repo}-%{version}
+%setup -q -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
 rm -rf Godeps
