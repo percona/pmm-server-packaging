@@ -54,7 +54,7 @@ mv vendor/gopkg.in   _build/src/
 
 mkdir -p ./_build/src/github.com/grafana
 ln -s $(pwd) ./_build/src/github.com/grafana/grafana
-export GOPATH=$(pwd)/_build:%{gopath}
+export GOPATH="$(pwd)/_build"
 
 export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 %gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
@@ -95,7 +95,7 @@ install -d -p %{buildroot}%{_sharedstatedir}/%{repo}
 install -d -p %{buildroot}/var/log/%{repo}
 
 %check
-export GOPATH=$(pwd)/_build:%{gopath}
+export GOPATH="$(pwd)/_build"
 #go test ./pkg/api
 go test ./pkg/bus
 #go test ./pkg/components/apikeygen
