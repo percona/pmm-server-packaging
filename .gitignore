@@ -9,3 +9,4 @@ rhel/SOURCES/*
 !rhel/SOURCES/*.patch
 !rhel/SOURCES/*.ico
 rhel/SRPMS
+.DS_Store
