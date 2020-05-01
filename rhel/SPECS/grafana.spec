@@ -59,7 +59,7 @@ export GOPATH="$(pwd)/_build"
 export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 %gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
 %gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
-/usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose --pkgVer=%{version} release
+/usr/bin/node --max-old-space-size=4500 /usr/bin/npm --verbose run build
 
 %install
 install -d -p %{buildroot}%{_datadir}/%{repo}
