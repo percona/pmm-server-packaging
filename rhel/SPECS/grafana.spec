@@ -65,6 +65,7 @@ yarn install
 
 %install
 install -d -p %{buildroot}%{_datadir}/%{repo}
+ls -hal tmp/
 cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
 cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
