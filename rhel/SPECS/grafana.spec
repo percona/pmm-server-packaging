@@ -21,7 +21,7 @@ Summary:        Grafana is an open source, feature rich metrics dashboard and gr
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v6.7.3.el7.tar.gz
+#Source2:        grafana-node_modules-v6.7.3.el7.tar.gz
 Source4:        percona-favicon.ico
 Patch0:         grafana-6.7.3-fav-icon.patch
 Patch1:         grafana-6.7.3-share-panel.patch
@@ -59,6 +59,7 @@ export GOPATH="$(pwd)/_build"
 export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 %gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
 %gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
+yarn install
 /usr/bin/node --max-old-space-size=4500 /usr/bin/npm --verbose run build
 
 %install
