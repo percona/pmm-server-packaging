@@ -23,8 +23,8 @@ URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        grafana-node_modules-v6.5.1.el7.tar.gz
 Source4:        percona-favicon.ico
-Patch0:         grafana-5.4.2-change-icon.patch
-Patch1:         grafana-6.3.6-share-panel.patch
+Patch0:         grafana-7.6.3-fav-icon.patch
+Patch1:         grafana-7.6.3-share-panel.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
