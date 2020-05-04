@@ -21,7 +21,6 @@ Summary:        Grafana is an open source, feature rich metrics dashboard and gr
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-#Source2:        grafana-node_modules-v6.7.3.el7.tar.gz
 Source2:        percona-favicon.ico
 Patch0:         grafana-6.7.3-fav-icon.patch
 Patch1:         grafana-6.7.3-share-panel.patch
@@ -77,7 +76,7 @@ else
  cp -rpav bin/* tmp/bin/
 fi
 
-install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
+install -m 644 %{SOURCE2} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
