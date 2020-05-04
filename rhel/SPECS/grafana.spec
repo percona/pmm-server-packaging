@@ -84,8 +84,8 @@ install -d -p %{buildroot}%{_bindir}
 cp tmp/bin/%{repo}-cli %{buildroot}%{_bindir}/
 
 install -d -p %{buildroot}%{_sysconfdir}/%{repo}
-cp tmp/conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
-mv tmp/conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
+cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
+mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
 
 %if  0%{?rhel} == 6
 mkdir -p %{buildroot}%{_initddir}/
