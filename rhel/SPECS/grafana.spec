@@ -98,8 +98,9 @@ install -d -p %{buildroot}/var/log/%{repo}
 
 %check
 export GOPATH="$(pwd)/_build"
+make test
 #go test ./pkg/api
-go test ./pkg/bus
+#go test ./pkg/bus
 #go test ./pkg/components/apikeygen
 #go test ./pkg/events
 #go test ./pkg/models
