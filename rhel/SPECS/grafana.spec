@@ -65,11 +65,10 @@ yarn install
 
 %install
 install -d -p %{buildroot}%{_datadir}/%{repo}
-ls -hal tmp/
-cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/tools %{buildroot}%{_datadir}/%{repo}
+cp -rpav conf %{buildroot}%{_datadir}/%{repo}
+cp -rpav public %{buildroot}%{_datadir}/%{repo}
+cp -rpav scripts %{buildroot}%{_datadir}/%{repo}
+cp -rpav tools %{buildroot}%{_datadir}/%{repo}
 
 if [ -d tmp/bin ]; then
  cp -rpav bin/* tmp/bin/
