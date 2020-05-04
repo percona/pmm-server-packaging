@@ -38,7 +38,6 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-#%setup -q -a 2 -n %{repo}-%{version}
 %setup -q -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
@@ -98,16 +97,6 @@ install -d -p %{buildroot}/var/log/%{repo}
 %check
 export GOPATH="$(pwd)/_build"
 make test
-#go test ./pkg/api
-#go test ./pkg/bus
-#go test ./pkg/components/apikeygen
-#go test ./pkg/events
-#go test ./pkg/models
-#go test ./pkg/plugins
-#go test ./pkg/services/sqlstore
-#go test ./pkg/services/sqlstore/migrations
-#go test ./pkg/setting
-#go test ./pkg/util
 
 %files
 %defattr(-, grafana, grafana, -)
