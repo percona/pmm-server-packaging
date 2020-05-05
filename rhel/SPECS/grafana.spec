@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v6.5.1
+%global commit          v6.7.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
@@ -15,16 +15,15 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        6.5.1
-Release:        4%{?dist}
+Version:        6.7.3
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        grafana-node_modules-v6.5.1.el7.tar.gz
-Source4:        percona-favicon.ico
-Patch0:         grafana-5.4.2-change-icon.patch
-Patch1:         grafana-6.3.6-share-panel.patch
+Source2:        percona-favicon.ico
+Patch0:         grafana-6.7.3-fav-icon.patch
+Patch1:         grafana-6.7.3-share-panel.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
@@ -39,9 +38,9 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%setup -q -a 2 -n %{repo}-%{version}
-%patch0 -p 0
-%patch1 -p 0 
+%setup -q -n %{repo}-%{version}
+%patch0 -p 1
+%patch1 -p 1
 rm -rf Godeps
 
 %build
@@ -54,19 +53,20 @@ mv vendor/gopkg.in   _build/src/
 
 mkdir -p ./_build/src/github.com/grafana
 ln -s $(pwd) ./_build/src/github.com/grafana/grafana
-export GOPATH=$(pwd)/_build:%{gopath}
+export GOPATH="$(pwd)/_build"
 
 export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 %gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
 %gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
-/usr/bin/node --max-old-space-size=4500 /usr/bin/grunt --verbose --pkgVer=%{version} release
+yarn install
+npm --verbose run build
 
 %install
 install -d -p %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/conf %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/public %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/scripts %{buildroot}%{_datadir}/%{repo}
-cp -rpav tmp/tools %{buildroot}%{_datadir}/%{repo}
+cp -rpav conf %{buildroot}%{_datadir}/%{repo}
+cp -rpav public %{buildroot}%{_datadir}/%{repo}
+cp -rpav scripts %{buildroot}%{_datadir}/%{repo}
+cp -rpav tools %{buildroot}%{_datadir}/%{repo}
 
 if [ -d tmp/bin ]; then
  cp -rpav bin/* tmp/bin/
@@ -75,7 +75,7 @@ else
  cp -rpav bin/* tmp/bin/
 fi
 
-install -m 644 %{SOURCE4} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
+install -m 644 %{SOURCE2} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
 
 install -d -p %{buildroot}%{_sbindir}
 cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
@@ -83,8 +83,8 @@ install -d -p %{buildroot}%{_bindir}
 cp tmp/bin/%{repo}-cli %{buildroot}%{_bindir}/
 
 install -d -p %{buildroot}%{_sysconfdir}/%{repo}
-cp tmp/conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
-mv tmp/conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
+cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
+mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
 
 %if  0%{?rhel} == 6
 mkdir -p %{buildroot}%{_initddir}/
@@ -95,17 +95,8 @@ install -d -p %{buildroot}%{_sharedstatedir}/%{repo}
 install -d -p %{buildroot}/var/log/%{repo}
 
 %check
-export GOPATH=$(pwd)/_build:%{gopath}
-#go test ./pkg/api
-go test ./pkg/bus
-#go test ./pkg/components/apikeygen
-#go test ./pkg/events
-#go test ./pkg/models
-#go test ./pkg/plugins
-#go test ./pkg/services/sqlstore
-#go test ./pkg/services/sqlstore/migrations
-#go test ./pkg/setting
-#go test ./pkg/util
+export GOPATH="$(pwd)/_build"
+make test
 
 %files
 %defattr(-, grafana, grafana, -)
@@ -130,6 +121,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Wed Apr 29 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.3-1
+- PMM-5549 update Grafana v.6.7.3
+
 * Mon Mar 23 2020 Alexander Tymchuk <alexander.tymchuk@percona.com> - 6.5.1-4
 - PMM-4252 Better resolution favicon
 
