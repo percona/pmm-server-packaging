@@ -2,6 +2,13 @@ diff --git a/public/app/features/dashboard/components/ShareModal/ShareSnapshot.t
 index 13f22fc7d4..df671890c8 100644
 --- a/public/app/features/dashboard/components/ShareModal/ShareSnapshot.tsx
 +++ b/public/app/features/dashboard/components/ShareModal/ShareSnapshot.tsx
+@@ -1,5 +1,5 @@
+ import React, { PureComponent } from 'react';
+-import { Button, ClipboardButton, Input, LinkButton, Select } from '@grafana/ui';
++import { Button, ClipboardButton, Input, Select } from '@grafana/ui';
+ import { AppEvents, SelectableValue } from '@grafana/data';
+ import { getBackendSrv } from '@grafana/runtime';
+ import { DashboardModel, PanelModel } from 'app/features/dashboard/state';
 @@ -13,6 +13,7 @@ const expireOptions: Array<SelectableValue<number>> = [
    { label: '1 Hour', value: 60 * 60 },
    { label: '1 Day', value: 60 * 60 * 24 },
