@@ -121,6 +121,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Wed May  6 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-2
+- PMM-5882 Delete Snapshot throws an Error
+
 * Wed Apr 29 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.3-1
 - PMM-5549 update Grafana v.6.7.3
 
