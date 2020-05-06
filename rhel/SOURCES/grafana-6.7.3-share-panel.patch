@@ -20,8 +20,8 @@ index 13f22fc7d4..df671890c8 100644
 @@ -44,9 +45,9 @@ export class ShareSnapshot extends PureComponent<Props, State> {
        isLoading: false,
        step: 1,
-       selectedExpireOption: expireOptions[0],
--      snapshotExpires: expireOptions[0].value,
+       selectedExpireOption: expireOptions[4],
+-      snapshotExpires: expireOptions[4].value,
 +      snapshotExpires: 7776000,
        snapshotName: props.dashboard.title,
 -      timeoutSeconds: 4,
