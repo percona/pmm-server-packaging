@@ -39,7 +39,7 @@ index 13f22fc7d4..df671890c8 100644
 -            <strong>strip sensitive data</strong> like queries (metric, template and annotation) and panel links,
 -            leaving only the visible metric data and series names embedded into your dashboard.
 +            A snapshot is a way to securely share your dashboard with Percona. When created, we{' '}
-+            <strong>strip sensitive data</strong>
++            <strong>strip sensitive data </strong>
 +            like queries (metrics, template variables, and annotations) along with panel links. The shared dashboard
 +            will only be available for viewing by Percona Engineers, and the content on the dashboard will assist
 +            Percona Engineers in troubleshooting your case.
@@ -65,7 +65,7 @@ index 13f22fc7d4..df671890c8 100644
 +            </ul>
 +          </p>
 +          <p className="share-modal-info-text">
-+            <strong>What to do next:</strong>
++            <strong>What to do next: </strong>
 +            After clicking Share with Percona, wait for the dashboard to be generated, and you will be provided a unique
 +            URL that then needs to be communicated to Percona via your ticket.
            </p>
