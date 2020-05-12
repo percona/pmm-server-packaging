@@ -13,9 +13,10 @@
 %global commit		8f3d007617941033867aea6a134c48b39142427f
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         15
+%define release         16
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
+# the line below is sed'ed by build/bin/build-server-rpm to set a correct version
 %define full_pmm_version 2.0.0
 
 %global install_golang 0
@@ -61,6 +62,7 @@ install -d -p %{buildroot}%{_bindir}
 install -d -p %{buildroot}%{_sbindir}
 install -p -m 0755 bin/pmm-managed %{buildroot}%{_sbindir}/pmm-managed
 install -p -m 0755 bin/pmm-managed-init %{buildroot}%{_sbindir}/pmm-managed-init
+install -p -m 0755 bin/pmm-managed-starlark %{buildroot}%{_sbindir}/pmm-managed-starlark
 
 
 %files
@@ -68,9 +70,13 @@ install -p -m 0755 bin/pmm-managed-init %{buildroot}%{_sbindir}/pmm-managed-init
 %doc src/%{provider_prefix}/README.md
 %{_sbindir}/pmm-managed
 %{_sbindir}/pmm-managed-init
+%{_sbindir}/pmm-managed-starlark
 
 
 %changelog
+* Tue May 12 2020 Alexey Palazhchenko <alexey.palazhchenko@percona.com> - 2.0.0-16
+- added pmm-managed-starlark
+
 * Tue Feb 11 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.0.0-14
 - added pmm-managed-init
 
