@@ -20,6 +20,7 @@
 
 %global install_golang 0
 
+# the line below is sed'ed by build/bin/build-server-rpm to set a correct version
 %define full_pmm_version 2.0.0
 
 Name:           percona-qan-api2
