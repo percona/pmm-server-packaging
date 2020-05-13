@@ -13,7 +13,7 @@
 
 Name:           percona-%{repo}
 Version:        0.20.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -50,6 +50,9 @@ install -D -p -m 0755 ./%{repo}  %{buildroot}%{_sbindir}/%{repo}
 install -D -p -m 0755 ./amtool %{buildroot}%{_bindir}/amtool
 install -d %{buildroot}%{_datadir}/%{repo}
 install -d %{buildroot}%{_sharedstatedir}/%{repo}
+
+
+%post
 install -d -m 0755 -o pmm -g pmm /srv/alertmanager
 
 
@@ -61,6 +64,9 @@ install -d -m 0755 -o pmm -g pmm /srv/alertmanager
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
 
 %changelog
+* Wed May 13 2020 Andrii Skomorokhov <andrii.skomorokhov@percona.com> - 0.20.0-4
+- PMM-5924 Added post section.
+
 * Wed May 13 2020 Andrii Skomorokhov <andrii.skomorokhov@percona.com> - 0.20.0-2
 - PMM-5924 Create data dir.
 
