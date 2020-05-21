@@ -123,6 +123,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Thu May 21 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-3
+- PMM-5906 Remove Update page
+
 * Wed May  6 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-2
 - PMM-5882 Delete Snapshot throws an Error
 
