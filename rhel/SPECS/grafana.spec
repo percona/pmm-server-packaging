@@ -16,7 +16,7 @@
 
 Name:           percona-%{repo}
 Version:        6.7.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -24,6 +24,7 @@ Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.
 Source2:        percona-favicon.ico
 Patch0:         grafana-6.7.3-fav-icon.patch
 Patch1:         grafana-6.7.3-share-panel.patch
+Patch2:         grafana-6.7.3-remove-update-tab.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
@@ -41,6 +42,7 @@ Graphite, InfluxDB & OpenTSDB.
 %setup -q -n %{repo}-%{version}
 %patch0 -p 1
 %patch1 -p 1
+%patch2 -p 1
 rm -rf Godeps
 
 %build
@@ -121,6 +123,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Thu May 21 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-3
+- PMM-5906 Remove Update page
+
 * Wed May  6 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-2
 - PMM-5882 Delete Snapshot throws an Error
 
