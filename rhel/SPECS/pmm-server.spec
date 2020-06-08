@@ -108,7 +108,7 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
-* Fri Jun  5 2018 Mykyta Solomko <mykyta.solomko@percona.com> - 1.12.0-13
+* Fri Jun  5 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.12.0-13
 - PMM-5813 build password-page per installation type (OVF/AMI/Docker)
 
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
