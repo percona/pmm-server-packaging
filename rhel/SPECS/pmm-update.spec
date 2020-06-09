@@ -83,7 +83,7 @@ install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 %changelog
 
 * Tue Jun 09 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.7.0-33
-- https://per.co.na/pmm/2.6.1
+- https://per.co.na/pmm/2.7.0
 
 * Mon May 18 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.6.1-32
 - https://per.co.na/pmm/2.6.1
