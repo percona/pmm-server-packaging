@@ -11,7 +11,7 @@
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      @@pmm_commit@@
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
-%define release         19
+%define release         20
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -61,6 +61,7 @@ cp -pav ./entrypoint.sh %{buildroot}%{_datadir}/%{name}/entrypoint.sh
 cp -pav ./landing-page/img/pmm-logo.svg %{buildroot}%{_datadir}/%{name}/landing-page/img/pmm-logo.svg
 cp -pav ./installation-wizard-page/build %{buildroot}%{_datadir}/%{name}/installation-wizard-page
 cp -pav ./%{pmm_repo}-%{pmm_commit}/api/swagger %{buildroot}%{_datadir}/%{name}/swagger
+cp -pav ./local-rss.xml %{buildroot}%{_datadir}/%{name}/local-rss.xml
 rm -rf %{pmm_repo}-%{pmm_commit}
 
 
@@ -77,6 +78,9 @@ rm -rf %{pmm_repo}-%{pmm_commit}
 
 
 %changelog
+* Fri Jun 19 2020 Andrii Skomorokhov <andrii.sokmorokhov@percona.com> - 2.7.1-1
+- PMM-6153 PMM 2.7 Server does not work in fully isolated from internet environment
+
 * Thu Apr 11 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-4
 - PMM-3606 get the latest version of Swagger
 
