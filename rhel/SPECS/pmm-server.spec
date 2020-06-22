@@ -9,7 +9,7 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.12.0
+Version:	1.17.4
 Release:	20.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
@@ -109,7 +109,7 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
-* Fri Jun  5 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.12.0-20
+* Fri Jun  5 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.17.4-20
 - PMM-5813 build password-page per installation type (OVF/AMI/Docker)
 
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
