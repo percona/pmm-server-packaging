@@ -79,7 +79,7 @@ rm -rf %{pmm_repo}-%{pmm_commit}
 
 %changelog
 * Fri Jun 19 2020 Andrii Skomorokhov <andrii.sokmorokhov@percona.com> - 2.7.1-1
-- PMM-6153 PMM 2.7 Server does not work in fully isolated from internet environment
+- PMM-6153 PMM 2.7 nginx restarts when there is no outbound internet connectivity
 
 * Thu Apr 11 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-4
 - PMM-3606 get the latest version of Swagger
