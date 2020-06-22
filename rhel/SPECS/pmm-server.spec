@@ -28,9 +28,11 @@ Requires(preun): systemd
 Requires(postun): systemd
 %endif
 
+
 %description
 Percona Monitoring and Management (PMM) Server.
 See the PMM docs for more information.
+
 
 %prep
 %setup -q -n %{repo}-%{commit}
@@ -39,8 +41,10 @@ sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml promethe
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
 
+
 %build
 make build-password-page
+
 
 %install
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
@@ -81,8 +85,10 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 /usr/bin/systemd-tmpfiles --create
 %systemd_post node_exporter.service
 
+
 %preun
 %systemd_preun node_exporter.service
+
 
 %postun
 %systemd_postun node_exporter.service
