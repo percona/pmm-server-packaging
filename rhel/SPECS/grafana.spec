@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v6.7.3
+%global commit          v6.7.4
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
@@ -15,16 +15,16 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        6.7.3
-Release:        4%{?dist}
+Version:        6.7.4
+Release:        2%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        percona-favicon.ico
-Patch0:         grafana-6.7.3-fav-icon.patch
-Patch1:         grafana-6.7.3-share-panel.patch
-Patch2:         grafana-6.7.3-remove-update-tab.patch
+Patch0:         grafana-6.7.4-fav-icon.patch
+Patch1:         grafana-6.7.4-share-panel.patch
+Patch2:         grafana-6.7.4-remove-update-tab.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
@@ -123,8 +123,11 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
-* Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.3-4
+* Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.4-2
 - PMM-5645 Built using Golang 1.14
+
+* Thu Jun  4 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.4-1
+- PMM-6009 Update Grafana to 6.7.4; Fixes CVE-2020-13379
 
 * Thu May 21 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-3
 - PMM-5906 Remove Update page
