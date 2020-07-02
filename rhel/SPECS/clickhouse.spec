@@ -6,7 +6,7 @@
 
 Name:           percona-clickhouse
 Version:        19.7.5.27
-Release:        stable%{?dist}
+Release:        stable-1%{?dist}
 Summary:        A free analytic DBMS for big data
 Group:          Applications/Databases
 License:        Apache-2.0
@@ -168,6 +168,9 @@ exit 0
 
 
 %changelog
+* Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 19.7.5.27-stable-1
+- PMM-5645 Built using Golang 1.14
+
 * Thu Jun 27 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 19.7.5.27-stable
 - PMM-4265 Clickhouse update
 
