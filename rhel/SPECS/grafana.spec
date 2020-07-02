@@ -16,7 +16,7 @@
 
 Name:           percona-%{repo}
 Version:        6.7.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -123,6 +123,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.3-4
+- PMM-5645 Built using Golang 1.14
+
 * Thu May 21 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 6.7.3-3
 - PMM-5906 Remove Update page
 
