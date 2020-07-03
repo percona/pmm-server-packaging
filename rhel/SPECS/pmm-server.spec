@@ -9,8 +9,8 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.12.0
-Release:	12.%{build_timestamp}.%{shortcommit}%{?dist}
+Version:	1.17.4
+Release:	20.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -28,6 +28,7 @@ Requires(preun): systemd
 Requires(postun): systemd
 %endif
 
+
 %description
 Percona Monitoring and Management (PMM) Server.
 See the PMM docs for more information.
@@ -39,6 +40,11 @@ sed -i "s/ENV_SERVER_USER/${SERVER_USER:-pmm}/g" prometheus.yml prometheus1.yml
 sed -i "s/ENV_SERVER_PASSWORD/${SERVER_PASSWORD:-pmm}/g" prometheus.yml prometheus1.yml
 echo "${SERVER_USER:-pmm}:$(openssl passwd -apr1 ${SERVER_PASSWORD:-pmm})" > .htpasswd
 sed -i "s/v[0-9].[0-9].[0-9]/v%{version}/" landing-page/index.html
+
+
+%build
+make build-password-page
+
 
 %install
 install -d %{buildroot}%{_sysconfdir}/nginx/conf.d
@@ -79,8 +85,10 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 /usr/bin/systemd-tmpfiles --create
 %systemd_post node_exporter.service
 
+
 %preun
 %systemd_preun node_exporter.service
+
 
 %postun
 %systemd_postun node_exporter.service
@@ -107,6 +115,9 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
+* Fri Jun  5 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.17.4-20
+- PMM-5813 build password-page per installation type (OVF/AMI/Docker)
+
 * Mon Jun 18 2018 Mykola Marzhan <mykola.marzhan@percona.com> - 1.12.0-11
 - PMM-2629 add prometheus1 config
 
