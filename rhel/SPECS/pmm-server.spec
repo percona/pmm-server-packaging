@@ -10,7 +10,7 @@
 
 Name:		%{repo}
 Version:	1.17.4
-Release:	20.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	21.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
