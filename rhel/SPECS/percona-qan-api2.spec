@@ -15,7 +15,7 @@
 %global commit          376dbed06e403faad1b444f99ab3e1e28ac7687e
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         14
+%define release         15
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
@@ -71,6 +71,9 @@ install -p -m 0755 bin/qan-api2 %{buildroot}%{_sbindir}/%{name}
 %attr(0755, root, root) %{_sbindir}/%{name}
 
 %changelog
+* Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.0.0-15
+- PMM-5645 built using Golang 1.14
+
 * Tue Mar 19 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 2.0.0-4
 - PMM-3681 Remove old qan-api and move qan-api2 in feature builds.
 

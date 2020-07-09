@@ -13,7 +13,7 @@
 
 Name:           percona-%{repo}
 Version:        0.20.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
@@ -60,5 +60,8 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo}
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
 
 %changelog
+* Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 0.20.0-3
+- PMM-5645 built using Golang 1.14
+
 * Fri Mar 27 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 0.20.0
 - Init version
