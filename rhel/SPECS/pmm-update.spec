@@ -81,6 +81,9 @@ install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 # Specifically, the change date is ignored – RPM's "Buildtime" is used instead.
 
 %changelog
+* Mon Jul 13 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.9.0-36
+- https://per.co.na/pmm/2.9.0
+
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.6.1-35
 - PMM-5645 built using Golang 1.14
 
