@@ -10,7 +10,9 @@
 %global repo		dbaas-controller
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		41d72afe43a88f522bdd35a4281a447424f18055
+# commit value is dynamic, see build script:
+# https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
+%global commit		0000000000000000000000000000000000000000
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %define release         1
@@ -38,8 +40,9 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -n %{repo}-%{commit}
-mkdir -p src/%{provider}.%{provider_tld}/%{project}
-ln -s $(pwd) src/%{provider_prefix}
+mkdir -p src/github.com/percona-platform
+ln -s $(pwd) src/github.com/percona-platform/dbaas-controller
+
 
 
 %build
