@@ -10,7 +10,7 @@
 %global repo		dbaas-controller
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		54f0fc7b6f56c8d7b93e053ee73a7c0f2fc6739d
+%global commit		41d72afe43a88f522bdd35a4281a447424f18055
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %define release         1
