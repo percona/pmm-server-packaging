@@ -57,7 +57,7 @@ install -p -m 0755 bin/dbaas-controller %{buildroot}%{_sbindir}/dbaas-controller
 
 
 %files
-#%license src/%{provider_prefix}/LICENSE
+%license src/%{provider_prefix}/LICENSE
 %doc src/%{provider_prefix}/README.md
 %{_sbindir}/dbaas-controller
 
