@@ -2,32 +2,32 @@
 %global _dwz_low_mem_die_limit 0
 
 # do not strip debug symbols
-%global debug_package   %{nil}
+%global debug_package     %{nil}
 
-%global provider	github
-%global provider_tld	com
-%global project		percona-platform
-%global repo		dbaas-controller
-%global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
-%global import_path	%{provider_prefix}
+%global provider          github
+%global provider_tld      com
+%global project           percona-platform
+%global repo              dbaas-controller
+%global provider_prefix   %{provider}.%{provider_tld}/%{project}/%{repo}
+%global import_path       %{provider_prefix}
 # commit value is dynamic, see build script:
 # https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
-%global commit		0000000000000000000000000000000000000000
-%global shortcommit	%(c=%{commit}; echo ${c:0:7})
-%define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         1
-%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
+%global commit            0000000000000000000000000000000000000000
+%global shortcommit       %(c=%{commit}; echo ${c:0:7})
+%define build_timestamp   %(date -u +"%y%m%d%H%M")
+%define release           1
+%define rpm_release       %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
-%global install_golang 0
+%global install_golang    0
 
-Name:		%{repo}
-Version:	%{version}
-Release:	%{rpm_release}
-Summary:	Simplified API for managing Percona Kubernetes Operators
+Name:       %{repo}
+Version:    %{version}
+Release:    %{rpm_release}
+Summary:    Simplified API for managing Percona Kubernetes Operators
 
-License:	AGPLv3
-URL:		https://%{provider_prefix}
-Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+License:    AGPLv3
+URL:        https://%{provider_prefix}
+Source0:    https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 %if %{install_golang}
 BuildRequires:   golang >= 1.14.0
