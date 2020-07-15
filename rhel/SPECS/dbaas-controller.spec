@@ -40,13 +40,8 @@ See the PMM docs for more information.
 
 %prep
 %setup -q -n %{repo}-%{commit}
-mkdir -p src/github.com/percona-platform
-ln -s $(pwd) src/github.com/percona-platform/dbaas-controller
-
-
 
 %build
-cd src/github.com/percona-platform/dbaas-controller
 make release
 
 
