@@ -4,12 +4,6 @@
 # do not strip debug symbols
 %global debug_package     %{nil}
 
-%global provider          github
-%global provider_tld      com
-%global project           percona-platform
-%global repo              dbaas-controller
-%global provider_prefix   %{provider}.%{provider_tld}/%{project}/%{repo}
-%global import_path       %{provider_prefix}
 # commit value is dynamic, see build script:
 # https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
 %global commit            0000000000000000000000000000000000000000
@@ -20,14 +14,14 @@
 
 %global install_golang    0
 
-Name:       %{repo}
+Name:       dbaas-controller
 Version:    %{version}
 Release:    %{rpm_release}
 Summary:    Simplified API for managing Percona Kubernetes Operators
 
 License:    AGPLv3
-URL:        https://%{provider_prefix}
-Source0:    https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+URL:        https://github.com/percona-platform/dbaas-controller
+Source0:    https://github.com/percona-platform/dbaas-controller/archive/%{commit}/dbaas-controller-%{shortcommit}.tar.gz
 
 %if %{install_golang}
 BuildRequires:   golang >= 1.14.0
@@ -39,7 +33,7 @@ See the PMM docs for more information.
 
 
 %prep
-%setup -q -n %{repo}-%{commit}
+%setup -q -n dbaas-controller-%{commit}
 
 %build
 make release
@@ -52,8 +46,8 @@ install -p -m 0755 bin/dbaas-controller %{buildroot}%{_sbindir}/dbaas-controller
 
 
 %files
-%license src/%{provider_prefix}/LICENSE
-%doc src/%{provider_prefix}/README.md
+%license LICENSE
+%doc README.md
 %{_sbindir}/dbaas-controller
 
 
