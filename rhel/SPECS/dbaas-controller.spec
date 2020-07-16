@@ -35,6 +35,7 @@ See the PMM docs for more information.
 %prep
 %setup -q -n dbaas-controller-%{commit}
 
+
 %build
 make release
 
