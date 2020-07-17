@@ -37,6 +37,10 @@ See the PMM docs for more information.
 
 
 %build
+export PMM_RELEASE_VERSION=%{full_pmm_version}
+export PMM_RELEASE_FULLCOMMIT=%{commit}
+export PMM_RELEASE_BRANCH=""
+
 make release
 
 
