@@ -1,10 +1,4 @@
 %global debug_package   %{nil}
-%global provider        github
-%global provider_tld    com
-%global project         grafana
-%global repo            grafana
-# https://github.com/grafana/grafana
-%global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
 %global commit          v7.1.0
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
@@ -14,13 +8,13 @@
 %define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**};
 %endif
 
-Name:           percona-%{repo}
+Name:           percona-grafana
 Version:        7.1.0
 Release:        q%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
-URL:            https://%{import_path}
-Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+URL:            https://github.com/grafana/grafana
+Source0:        https://github.com/grafana/grafana/archive/%{commit}/grafana-%{shortcommit}.tar.gz
 Source2:        percona-favicon.ico
 #Patch0:         grafana-6.7.4-fav-icon.patch
 #Patch1:         grafana-6.7.4-share-panel.patch
@@ -39,7 +33,7 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%setup -q -n %{repo}-%{version}
+%setup -q -n grafana-%{version}
 #%patch0 -p 1
 #%patch1 -p 1
 #%patch2 -p 1
@@ -65,11 +59,11 @@ export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit
 make build
 
 %install
-install -d -p %{buildroot}%{_datadir}/%{repo}
-cp -rpav conf %{buildroot}%{_datadir}/%{repo}
-cp -rpav public %{buildroot}%{_datadir}/%{repo}
-cp -rpav scripts %{buildroot}%{_datadir}/%{repo}
-cp -rpav tools %{buildroot}%{_datadir}/%{repo}
+install -d -p %{buildroot}%{_datadir}/grafana
+cp -rpav conf %{buildroot}%{_datadir}/grafana
+cp -rpav public %{buildroot}%{_datadir}/grafana
+cp -rpav scripts %{buildroot}%{_datadir}/grafana
+cp -rpav tools %{buildroot}%{_datadir}/grafana
 
 if [ -d tmp/bin ]; then
  cp -rpav bin/* tmp/bin/
@@ -81,21 +75,21 @@ fi
 install -m 644 %{SOURCE2} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
 
 install -d -p %{buildroot}%{_sbindir}
-cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
+cp tmp/bin/grafana-server %{buildroot}%{_sbindir}/
 install -d -p %{buildroot}%{_bindir}
-cp tmp/bin/%{repo}-cli %{buildroot}%{_bindir}/
+cp tmp/bin/grafana-cli %{buildroot}%{_bindir}/
 
-install -d -p %{buildroot}%{_sysconfdir}/%{repo}
-cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
-mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
+install -d -p %{buildroot}%{_sysconfdir}/grafana
+cp conf/sample.ini %{buildroot}%{_sysconfdir}/grafana/grafana.ini
+mv conf/ldap.toml %{buildroot}%{_sysconfdir}/grafana/
 
 %if  0%{?rhel} == 6
 mkdir -p %{buildroot}%{_initddir}/
 install -p -m 0644 packaging/rpm/init.d/grafana-server %{buildroot}%{_initddir}/
 %endif
 
-install -d -p %{buildroot}%{_sharedstatedir}/%{repo}
-install -d -p %{buildroot}/var/log/%{repo}
+install -d -p %{buildroot}%{_sharedstatedir}/grafana
+install -d -p %{buildroot}/var/log/grafana
 
 %check
 export GOPATH="$(pwd)/_build"
@@ -103,18 +97,18 @@ make test
 
 %files
 %defattr(-, grafana, grafana, -)
-%{_datadir}/%{repo}
+%{_datadir}/grafana
 %doc *.md
 %doc docs
-%attr(0755, root, root) %{_sbindir}/%{repo}-server
-%attr(0755, root, root) %{_bindir}/%{repo}-cli
-%{_sysconfdir}/%{repo}/grafana.ini
-%{_sysconfdir}/%{repo}/ldap.toml
+%attr(0755, root, root) %{_sbindir}/grafana-server
+%attr(0755, root, root) %{_bindir}/grafana-cli
+%{_sysconfdir}/grafana/grafana.ini
+%{_sysconfdir}/grafana/ldap.toml
 %if 0%{?rhel} == 6
 %attr(-, root, root) %{_initddir}/grafana-server
 %endif
-%dir %{_sharedstatedir}/%{repo}
-%dir /var/log/%{repo}
+%dir %{_sharedstatedir}/grafana
+%dir /var/log/grafana
 
 %pre
 getent group grafana >/dev/null || groupadd -r grafana
