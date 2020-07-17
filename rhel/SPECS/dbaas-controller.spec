@@ -4,16 +4,17 @@
 # do not strip debug symbols
 %global debug_package     %{nil}
 
-# the line below is sed'ed by build-server-rpm script to set a correct version
-# https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
+# the lines below are sed'ed by build-server-rpm script to set a correct version
+# see: https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
 %global commit            0000000000000000000000000000000000000000
+%define full_pmm_version 2.0.0
+
 %global shortcommit       %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp   %(date -u +"%y%m%d%H%M")
 %define release           1
 %define rpm_release       %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 # the line below is sed'ed by build/bin/build-server-rpm to set a correct version
-%define full_pmm_version 2.0.0
 
 %global install_golang    0
 
