@@ -56,7 +56,10 @@ export GOPATH="$(pwd)/_build"
 #%gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
 #yarn install
 #npm --verbose run build
-make
+make build-go
+
+make deps-js
+make build-js
 
 %install
 install -d -p %{buildroot}%{_datadir}/grafana
