@@ -5,7 +5,7 @@
 %global repo            grafana
 # https://github.com/grafana/grafana
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v6.7.4
+%global commit          v7.1.0
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
@@ -15,16 +15,16 @@
 %endif
 
 Name:           percona-%{repo}
-Version:        6.7.4
-Release:        2%{?dist}
+Version:        7.1.0
+Release:        q%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 Source2:        percona-favicon.ico
-Patch0:         grafana-6.7.4-fav-icon.patch
-Patch1:         grafana-6.7.4-share-panel.patch
-Patch2:         grafana-6.7.4-remove-update-tab.patch
+#Patch0:         grafana-6.7.4-fav-icon.patch
+#Patch1:         grafana-6.7.4-share-panel.patch
+#Patch2:         grafana-6.7.4-remove-update-tab.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
@@ -40,28 +40,29 @@ Graphite, InfluxDB & OpenTSDB.
 
 %prep
 %setup -q -n %{repo}-%{version}
-%patch0 -p 1
-%patch1 -p 1
-%patch2 -p 1
+#%patch0 -p 1
+#%patch1 -p 1
+#%patch2 -p 1
 rm -rf Godeps
 
 %build
 mkdir -p _build/src
-mv vendor/google.golang.org _build/src/
-mv vendor/cloud.google.com _build/src/
-mv vendor/github.com _build/src/
-mv vendor/golang.org _build/src/
-mv vendor/gopkg.in   _build/src/
+#mv vendor/google.golang.org _build/src/
+#mv vendor/cloud.google.com _build/src/
+#mv vendor/github.com _build/src/
+#mv vendor/golang.org _build/src/
+#mv vendor/gopkg.in   _build/src/
 
-mkdir -p ./_build/src/github.com/grafana
-ln -s $(pwd) ./_build/src/github.com/grafana/grafana
+#mkdir -p ./_build/src/github.com/grafana
+#ln -s $(pwd) ./_build/src/github.com/grafana/grafana
 export GOPATH="$(pwd)/_build"
 
 export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
-%gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
-%gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
-yarn install
-npm --verbose run build
+#%gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
+#%gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
+#yarn install
+#npm --verbose run build
+make build
 
 %install
 install -d -p %{buildroot}%{_datadir}/%{repo}
