@@ -51,7 +51,7 @@ mkdir -p _build/src
 #ln -s $(pwd) ./_build/src/github.com/grafana/grafana
 export GOPATH="$(pwd)/_build"
 
-export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
+#export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
 #%gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
 #%gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
 #yarn install
