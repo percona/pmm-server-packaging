@@ -4,7 +4,7 @@
 # do not strip debug symbols
 %global debug_package     %{nil}
 
-# commit value is dynamic, see build script:
+# the line below is sed'ed by build-server-rpm script to set a correct version
 # https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
 %global commit            0000000000000000000000000000000000000000
 %global shortcommit       %(c=%{commit}; echo ${c:0:7})
@@ -18,6 +18,8 @@
 %global install_golang    0
 
 Name:       dbaas-controller
+# the line below is sed'ed by build-server-rpm script to set a correct version
+# see: https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
 Version:    %{version}
 Release:    %{rpm_release}
 Summary:    Simplified API for managing Percona Kubernetes Operators
