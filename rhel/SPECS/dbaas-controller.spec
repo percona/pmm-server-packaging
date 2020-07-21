@@ -14,8 +14,6 @@
 %define release           1
 %define rpm_release       %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
-# the line below is sed'ed by build/bin/build-server-rpm to set a correct version
-
 %global install_golang    0
 
 Name:       dbaas-controller
