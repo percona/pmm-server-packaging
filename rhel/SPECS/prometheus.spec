@@ -7,24 +7,19 @@
 %doc %{*} \
 %endif
 
-%global provider        github
-%global provider_tld    com
-%global project         prometheus
-%global repo            prometheus
-%global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
-%global import_path     %{provider_prefix}
-%global commit          b90be6f32a33c03163d700e1452b54454ddce0ec
+%global import_path     github.com/prometheus/prometheus
+%global commit          0000000000000000000000000000000000000000
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
 
-Name:           percona-%{repo}
-Version:        2.16.0
-Release:        2%{?dist}
+Name:           percona-prometheus
+Version:        2.19.2
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
-URL:            https://%{provider_prefix}
-Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+URL:            https://github.com/prometheus/prometheus
+Source0:        https://github.com/prometheus/prometheus/archive/%{commit}/prometheus-%{shortcommit}.tar.gz
 
 %if %{install_golang}
 BuildRequires:   golang >= 1.12.0
@@ -38,7 +33,7 @@ BuildRequires:   golang >= 1.12.0
 
 
 %prep
-%setup -q -n %{repo}-%{commit}
+%setup -q -n prometheus-%{commit}
 mkdir -p ./build/src/github.com/prometheus
 ln -s $(pwd) ./build/src/github.com/prometheus/prometheus
 
@@ -53,24 +48,27 @@ make build
 
 
 %install
-install -D -p -m 0755 ./%{repo}  %{buildroot}%{_sbindir}/%{repo}
+install -D -p -m 0755 ./prometheus  %{buildroot}%{_sbindir}/prometheus
 install -D -p -m 0755 ./promtool %{buildroot}%{_bindir}/promtool
-install -d %{buildroot}%{_datadir}/%{repo}
-cp -rpa ./consoles %{buildroot}%{_datadir}/%{repo}/consoles
-cp -rpa ./console_libraries %{buildroot}%{_datadir}/%{repo}/console_libraries
-install -d %{buildroot}%{_sharedstatedir}/%{repo}
+install -d %{buildroot}%{_datadir}/prometheus
+cp -rpa ./consoles %{buildroot}%{_datadir}/prometheus/consoles
+cp -rpa ./console_libraries %{buildroot}%{_datadir}/prometheus/console_libraries
+install -d %{buildroot}%{_sharedstatedir}/prometheus
 
 
 %files
 %copying LICENSE
 %doc CHANGELOG.md CONTRIBUTING.md README.md NOTICE
 #doc Godeps/Godeps.json
-%{_sbindir}/%{repo}
+%{_sbindir}/prometheus
 %{_bindir}/promtool
-%{_datadir}/%{repo}
-%dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
+%{_datadir}/prometheus
+%dir %attr(-, nobody, nobody) %{_sharedstatedir}/prometheus
 
 %changelog
+* Wed Jul 22 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.16.0-2
+- PMM-6234 Update to Prometheus 2.19.2
+
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.16.0-2
 - PMM-5645 built using Golang 1.14
 
