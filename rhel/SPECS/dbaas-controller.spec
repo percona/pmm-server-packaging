@@ -11,7 +11,7 @@
 
 %global shortcommit       %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp   %(date -u +"%y%m%d%H%M")
-%define release           1
+%define release           2
 %define rpm_release       %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang    0
