@@ -7,7 +7,6 @@
 %doc %{*} \
 %endif
 
-%global import_path     github.com/prometheus/prometheus
 %global commit          c448ada63d83002e9c1d2c9f84e09f55a61f0ff7
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
@@ -66,7 +65,7 @@ install -d %{buildroot}%{_sharedstatedir}/prometheus
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/prometheus
 
 %changelog
-* Wed Jul 22 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.16.0-2
+* Wed Jul 22 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.19.2-1
 - PMM-6234 Update to Prometheus 2.19.2
 
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.16.0-2
