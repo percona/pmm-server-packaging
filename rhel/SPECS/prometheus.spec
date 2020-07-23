@@ -8,7 +8,7 @@
 %endif
 
 %global import_path     github.com/prometheus/prometheus
-%global commit          0000000000000000000000000000000000000000
+%global commit          c448ada63d83002e9c1d2c9f84e09f55a61f0ff7
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
