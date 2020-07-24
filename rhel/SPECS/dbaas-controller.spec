@@ -45,7 +45,10 @@ export PMM_RELEASE_VERSION=%{full_pmm_version}
 export PMM_RELEASE_FULLCOMMIT=%{commit}
 export PMM_RELEASE_BRANCH=""
 
-make release
+make release \
+-DPMM_RELEASE_VERSION=%{full_pmm_version} \
+-DPMM_RELEASE_FULLCOMMIT=%{commit} \
+-DPMM_RELEASE_FULLCOMMIT=""
 
 
 %install
