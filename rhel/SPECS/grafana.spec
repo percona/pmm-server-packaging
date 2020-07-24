@@ -102,6 +102,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Thu Jul 20 2020 Mykyta Solomko <mykyta.solomko@percona.com> -7.1.0-1
+- PMM-6270 Update Grafana to 7.1.0
+
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.4-2
 - PMM-5645 Built using Golang 1.14
 
