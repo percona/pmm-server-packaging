@@ -45,11 +45,8 @@ export PMM_RELEASE_VERSION=%{full_pmm_version}
 export PMM_RELEASE_FULLCOMMIT=%{commit}
 export PMM_RELEASE_BRANCH=""
 
-make release \
- PMM_RELEASE_VERSION=%{full_pmm_version} \
- PMM_RELEASE_FULLCOMMIT=%{commit} \
- PMM_RELEASE_BRANCH=""
-
+cd src/github.com/percona-platform/dbaas-controller
+make release
 
 %install
 install -d -p %{buildroot}%{_bindir}
