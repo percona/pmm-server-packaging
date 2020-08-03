@@ -45,7 +45,6 @@ export PMM_RELEASE_VERSION=%{full_pmm_version}
 export PMM_RELEASE_FULLCOMMIT=%{commit}
 export PMM_RELEASE_BRANCH=""
 
-# cd src/github.com/percona-platform/dbaas-controller
 make release
 
 %install
@@ -61,5 +60,5 @@ install -p -m 0755 bin/dbaas-controller %{buildroot}%{_sbindir}/dbaas-controller
 
 
 %changelog
-* Fri Jul  10 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.9.0-1
+* Fri Jul  10 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.9.0-2
 - init version
