@@ -11,7 +11,7 @@
 
 %global shortcommit       %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp   %(date -u +"%y%m%d%H%M")
-%define release           2
+%define release           1
 %define rpm_release       %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang    0
@@ -60,5 +60,5 @@ install -p -m 0755 bin/dbaas-controller %{buildroot}%{_sbindir}/dbaas-controller
 
 
 %changelog
-* Tue Aug  4 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.9.1-2
+* Tue Aug  4 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.10.0-1
 - init version
