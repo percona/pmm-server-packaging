@@ -60,5 +60,5 @@ install -p -m 0755 bin/dbaas-controller %{buildroot}%{_sbindir}/dbaas-controller
 
 
 %changelog
-* Fri Jul  10 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.9.0-2
+* Tue Aug  4 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.9.1-2
 - init version
