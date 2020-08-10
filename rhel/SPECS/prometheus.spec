@@ -13,13 +13,13 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          b90be6f32a33c03163d700e1452b54454ddce0ec
+%global commit          657ba532e42f1db8d7c77bf802378643da0d3118
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
 
 Name:           percona-%{repo}
-Version:        2.16.0
+Version:        2.19.3
 Release:        2%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
@@ -27,7 +27,7 @@ URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 %if %{install_golang}
-BuildRequires:   golang >= 1.12.0
+BuildRequires:   golang >= 1.13.0
 %endif
 
 %description
