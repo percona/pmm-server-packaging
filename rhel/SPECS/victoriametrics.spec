@@ -16,7 +16,7 @@
 %global commit          2791008e1982f30892fe86cc98888f4c4519c858
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           percona-%{repo}
+Name:           percona-victoriametrics
 Version:        1.39.4
 Release:        1%{?dist}
 Summary:        VictoriaMetrics monitoring solution and time series database
