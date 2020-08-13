@@ -13,21 +13,21 @@
 %global repo            prometheus
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          b90be6f32a33c03163d700e1452b54454ddce0ec
+%global commit          657ba532e42f1db8d7c77bf802378643da0d3118
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
 
 Name:           percona-%{repo}
-Version:        2.16.0
-Release:        2%{?dist}
+Version:        2.19.3
+Release:        1%{?dist}
 Summary:        The Prometheus monitoring system and time series database
 License:        ASL 2.0
 URL:            https://%{provider_prefix}
 Source0:        https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 %if %{install_golang}
-BuildRequires:   golang >= 1.12.0
+BuildRequires:   golang >= 1.13.0
 %endif
 
 %description
@@ -71,6 +71,9 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo}
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo}
 
 %changelog
+* Mon Aug 10 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.19.3-1
+- PMM-6355 Upgrade Prometheus version to 2.19.3
+
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 2.16.0-2
 - PMM-5645 built using Golang 1.14
 
