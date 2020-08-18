@@ -33,8 +33,6 @@ Graphite, InfluxDB & OpenTSDB.
 %setup -q -n grafana-%{version}-%{detailedcommit}
 rm -rf Godeps
 sed -i "s/unknown-dev/%{detailedcommit}/" build.go
-sed -i "s/snapshots-origin.raintank.io/snapshots-g710.percona.com/" conf/defaults.ini
-sed -i "s/snapshot.raintank.io/snapshots.percona.com/" conf/defaults.ini
 
 %build
 mkdir -p _build/src
