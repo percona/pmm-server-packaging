@@ -17,7 +17,7 @@
 %global _checkshell  /bin/bash
 
 
-Name:           percona-kubectl
+Name:           dbaas-kubectl
 Version:        1.16.8
 Release:        1%{?dist}
 Summary:        CLI client for Kubernetes
