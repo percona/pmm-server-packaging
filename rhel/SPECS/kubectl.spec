@@ -40,9 +40,6 @@ Kubernetes client tools
 %prep
 %setup -q -n kubernetes-%{commit}
 
-mkdir -p src/k8s.io/kubernetes
-mv $(ls | grep -v "^src$") src/k8s.io/kubernetes/.
-
 
 %build
 pushd src/k8s.io/kubernetes/
