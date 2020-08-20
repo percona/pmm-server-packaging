@@ -40,19 +40,6 @@ Kubernetes client tools
 %prep
 %setup -q -n kubernetes-%{commit}
 
-# src/k8s.io/kubernetes/pkg/util/certificates
-# Patch the code to remove eliptic.P224 support
-# For whatever reason:
-# https://groups.google.com/forum/#!topic/Golang-nuts/Oq4rouLEvrU
-for dir in vendor/github.com/google/certificate-transparency/go/x509 pkg/util/certificates; do
-  if [ -d "${dir}" ]; then
-    pushd ${dir}
-    sed -i "/^[^=]*$/ s/oidNamedCurveP224/oidNamedCurveP256/g" *.go
-    sed -i "/^[^=]*$/ s/elliptic\.P224/elliptic.P256/g" *.go
-    popd
-  fi
-done
-
 mkdir -p src/k8s.io/kubernetes
 mv $(ls | grep -v "^src$") src/k8s.io/kubernetes/.
 
