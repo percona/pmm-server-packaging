@@ -65,10 +65,7 @@ output_path="${KUBE_OUTPUT_BINPATH}/$(kube::golang::host_platform)"
 echo "+++ INSTALLING binaries"
 install -m 755 -d %{buildroot}%{_bindir}
 install -p -m 755 -t %{buildroot}%{_bindir} ${output_path}/kubectl
-
-echo "+++ INSTALLING bash completion"
-install -d -m 0755 %{buildroot}%{_datadir}/bash-completion/completions/
-%{buildroot}%{_bindir}/kubectl completion bash > %{buildroot}%{_datadir}/bash-completion/completions/kubectl
+mv %{buildroot}%{_bindir}/kubectl %{buildroot}%{_bindir}/dbaas-kubectl-1.16
 popd
 
 mv src/k8s.io/kubernetes/*.md .
@@ -91,8 +88,7 @@ fi
 %files
 %license LICENSE
 %doc *.md
-%{_bindir}/kubectl
-%{_datadir}/bash-completion/completions/kubectl
+%{_bindir}/dbaas-kubectl-1.16
 
 ############################################
 %changelog
