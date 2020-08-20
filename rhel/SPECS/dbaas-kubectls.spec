@@ -17,7 +17,7 @@
 %global _checkshell  /bin/bash
 
 
-Name:           dbaas-kubectl
+Name:           dbaas-kubectls
 Version:        1.16.8
 Release:        1%{?dist}
 Summary:        CLI client for Kubernetes
