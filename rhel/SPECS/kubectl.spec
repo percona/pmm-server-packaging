@@ -7,7 +7,7 @@
 %global debug_package %{nil}
 %endif
 
-%global commit                  1.16.8
+%global commit                  v1.16.8
 %global shortcommit             %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
@@ -24,7 +24,7 @@ Summary:        CLI client for Kubernetes
 License:        ASL 2.0
 URL:            https://github.com/kubernetes/kubernetes
 ExclusiveArch:  x86_64 %{arm}
-Source0:        https://github.com/kubernetes/kubernetes/archive/v%{commit}/v%{shortcommit}.tar.gz
+Source0:        https://github.com/kubernetes/kubernetes/archive/%{commit}/%{shortcommit}.tar.gz
 
 %if %{install_golang}
 BuildRequires: golang >= 1.12.0
