@@ -8,6 +8,7 @@
 %endif
 
 %global commit                  v1.16.8
+%global commit_noprefix         %(c=%{commit}; echo ${c#v})
 %global shortcommit             %(c=%{commit}; echo ${c:0:7})
 
 %global install_golang 0
@@ -38,7 +39,7 @@ Kubernetes client tools
 
 
 %prep
-%setup -q -n kubernetes-%{commit}
+%setup -q -n kubernetes-%{commit_noprefix}
 
 
 %build
