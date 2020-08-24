@@ -20,7 +20,7 @@
 
 Name:           dbaas-kubectls
 Version:        1.16.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        CLI client for Kubernetes
 License:        ASL 2.0
 URL:            https://github.com/kubernetes/kubernetes
@@ -95,6 +95,5 @@ fi
 
 ############################################
 %changelog
-* Tue Aug 11 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.16.8-1
+* Tue Aug 11 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.16.8-2
 - Initial import from Fedora Project and modifications
-
