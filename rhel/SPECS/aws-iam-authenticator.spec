@@ -10,7 +10,7 @@
 
 %global install_golang 0
 
-Name:           %{repo}
+Name:           percona-%{repo}
 Version:        0.5.1
 Release:        1%{?dist}
 Summary:        A tool to use AWS IAM credentials to authenticate to a Kubernetes cluster
