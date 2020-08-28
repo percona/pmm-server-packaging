@@ -5,9 +5,7 @@
 %global repo_aws            aws-iam-authenticator
 %global provider_prefix_aws %{provider_aws}.%{provider_tld_aws}/%{project_aws}/%{repo_aws}
 
-# the lines below are sed'ed by build-server-rpm script to set a correct version
-# see: https://github.com/Percona-Lab/pmm-submodules/blob/PMM-2.0/build/bin/build-server-rpm
-%global commit_aws          0000000000000000000000000000000000000000
+%global commit_aws          d7c0b2e9131faabb2b09dd804a35ee03822f8447
 %global shortcommit_aws     %(c=%{commit_aws}; echo ${c:0:7})
 
 %define full_pmm_version 2.0.0
