@@ -1,10 +1,8 @@
 %define debug_package %{nil}
-%global provider_aws        github
-%global provider_tld_aws    com
+
 %global project_aws         kubernetes-sigs
 %global repo_aws            aws-iam-authenticator
-%global provider_prefix_aws %{provider_aws}.%{provider_tld_aws}/%{project_aws}/%{repo_aws}
-
+%global provider_prefix_aws github.com/%{project_aws}/%{repo_aws}
 %global commit_aws          d7c0b2e9131faabb2b09dd804a35ee03822f8447
 %global shortcommit_aws     %(c=%{commit_aws}; echo ${c:0:7})
 
@@ -49,7 +47,7 @@ make build
 
 
 %install
-install -D -p -m 0755 ./aws-iam-authenticator %{buildroot}/opt/dbaas-tools/bin/aws-iam-authenticator
+install -D -p -m 0755 ./%{repo_aws} %{buildroot}/opt/dbaas-tools/bin/%{repo_aws}
 install -d %{buildroot}%{_datadir}/%{repo_aws}
 install -d %{buildroot}%{_sharedstatedir}/%{repo_aws}
 
@@ -58,7 +56,7 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo_aws}
 %copying LICENSE
 %doc CHANGELOG.md CONTRIBUTING.md README.md
 #doc Godeps/Godeps.json
-/opt/dbaas-tools/bin/aws-iam-authenticator
+/opt/dbaas-tools/bin/%{repo_aws}
 %{_datadir}/%{repo_aws}
 %dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo_aws}
 
