@@ -55,10 +55,9 @@ install -d %{buildroot}%{_sharedstatedir}/%{repo_aws}
 %files
 %copying LICENSE
 %doc CHANGELOG.md CONTRIBUTING.md README.md
-#doc Godeps/Godeps.json
 /opt/dbaas-tools/bin/%{repo_aws}
 %{_datadir}/%{repo_aws}
-%dir %attr(-, nobody, nobody) %{_sharedstatedir}/%{repo_aws}
+%{_sharedstatedir}/%{repo_aws}
 
 %changelog
 * Thu Aug 27 2020 Illia Pshonkin <illia.pshonkin@percona.com> - 0.5.1
