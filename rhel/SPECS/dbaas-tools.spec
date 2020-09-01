@@ -54,7 +54,7 @@ install -D -p -m 0755 ./dist/authenticator_linux_amd64/%{repo_aws} %{buildroot}/
 
 
 %files
-%license LICENSE.md
+%license LICENSE
 %doc CONTRIBUTING.md README.md
 /opt/dbaas-tools/bin/%{repo_aws}
 
