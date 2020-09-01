@@ -6,7 +6,7 @@
 %global install_golang 1
 
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         1
+%define release         2
 %define rpm_release     %{release}.%{build_timestamp}%{?dist}
 
 Name:           dbaas-tools
