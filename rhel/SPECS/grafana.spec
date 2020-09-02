@@ -1,12 +1,7 @@
 %global debug_package   %{nil}
-%global provider        github
-%global provider_tld    com
-%global project         grafana
-%global repo            grafana
-# https://github.com/grafana/grafana
-%global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          v6.7.4
+%global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
+%global detailedcommit  pmm-2.9.2
 
 %global install_golang 0
 
@@ -14,21 +9,17 @@
 %define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x %{?**};
 %endif
 
-Name:           percona-%{repo}
-Version:        6.7.4
-Release:        2%{?dist}
+Name:           percona-grafana
+Version:        %(c=%{commit}; echo ${c:1:7})
+Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
-URL:            https://%{import_path}
-Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source2:        percona-favicon.ico
-Patch0:         grafana-6.7.4-fav-icon.patch
-Patch1:         grafana-6.7.4-share-panel.patch
-Patch2:         grafana-6.7.4-remove-update-tab.patch
+URL:            https://github.com/percona-platform/grafana
+Source0:        https://github.com/percona-platform/grafana/archive/%{commit}-%{detailedcommit}.tar.gz
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
-BuildRequires:   golang >= 1.12.0
+BuildRequires:   golang >= 1.14.0
 %endif
 BuildRequires: nodejs-grunt-cli fontconfig
 
@@ -39,36 +30,28 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%setup -q -n %{repo}-%{version}
-%patch0 -p 1
-%patch1 -p 1
-%patch2 -p 1
+%setup -q -n grafana-%{version}-%{detailedcommit}
 rm -rf Godeps
+sed -i "s/unknown-dev/%{detailedcommit}/" build.go
 
 %build
 mkdir -p _build/src
-mv vendor/google.golang.org _build/src/
-mv vendor/cloud.google.com _build/src/
-mv vendor/github.com _build/src/
-mv vendor/golang.org _build/src/
-mv vendor/gopkg.in   _build/src/
-
-mkdir -p ./_build/src/github.com/grafana
-ln -s $(pwd) ./_build/src/github.com/grafana/grafana
 export GOPATH="$(pwd)/_build"
 
-export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
-%gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
-%gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
-yarn install
-npm --verbose run build
+#export LDFLAGS="$LDFLAGS -X main.version=%{version} -X main.commit=%{shortcommit} -X main.buildstamp=$(date '+%s') "
+#%gobuild -o ./bin/grafana-server ./pkg/cmd/grafana-server
+#%gobuild -o ./bin/grafana-cli ./pkg/cmd/grafana-cli
+make build-go
+
+make deps-js
+make build-js
 
 %install
-install -d -p %{buildroot}%{_datadir}/%{repo}
-cp -rpav conf %{buildroot}%{_datadir}/%{repo}
-cp -rpav public %{buildroot}%{_datadir}/%{repo}
-cp -rpav scripts %{buildroot}%{_datadir}/%{repo}
-cp -rpav tools %{buildroot}%{_datadir}/%{repo}
+install -d -p %{buildroot}%{_datadir}/grafana
+cp -rpav conf %{buildroot}%{_datadir}/grafana
+cp -rpav public %{buildroot}%{_datadir}/grafana
+cp -rpav scripts %{buildroot}%{_datadir}/grafana
+cp -rpav tools %{buildroot}%{_datadir}/grafana
 
 if [ -d tmp/bin ]; then
  cp -rpav bin/* tmp/bin/
@@ -77,24 +60,22 @@ else
  cp -rpav bin/* tmp/bin/
 fi
 
-install -m 644 %{SOURCE2} %{buildroot}/usr/share/grafana/public/img/percona-favicon.ico
-
 install -d -p %{buildroot}%{_sbindir}
-cp tmp/bin/%{repo}-server %{buildroot}%{_sbindir}/
+cp tmp/bin/linux-amd64/grafana-server %{buildroot}%{_sbindir}/
 install -d -p %{buildroot}%{_bindir}
-cp tmp/bin/%{repo}-cli %{buildroot}%{_bindir}/
+cp tmp/bin/linux-amd64/grafana-cli %{buildroot}%{_bindir}/
 
-install -d -p %{buildroot}%{_sysconfdir}/%{repo}
-cp conf/sample.ini %{buildroot}%{_sysconfdir}/%{repo}/grafana.ini
-mv conf/ldap.toml %{buildroot}%{_sysconfdir}/%{repo}/
+install -d -p %{buildroot}%{_sysconfdir}/grafana
+cp conf/sample.ini %{buildroot}%{_sysconfdir}/grafana/grafana.ini
+mv conf/ldap.toml %{buildroot}%{_sysconfdir}/grafana/
 
 %if  0%{?rhel} == 6
 mkdir -p %{buildroot}%{_initddir}/
 install -p -m 0644 packaging/rpm/init.d/grafana-server %{buildroot}%{_initddir}/
 %endif
 
-install -d -p %{buildroot}%{_sharedstatedir}/%{repo}
-install -d -p %{buildroot}/var/log/%{repo}
+install -d -p %{buildroot}%{_sharedstatedir}/grafana
+install -d -p %{buildroot}/var/log/grafana
 
 %check
 export GOPATH="$(pwd)/_build"
@@ -102,18 +83,18 @@ make test
 
 %files
 %defattr(-, grafana, grafana, -)
-%{_datadir}/%{repo}
+%{_datadir}/grafana
 %doc *.md
 %doc docs
-%attr(0755, root, root) %{_sbindir}/%{repo}-server
-%attr(0755, root, root) %{_bindir}/%{repo}-cli
-%{_sysconfdir}/%{repo}/grafana.ini
-%{_sysconfdir}/%{repo}/ldap.toml
+%attr(0755, root, root) %{_sbindir}/grafana-server
+%attr(0755, root, root) %{_bindir}/grafana-cli
+%{_sysconfdir}/grafana/grafana.ini
+%{_sysconfdir}/grafana/ldap.toml
 %if 0%{?rhel} == 6
 %attr(-, root, root) %{_initddir}/grafana-server
 %endif
-%dir %{_sharedstatedir}/%{repo}
-%dir /var/log/%{repo}
+%dir %{_sharedstatedir}/grafana
+%dir /var/log/grafana
 
 %pre
 getent group grafana >/dev/null || groupadd -r grafana
@@ -123,6 +104,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Tue Aug 18 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 7.1.3-1
+- PMM-6360 grafana upgrade to 7.1.x build changes 
+
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.4-2
 - PMM-5645 Built using Golang 1.14
 
