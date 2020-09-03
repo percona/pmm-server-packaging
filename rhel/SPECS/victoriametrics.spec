@@ -13,12 +13,12 @@
 %global repo            VictoriaMetrics
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          ed00eb3f3371f7bb2ca3bee528e530f72c709a49
+%global commit          764b3d4fda41e27aa7af83e406503c1087c41d4d
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           percona-victoriametrics
 Version:        1.40.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        VictoriaMetrics monitoring solution and time series database
 License:        Apache-2.0
 URL:            https://%{provider_prefix}
@@ -55,5 +55,5 @@ install -D -p -m 0755 ./bin/vmalert-pure %{buildroot}%{_sbindir}/vmalert
 
 
 %changelog
-* Wed Aug 12 2020 Aliaksandr Valialkin <valyala@victoriametrics.com> - 1.40.0-1
+* Wed Sep 3 2020 Aliaksandr Valialkin <valyala@victoriametrics.com> - 1.40.0-2
 - PMM-6389 add victoriametrics and vmalert binaries
