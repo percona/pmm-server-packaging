@@ -1,7 +1,7 @@
 %global debug_package   %{nil}
 %global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  pmm-2.9.2
+%global detailedcommit  pmm-dbaas
 
 %global install_golang 0
 
