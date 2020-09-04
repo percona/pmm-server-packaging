@@ -25,7 +25,6 @@ Source1:        https://github.com/kubernetes/kubernetes/archive/%{commit_k8s}/k
 %if %{install_golang}
 BuildRequires:   golang >= 1.13.0
 %endif
-BuildRequires: go-bindata
 BuildRequires: which
 
 %description
@@ -58,10 +57,6 @@ make build
 
 cd %{_builddir}/kubernetes-%{commit_k8s}/
 export GOPATH="$(pwd)"
-export KUBE_GIT_TREE_STATE="clean"
-export KUBE_GIT_COMMIT=%{commit_k8s}
-export KUBE_GIT_VERSION=%{version_k8s}
-export KUBE_EXTRA_GOPATH=$(pwd)/Godeps/_workspace
 
 cd src/github.com/kubernetes/kubernetes-%{commit_k8s}
 make WHAT="cmd/kubectl"
