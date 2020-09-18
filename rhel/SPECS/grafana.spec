@@ -1,7 +1,7 @@
 %global debug_package   %{nil}
-%global commit          v7.1.3
+%global commit          v7.2.0
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  pmm-2.9.2
+%global detailedcommit  beta2
 
 %global install_golang 0
 
@@ -14,12 +14,12 @@ Version:        %(c=%{commit}; echo ${c:1:7})
 Release:        1%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
-URL:            https://github.com/percona-platform/grafana
-Source0:        https://github.com/percona-platform/grafana/archive/%{commit}-%{detailedcommit}.tar.gz
+URL:            https://github.com/grafana/grafana
+Source0:        https://github.com/grafana/grafana/archive/%{commit}-%{detailedcommit}.tar.gz
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
-BuildRequires:   golang >= 1.14.0
+BuildRequires:   golang >= 1.15.0
 %endif
 BuildRequires: nodejs-grunt-cli fontconfig
 
