@@ -10,7 +10,7 @@
 
 Name:		%{repo}
 Version:	1.17.4
-Release:	21.%{build_timestamp}.%{shortcommit}%{?dist}
+Release:	22.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
 License:	AGPLv3
@@ -115,6 +115,9 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
+* Wed Sep 23 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.17.4-21
+- PMM-6268 upgrade angular to v10, CVE fix
+
 * Fri Jun  5 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.17.4-20
 - PMM-5813 build password-page per installation type (OVF/AMI/Docker)
 
