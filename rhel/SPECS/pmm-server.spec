@@ -9,7 +9,7 @@
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 
 Name:		%{repo}
-Version:	1.17.4
+Version:	1.17.5
 Release:	22.%{build_timestamp}.%{shortcommit}%{?dist}
 Summary:	Percona Monitoring and Management Server
 
@@ -115,7 +115,7 @@ install -p -m 0644 node_exporter.service %{buildroot}/usr/lib/systemd/system/nod
 
 
 %changelog
-* Wed Sep 23 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.17.4-21
+* Wed Sep 23 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.17.5-22
 - PMM-6268 upgrade angular to v10, CVE fix
 
 * Fri Jun  5 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 1.17.4-20
