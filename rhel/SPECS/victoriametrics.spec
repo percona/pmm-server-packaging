@@ -55,8 +55,8 @@ install -D -p -m 0755 ./bin/vmalert-pure %{buildroot}%{_sbindir}/vmalert
 
 
 %changelog
-* Wed Oct 6 2020 Aliaksandr Valialkin <valyala@victoriametrics.com> - 1.43.0-1
+* Tue Oct 6 2020 Aliaksandr Valialkin <valyala@victoriametrics.com> - 1.43.0-1
 - PMM-6401 upgrade victoriametrics for reading Prometheus data files
 
-* Wed Sep 4 2020 Aliaksandr Valialkin <valyala@victoriametrics.com> - 1.40.1-1
+* Fri Sep 4 2020 Aliaksandr Valialkin <valyala@victoriametrics.com> - 1.40.1-1
 - PMM-6389 add victoriametrics and vmalert binaries
