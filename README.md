@@ -1,5 +1,6 @@
 # PMM Server packages
 [![CLA assistant](https://cla-assistant.percona.com/readme/badge/percona/pmm-server-packaging)](https://cla-assistant.percona.com/percona/pmm-server-packaging)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpercona%2Fpmm-server-packaging.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpercona%2Fpmm-server-packaging?ref=badge_shield)
 ## CentOS/RHEL 7
 * Prepare environment
 ```
@@ -27,3 +28,7 @@ mockchain -c -r epel-7-x86_64 -l result-repo rhel/SRPMS/*.src.rpm
 ```
 ls result-repo/results/epel-7-x86_64/*/*.rpm
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpercona%2Fpmm-server-packaging.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpercona%2Fpmm-server-packaging?ref=badge_large)
