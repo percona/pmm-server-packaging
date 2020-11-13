@@ -1,7 +1,7 @@
 %global debug_package   %{nil}
 %global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  pmm-2.11.0
+%global detailedcommit  pmm-2.12.0
 
 %global install_golang 0
 
@@ -105,7 +105,7 @@ exit 0
 
 %changelog
 * Tue Aug 18 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 7.1.3-1
-- PMM-6360 grafana upgrade to 7.1.x build changes 
+- PMM-6360 grafana upgrade to 7.1.x build changes
 
 * Thu Jul  2 2020 Mykyta Solomko <mykyta.solomko@percona.com> - 6.7.4-2
 - PMM-5645 Built using Golang 1.14
