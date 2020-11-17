@@ -104,6 +104,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Tue Nov 17 2020 Nicola Lamacchia <nicola.lamacchia@percona.com> - 7.1.3-2
+- PMM-6872 add an Integrated Alerting section
+
 * Tue Aug 18 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 7.1.3-1
 - PMM-6360 grafana upgrade to 7.1.x build changes
 
