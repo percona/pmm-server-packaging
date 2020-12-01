@@ -81,7 +81,7 @@ install -p -m 0755 bin/pmm-update %{buildroot}%{_sbindir}/
 # Specifically, the change date is ignored – RPM's "Buildtime" is used instead.
 
 %changelog
-* Mon Dec 01 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.12.0-46
+* Tue Dec 01 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.12.0-46
 - https://per.co.na/pmm/2.12.0
 
 * Mon Oct 19 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 2.11.1-45
