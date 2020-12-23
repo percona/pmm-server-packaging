@@ -1,7 +1,7 @@
 %global debug_package   %{nil}
 %global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  pmm-2.12.0
+%global detailedcommit  pmm-2.13.0
 
 %global install_golang 0
 
@@ -11,7 +11,7 @@
 
 Name:           percona-grafana
 Version:        %(c=%{commit}; echo ${c:1:7})
-Release:        7%{?dist}
+Release:        40%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://github.com/percona-platform/grafana
@@ -104,6 +104,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Wed Dec 23 2020 Tiago Santos <tiago.mota@percona.com> - 7.1.3-40
+- PMM-6994 add alerts table
+
 * Tue Nov 17 2020 Nicola Lamacchia <nicola.lamacchia@percona.com> - 7.1.3-7
 - PMM-6872 add an Integrated Alerting section
 
