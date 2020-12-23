@@ -11,7 +11,7 @@
 %global pmm_prefix      %{provider}.%{provider_tld}/%{project}/%{pmm_repo}
 %global pmm_commit      @@pmm_commit@@
 %global pmm_shortcommit %(c=%{pmm_commit}; echo ${c:0:7})
-%define release         21
+%define release         1
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 Name:		%{repo}
@@ -47,6 +47,7 @@ mv nginx.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm.conf
 mv nginx-ssl.conf %{buildroot}%{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 install -d %{buildroot}%{_datadir}/percona-dashboards
 mv import-dashboards.py %{buildroot}%{_datadir}/percona-dashboards/import-dashboards.py
+mv import-dbass-dashboard.py %{buildroot}%{_datadir}/percona-dashboards/import-dbass-dashboard.py
 
 mv prometheus.yml %{buildroot}%{_sysconfdir}/prometheus.yml
 mv alertmanager.yml %{buildroot}%{_sysconfdir}/alertmanager.yml
@@ -79,6 +80,9 @@ rm -rf %{pmm_repo}-%{pmm_commit}
 
 
 %changelog
+* Wed Dec 23 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.13.0-1
+- PMM-6713 External services Presentation on Node Summary dashboard
+
 * Mon Jun 22 2020 Andrii Skomorokhov <andrii.sokmorokhov@percona.com> - 2.7.1-21
 - PMM-6153 PMM 2.7 nginx restarts when there is no outbound internet connectivity
 
