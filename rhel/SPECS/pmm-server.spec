@@ -76,6 +76,7 @@ rm -rf %{pmm_repo}-%{pmm_commit}
 %{_sysconfdir}/nginx/conf.d/pmm.conf
 %{_sysconfdir}/nginx/conf.d/pmm-ssl.conf
 %{_datadir}/percona-dashboards/import-dashboards.py*
+%{_datadir}/percona-dashboards/import-dbass-dashboard.py*
 %{_datadir}/%{name}
 
 
