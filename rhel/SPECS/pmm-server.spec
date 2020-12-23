@@ -81,7 +81,7 @@ rm -rf %{pmm_repo}-%{pmm_commit}
 
 %changelog
 * Wed Dec 23 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.13.0-22
-- PMM-6713 External services Presentation on Node Summary dashboard
+- PMM-7085 DBaaS dashboard showing when feature flag not enabled
 
 * Mon Jun 22 2020 Andrii Skomorokhov <andrii.sokmorokhov@percona.com> - 2.7.1-21
 - PMM-6153 PMM 2.7 nginx restarts when there is no outbound internet connectivity
