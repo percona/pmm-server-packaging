@@ -55,7 +55,7 @@ install -D -p -m 0755 ./bin/vmalert-pure %{buildroot}%{_sbindir}/vmalert
 
 %changelog
 * Thu Dec 24 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.50.2-1
-- PMM-7135 Wire everything together
+- upgrade victoriametrics to 1.50.2 release
 
 * Tue Dec 15 2020 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 1.50.1-1
 - upgrade victoriametrics to 1.50.1 release
