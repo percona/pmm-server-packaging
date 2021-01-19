@@ -18,7 +18,6 @@ Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 License:	AGPLv3
 URL:		https://%{provider_prefix}
 Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app-node_modules-1.8.0.tar.gz
 
 BuildRequires:	nodejs
 BuildArch:	noarch
