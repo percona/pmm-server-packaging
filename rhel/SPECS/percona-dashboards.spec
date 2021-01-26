@@ -56,7 +56,7 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
-* Tue Jan 26 2020 Vadim Yalovets <alexander.tymchuk@percona.com> - 2.14.0-15
+* Tue Jan 26 2021 Vadim Yalovets <alexander.tymchuk@percona.com> - 2.14.0-15
 - PMM-6766 remove qan-app
 
 * Wed Apr 08 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.5.0-14
