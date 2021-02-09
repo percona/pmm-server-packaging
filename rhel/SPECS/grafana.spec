@@ -18,7 +18,7 @@ Release:        %{rpm_release}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://github.com/percona-platform/grafana
-Source0:        https://github.com/percona-platform/grafana/archive/%{commit}-%{detailedcommit}.tar.gz
+Source0:        https://github.com/percona-platform/grafana/archive/%{commit}.tar.gz
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %if %{install_golang}
@@ -35,7 +35,7 @@ Graphite, InfluxDB & OpenTSDB.
 %prep
 %setup -q -n grafana-%{version}-%{detailedcommit}
 rm -rf Godeps
-sed -i "s/unknown-dev/%{detailedcommit}/" build.go+A
+sed -i "s/unknown-dev/%{detailedcommit}/" build.go
 
 %build
 mkdir -p _build/src
