@@ -13,10 +13,10 @@
 %global repo		pmm-update
 %global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path	%{provider_prefix}
-%global commit		592eddf656bce32a11bd958af0a32c62bd5ea34c
+%global commit		683c30ea9cf2313ac8035104e9d76135d37dba38
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         51
+%define release         52
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
