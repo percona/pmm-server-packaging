@@ -33,9 +33,9 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB.
 
 %prep
-%setup -q -n grafana-%{version}-%{detailedcommit}
+%setup -q -n grafana-%{commit}
 rm -rf Godeps
-sed -i "s/unknown-dev/%{detailedcommit}/" build.go
+sed -i "s/unknown-dev/%{commit}/" build.go
 
 %build
 mkdir -p _build/src
