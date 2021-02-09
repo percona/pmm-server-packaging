@@ -1,7 +1,7 @@
 %global debug_package   %{nil}
 %global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  PMM-4924
+%global detailedcommit  PMM-6924
 
 %global install_golang 0
 
