@@ -1,9 +1,8 @@
 %global debug_package   %{nil}
 %global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  pmm-2.14.0
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         17
+%define release         71
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
@@ -107,6 +106,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Thu Feb 11 2021 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 7.1.3-71
+- PMM-6693 Fix grafana build in FB
+
 * Wed Jan 20 2021 Tiago Santos <tiago.mota@percona.com> - 7.1.3-70
 - PMM-7282 Create rule without channels and filters
 
