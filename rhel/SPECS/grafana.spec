@@ -1,9 +1,12 @@
 %global debug_package   %{nil}
-%global commit          v7.1.3
+%global commit          33423d34f211ce1ce5ce0a265a38f0709ec44360
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %define release         71
-%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
+%define grafana_version v7.1.3
+%define full_pmm_version 2.0.0
+%define full_version    %{grafana_version}-%{full_pmm_version}
+%define rpm_release     %{full_version}-%{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
 
@@ -34,7 +37,7 @@ Graphite, InfluxDB & OpenTSDB.
 %prep
 %setup -q -n grafana-%{commit}
 rm -rf Godeps
-sed -i "s/unknown-dev/%{commit}/" build.go
+sed -i "s/unknown-dev/%{full_version}/" build.go
 
 %build
 mkdir -p _build/src
