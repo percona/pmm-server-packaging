@@ -6,7 +6,7 @@
 %define grafana_version v7.1.3
 %define full_pmm_version 2.0.0
 %define full_version    %{grafana_version}-%{full_pmm_version}
-%define rpm_release     %{full_version}-%{release}.%{build_timestamp}.%{shortcommit}%{?dist}
+%define rpm_release     %{grafana_version}.%{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
 
