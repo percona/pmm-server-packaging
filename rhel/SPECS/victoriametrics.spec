@@ -57,6 +57,10 @@ install -D -p -m 0755 ./bin/vmalert-pure %{buildroot}%{_sbindir}/vmalert
 * Wed Feb 10 2021 Vadim Yalovets <vadim.yalovets@percona.com> - 1.53.1-1
 - upgrade victoriametrics to 1.53.1 release
 
+* Wed Jan 13 2021 Vadim Yalovets <vadim.yalovets@percona.com> - 1.52.0-1
+- upgrade victoriametrics to 1.52.0 release
+
+
 * Thu Dec 24 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 1.50.2-1
 - upgrade victoriametrics to 1.50.2 release
 
