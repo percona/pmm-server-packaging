@@ -1,7 +1,7 @@
 %global debug_package   %{nil}
 %global commit          v7.1.3
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%global detailedcommit  pmm-2.14.0
+%global detailedcommit  pmm-2.15.0
 
 %global install_golang 0
 
@@ -11,7 +11,7 @@
 
 Name:           percona-grafana
 Version:        %(c=%{commit}; echo ${c:1:7})
-Release:        70%{?dist}
+Release:        87%{?dist}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
 URL:            https://github.com/percona-platform/grafana
@@ -104,6 +104,9 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
+* Wed Feb 10 2021 Nicola Lamacchia <nicola.lamacchia@percona.com> - 7.1.3-87
+- PMM-6924 Page breadcrumb component
+
 * Wed Jan 20 2021 Tiago Santos <tiago.mota@percona.com> - 7.1.3-70
 - PMM-7282 Create rule without channels and filters
 
