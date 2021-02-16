@@ -6,7 +6,7 @@
 %define grafana_version v7.1.3
 %define full_pmm_version 2.0.0
 %define full_version    %{grafana_version}-%{full_pmm_version}
-%define rpm_release     %{grafana_version}.%{release}.%{build_timestamp}.%{shortcommit}%{?dist}
+%define rpm_release     %{release}.%{grafana_version}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
 
@@ -15,7 +15,7 @@
 %endif
 
 Name:           percona-grafana
-Version:        %(c=%{commit}; echo ${c:1:7})
+Version:        %{version}
 Release:        %{rpm_release}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
@@ -82,10 +82,6 @@ install -p -m 0644 packaging/rpm/init.d/grafana-server %{buildroot}%{_initddir}/
 install -d -p %{buildroot}%{_sharedstatedir}/grafana
 install -d -p %{buildroot}/var/log/grafana
 
-%check
-export GOPATH="$(pwd)/_build"
-make test
-
 %files
 %defattr(-, grafana, grafana, -)
 %{_datadir}/grafana
@@ -95,9 +91,6 @@ make test
 %attr(0755, root, root) %{_bindir}/grafana-cli
 %{_sysconfdir}/grafana/grafana.ini
 %{_sysconfdir}/grafana/ldap.toml
-%if 0%{?rhel} == 6
-%attr(-, root, root) %{_initddir}/grafana-server
-%endif
 %dir %{_sharedstatedir}/grafana
 %dir /var/log/grafana
 
