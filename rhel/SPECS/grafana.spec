@@ -2,11 +2,11 @@
 %global commit          33423d34f211ce1ce5ce0a265a38f0709ec44360
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         89
+%define release         90
 %define grafana_version v7.1.3
 %define full_pmm_version 2.0.0
 %define full_version    %{grafana_version}-%{full_pmm_version}
-%define rpm_release     %{release}.%{grafana_version}.%{build_timestamp}.%{shortcommit}%{?dist}
+%define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
 
@@ -15,7 +15,7 @@
 %endif
 
 Name:           percona-grafana
-Version:        %{version}
+Version:        %{grafana_version}
 Release:        %{rpm_release}
 Summary:        Grafana is an open source, feature rich metrics dashboard and graph editor
 License:        ASL 2.0
