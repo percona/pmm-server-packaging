@@ -3,9 +3,9 @@
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
 %define release         90
-%define grafana_version v7.1.3
+%define grafana_version 7.1.3
 %define full_pmm_version 2.0.0
-%define full_version    %{grafana_version}-%{full_pmm_version}
+%define full_version    v%{grafana_version}-%{full_pmm_version}
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %global install_golang 0
