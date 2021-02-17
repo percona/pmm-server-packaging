@@ -2,7 +2,7 @@
 %global commit          33423d34f211ce1ce5ce0a265a38f0709ec44360
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         91
+%define release         92
 %define grafana_version v7.3.7
 %define full_pmm_version 2.0.0
 %define full_version    v%{grafana_version}-%{full_pmm_version}
@@ -102,7 +102,7 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
-* Thu Feb 17 2021 Roman Misyurin <roman.misyurin@percona.com> - 7.3.7-91
+* Thu Feb 17 2021 Roman Misyurin <roman.misyurin@percona.com> - 7.3.7-92
 - PMM-6693 Fix grafana build in FB
 
 * Thu Feb 11 2021 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 7.1.3-88
