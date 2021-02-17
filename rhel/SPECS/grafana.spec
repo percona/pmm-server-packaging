@@ -102,7 +102,7 @@ getent passwd grafana >/dev/null || \
 exit 0
 
 %changelog
-* Thu Feb 17 2021 Roman Misyurin <roman.misyurin@percona.com> - 7.3.7-92
+* Thu Feb 18 2021 Roman Misyurin <roman.misyurin@percona.com> - 7.3.7-92
 - PMM-6695 Update grafana to version 7.3.7
 
 * Thu Feb 11 2021 Nurlan Moldomurov <nurlan.moldomurov@percona.com> - 7.1.3-88
