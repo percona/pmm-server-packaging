@@ -1,24 +1,21 @@
-%global provider	github
-%global provider_tld	com
 %global project		percona
 %global repo		grafana-dashboards
-%global provider_prefix	%{provider}.%{provider_tld}/%{project}/%{repo}
-%global import_path	%{provider_prefix}
-%global commit		64f4c3758af02f900ddc59cd74657bdcd0ca2038
+%global provider	github.com/percona/%{repo}
+%global import_path	%{provider}
+%global commit		ad4af6808bcd361284e8eb8cd1f36b1e98e32bce
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 %define build_timestamp %(date -u +"%y%m%d%H%M")
-%define release         14
+%define release         15
 %define rpm_release     %{release}.%{build_timestamp}.%{shortcommit}%{?dist}
 
-Name:		%{project}-dashboards
+Name:		percona-dashboards
 Version:	%{version}
 Release:	%{rpm_release}
 Summary:	Grafana dashboards for MySQL and MongoDB monitoring using Prometheus
 
 License:	AGPLv3
-URL:		https://%{provider_prefix}
-Source0:	https://%{provider_prefix}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
-Source1:	qan-app-node_modules-1.8.0.tar.gz
+URL:		https://%{provider}
+Source0:	https://%{provider}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
 
 BuildRequires:	nodejs
 BuildArch:	noarch
@@ -26,17 +23,17 @@ Requires:	percona-grafana python python-requests
 Provides:	percona-grafana-dashboards = %{version}-%{release}
 
 %description
-Grafana dashboards for MySQL and MongoDB monitoring using Prometheus.
 This is a set of Grafana dashboards for database and system monitoring
-using Prometheus datasource.
-Dashboards are also a part of Percona Monitoring and Management project.
+using VictoriaMetrics datasource.
+This package is part of Percona Monitoring and Management.
 
 
 %prep
-%setup -q -a 1 -n %{repo}-%{commit}
+%setup -q -n %{repo}-%{commit}
 
 
 %build
+node -v
 npm version
 make release
 
@@ -57,10 +54,13 @@ echo %{version} > %{buildroot}%{_datadir}/%{name}/VERSION
 
 
 %changelog
+* Tue Jan 26 2021 Alex Tymchuk <alexander.tymchuk@percona.com> - 2.15.0-15
+- PMM-6766 remove qan-app
+
 * Wed Apr 08 2020 Vadim Yalovets <vadim.yalovets@percona.com> - 2.5.0-14
 - PMM-5655 remove leftovers of Grafana plugins
 
-* Tue Oct 29 2019 Roman Misyurin <roman.misyurinv@percona.com> - 1.9.0-7
+* Tue Oct 29 2019 Roman Misyurin <roman.misyurin@percona.com> - 1.9.0-7
 - build process fix
 
 * Mon Feb  4 2019 Vadim Yalovets <vadim.yalovets@percona.com> - 1.9.0-6
